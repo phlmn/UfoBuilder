@@ -2,9 +2,6 @@
 
 #include "main.h"
 
-#ifndef LEVEL_H
-#define LEVEL_H
-
 class GameObject;
 
 class Level
@@ -30,5 +27,3 @@ public:
 	bool save(sf::String filename);
 	bool load(sf::String filename);
 };
-
-#endif

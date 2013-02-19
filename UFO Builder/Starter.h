@@ -2,9 +2,6 @@
 
 #include "main.h"
 
-#ifndef STARTER_H
-#define STARTER_H
-
 class Starter
 {
 private:
@@ -36,5 +33,3 @@ public:
 
 	void run();
 };
-
-#endif
