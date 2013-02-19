@@ -3,9 +3,9 @@
 
 Starter::Starter()
 {
-	PI = 3.14159265359;
-	DEG_TO_RAD = 0.0174532925;
-	RAD_TO_DEG = 57.2957795;
+	PI = 3.14159265359f;
+	DEG_TO_RAD = 0.0174532925f;
+	RAD_TO_DEG = 57.2957795f;
 }
 
 
@@ -43,27 +43,27 @@ bool Starter::init()
 
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
 
-	m_physWorld = new b2World(b2Vec2(0, 9.81f));
+	m_physWorld = new b2World(b2Vec2(0.0f, 9.81f));
 
 	b2BodyDef* def = new b2BodyDef();
-	def->position = b2Vec2(1, 1);
-	def->type = b2BodyType::b2_dynamicBody;
+	def->position = b2Vec2(1.0f, 1.0f);
+	def->type = b2_dynamicBody;
 	m_bodyTest = m_physWorld->CreateBody(def);
 	m_bodyTest->SetLinearDamping(0.1f);
 
 	b2CircleShape* shape = new b2CircleShape();
 	shape->m_radius = 1.1f;
-	m_bodyTest->CreateFixture(shape, 2);	
-	m_bodyTest->ApplyTorque(60);	
+	m_bodyTest->CreateFixture(shape, 2.0f);	
+	m_bodyTest->ApplyTorque(60.0f);	
 
 	def = new b2BodyDef();
-	def->position = b2Vec2(0, 5);
+	def->position = b2Vec2(0.0f, 5.0f);
 	m_bodyGround = m_physWorld->CreateBody(def);
 
 	b2PolygonShape* shape2 = new b2PolygonShape();
-	shape2->SetAsBox(10, 0.1, b2Vec2(0, 0), 0);
+	shape2->SetAsBox(10.0f, 0.1f, b2Vec2(0.0f, 0.0f), 0.0f);
 
-	m_bodyGround->CreateFixture(shape2, 2);	
+	m_bodyGround->CreateFixture(shape2, 2.0f);	
 
 	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
 
@@ -96,7 +96,7 @@ void Starter::tick()
 	sf::Text text;
 	text.setFont(m_fontSegoe);
 	text.setString("FPS: " + StringHelper::toString(fps));
-	text.setPosition(18, 10);
+	text.setPosition(18.0f, 10.0f);
 	text.setCharacterSize(16);
 	m_window->draw(text);
 	
