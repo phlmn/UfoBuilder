@@ -1,9 +1,6 @@
 #pragma once
 
 #include "main.h"
-#pragma once
-
-#include "main.h"
 
 #ifndef UFOPART_H
 #define UFOPART_H
