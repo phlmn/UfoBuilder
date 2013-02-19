@@ -1,10 +1,10 @@
-#include "Game.h"
+#include "Starter.h"
  
 int main()
 {
 
-	Game game;
-	game.run();
+	Starter starter;
+	starter.run();
 	
 	return 0;
 }

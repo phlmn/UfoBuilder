@@ -73,19 +73,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Starter.cpp" />
     <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="Ufo.cpp" />
+    <ClCompile Include="UfoCarriage.cpp" />
+    <ClCompile Include="UfoCockpit.cpp" />
+    <ClCompile Include="UfoEditor.cpp" />
+    <ClCompile Include="UfoEngine.cpp" />
+    <ClCompile Include="UfoFuelTank.cpp" />
+    <ClCompile Include="UfoPart.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Editor.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelEditor.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Starter.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="Ufo.h" />
+    <ClInclude Include="UfoCarriage.h" />
+    <ClInclude Include="UfoCockpit.h" />
+    <ClInclude Include="UfoEditor.h" />
+    <ClInclude Include="UfoEngine.h" />
+    <ClInclude Include="UfoFuelTank.h" />
+    <ClInclude Include="UfoPart.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

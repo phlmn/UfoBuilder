@@ -1,10 +1,15 @@
 #pragma once
-#include "ufopart.h"
-class UfoFuelTank :
-	public UfoPart
+
+#include "main.h"
+
+#ifndef UFOFUELTANK_H
+#define UFOFUELTANK_H
+
+class UfoFuelTank : public UfoPart
 {
 public:
 	UfoFuelTank();
 	~UfoFuelTank();
 };
 
+#endif

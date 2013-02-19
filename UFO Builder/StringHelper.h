@@ -1,7 +1,9 @@
 #pragma once
 
-#include <string>
-#include <sstream>
+#include "main.h"
+
+#ifndef STRINGHELPER_H
+#define STRINGHELPER_H
 
 class StringHelper
 {
@@ -11,3 +13,4 @@ public:
 	static std::string toString(int value);
 };
 
+#endif
