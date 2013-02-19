@@ -30,6 +30,9 @@
     <ClCompile Include="Editor.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Ufo.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -42,6 +45,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Editor.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Ufo.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
