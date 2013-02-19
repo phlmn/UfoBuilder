@@ -1,6 +1,6 @@
 #pragma once
 
-#include "main.h"
+#include "UfoPart.h"
 
 class UfoCarriage : public UfoPart
 {

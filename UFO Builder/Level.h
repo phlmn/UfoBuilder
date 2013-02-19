@@ -1,8 +1,20 @@
 #pragma once
 
-#include "main.h"
-
-class GameObject;
+#include <list>
+#include <string>
+#include <SFML\Graphics.hpp>
+#include "StringHelper.h"
+#include <Box2D\Box2D.h>
+#include "GameObject.h"
+#include "LevelEditor.h"
+#include "Ufo.h"
+#include "UfoEditor.h"
+#include "UfoPart.h"
+#include "UfoCarriage.h"
+#include "UfoCockpit.h"
+#include "UfoEngine.h"
+#include "UfoFuelTank.h"
+#include "Game.h"
 
 class Level
 {

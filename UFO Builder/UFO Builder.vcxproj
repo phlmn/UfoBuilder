@@ -93,7 +93,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="Starter.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="Ufo.h" />
