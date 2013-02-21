@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <sstream>
+#include <iostream>
 #include <SFML\Graphics.hpp>
 #include "StringHelper.h"
 #include <Box2D\Box2D.h>
@@ -31,7 +32,7 @@ private:
 	b2Body* m_bodyGround;
 
 	sf::Clock m_clock;
-	sf::RenderWindow* m_window;
+	sf::RenderWindow* m_renderWindow;
 	
 	sf::Sprite m_spriteTest;
 	sf::Sprite m_spriteBody;
@@ -42,10 +43,15 @@ private:
 
 	sfg::SFGUI m_sfgui;
 	sfg::Desktop m_desktop;
+	sfg::Window::Ptr m_windowMenu;
 
 	float PI;
 	float DEG_TO_RAD;
 	float RAD_TO_DEG;
+
+	void onButtonStartGameClicked();
+	void onButtonEditorClicked();
+	void onButtonExitClicked();
 
 public:
 	Starter();
