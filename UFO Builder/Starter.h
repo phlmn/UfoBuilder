@@ -17,6 +17,7 @@
 #include "UfoFuelTank.h"
 #include "Level.h"
 #include "Game.h"
+#include <SFGUI\SFGUI.hpp>
 
 class Starter
 {
@@ -38,6 +39,10 @@ private:
 	sf::Font m_fontSegoe;
 
 	sf::ConvexShape m_polygon;
+
+	sfg::SFGUI m_sfgui;
+sfg::Desktop desktop;
+
 
 	float PI;
 	float DEG_TO_RAD;
