@@ -68,14 +68,13 @@ bool Starter::init()
 	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
 
 	sfg::Window::Ptr window = sfg::Window::Create();
+
 	sfg::Box::Ptr box = sfg::Box::Create();
-	window->Add(box);
 	box->Pack(sfg::Button::Create("test"));
-	box->Pack(sfg::Button::Create("2. Testsldklasdlksldkasldklasksdk"));
+	box->Pack(sfg::Button::Create("2. test"));
+	window->Add(box);
 	
-	desktop.Add( window );
-
-
+	m_desktop.Add(window);
 
 	return true;
 }
@@ -92,7 +91,7 @@ void Starter::tick()
 	sf::Event event;
 	while(m_window->pollEvent(event))
 	{
-		desktop.HandleEvent(event);
+		m_desktop.HandleEvent(event);
 		if (event.type == sf::Event::Closed)
 			m_window->close();
 	}
@@ -111,7 +110,7 @@ void Starter::tick()
 	text.setCharacterSize(16);
 	m_window->draw(text);
 	
-	desktop.Update(elapsedTime.asSeconds());
+	m_desktop.Update(elapsedTime.asSeconds());
 
 	m_sfgui.Display(*m_window);
 	m_window->display();

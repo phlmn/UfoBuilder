@@ -41,8 +41,7 @@ private:
 	sf::ConvexShape m_polygon;
 
 	sfg::SFGUI m_sfgui;
-sfg::Desktop desktop;
-
+	sfg::Desktop m_desktop;
 
 	float PI;
 	float DEG_TO_RAD;
