@@ -2,12 +2,15 @@
 
 using namespace std;
 
+// set some usefull variables
+const float Starter::PI = 3.14159265359f;
+const float Starter::DEG_TO_RAD = 0.0174532925f;
+const float Starter::RAD_TO_DEG = 57.2957795f;
+
 Starter::Starter()
 {
-	// set some usefull variables
-	PI = 3.14159265359f;
-	DEG_TO_RAD = 0.0174532925f;
-	RAD_TO_DEG = 57.2957795f;
+	m_game = NULL;
+	m_editor = NULL;
 }
 
 
@@ -35,47 +38,25 @@ bool Starter::init()
 	// create window to render
 	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 600, 32), "UFO Builder");
 
-	// load textures
-	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("images/bg1.png");
-	m_spriteTest.setTexture(*texture);
-	m_spriteTest.setScale(2.0f, 1.2f);
-
-	texture = new sf::Texture();
-	texture->loadFromFile("images/body1.png");
-	texture->setSmooth(true);
-	m_spriteBody.setTexture(*texture);
-	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
-
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
+	m_fontSegoeBold.loadFromFile("fonts/segoeuib.ttf");
 
-	// create physical world
-	m_physWorld = new b2World(b2Vec2(0.0f, 9.81f));
+	m_textTitle.setFont(m_fontSegoeBold);
+	m_textTitle.setString("UFO Builder");
+	m_textTitle.setCharacterSize(50);
+	m_textTitle.setColor(sf::Color(0, 0, 0, 180));
+	m_textTitle.setOrigin(m_textTitle.getGlobalBounds().width / 2.0f, m_textTitle.getGlobalBounds().height / 2.0f);
+	m_textTitle.setPosition(sf::Vector2f(m_renderWindow->getView().getSize().x / 2.0f, m_renderWindow->getView().getSize().y / 2.0f - 100.0f));
 
-	// create physical bodies
-	b2BodyDef* def = new b2BodyDef();
-	def->position = b2Vec2(1.0f, 1.0f);
-	def->type = b2_dynamicBody;
-	m_bodyTest = m_physWorld->CreateBody(def);
-	m_bodyTest->SetLinearDamping(0.1f);
-
-	b2CircleShape* shape = new b2CircleShape();
-	shape->m_radius = 1.1f;
-	m_bodyTest->CreateFixture(shape, 2.0f);	
-	m_bodyTest->ApplyTorque(60.0f);	
-
-	def = new b2BodyDef();
-	def->position = b2Vec2(0.0f, 5.0f);
-	m_bodyGround = m_physWorld->CreateBody(def);
-
-	b2PolygonShape* shape2 = new b2PolygonShape();
-	shape2->SetAsBox(10.0f, 0.1f, b2Vec2(0.0f, 0.0f), 0.0f);
-
-	m_bodyGround->CreateFixture(shape2, 2.0f);	
-
+	// load images
+	sf::Texture* texture;
+	texture = new sf::Texture();
+	texture->loadFromFile("images/bg_menu.png");
+	m_spriteBg.setTexture(*texture);
+	
 	// create menu gui
-	m_windowMenu = sfg::Window::Create();
+	m_windowMenu = sfg::Window::Create();	
 
 	sfg::Box::Ptr box = sfg::Box::Create(sfg::Box::VERTICAL, 10.0f);
 
@@ -94,22 +75,41 @@ bool Starter::init()
 	m_windowMenu->Add(box);
 
 	m_windowMenu->SetRequisition(sf::Vector2f(250.0f, 0.0f));
-	m_windowMenu->SetPosition(sf::Vector2f((m_renderWindow->getView().getSize().x - m_windowMenu->GetRequisition().x) / 2.0f, (m_renderWindow->getView().getSize().y - m_windowMenu->GetRequisition().y) / 2.0f));
+	m_windowMenu->SetPosition(sf::Vector2f((m_renderWindow->getView().getSize().x - m_windowMenu->GetRequisition().x) / 2.0f, (m_renderWindow->getView().getSize().y - m_windowMenu->GetRequisition().y) / 2.0f + 40.0f));
 	m_windowMenu->SetStyle(m_windowMenu->GetStyle() & ~sfg::Window::TITLEBAR & ~sfg::Window::RESIZE);
 
 	m_desktop.Add(m_windowMenu);
+
+	// set the gamestate to menu
+	m_gamestate = Starter::Menu;
 
 	return true;
 }
 
 void Starter::onButtonStartGameClicked()
 {
-	// TODO: handle game start button click
+	if(m_game == NULL)
+	{
+		m_game = new Game(this, m_renderWindow, &m_desktop);
+		if(m_editor) m_editor->hide();
+		hide();
+		m_game->show();
+	}
+
+	m_gamestate = Starter::Ingame;
 }
 
 void Starter::onButtonEditorClicked()
 {
-	// TODO: handle editor start button click
+	if(m_editor == NULL)
+	{
+		m_editor = new LevelEditor(this, m_renderWindow, &m_desktop);
+		if(m_game) m_editor->hide();
+		hide();
+		m_editor->show();
+	}
+
+	m_gamestate = Starter::Editor;
 }
 
 void Starter::onButtonExitClicked()
@@ -122,36 +122,48 @@ void Starter::tick()
 	sf::Time elapsedTime = m_clock.restart();
 	float fps = 1000000.0f / elapsedTime.asMicroseconds();
 
-	// update physics
-	m_physWorld->Step(elapsedTime.asSeconds(), 6, 2);
-
 	m_renderWindow->clear(sf::Color(0, 0, 0));
 
-	sf::Event event;
-	while(m_renderWindow->pollEvent(event))
+	if(m_gamestate == Starter::Menu)
 	{
-		m_desktop.HandleEvent(event);
-		if (event.type == sf::Event::Closed)
+
+		// user event handling
+		sf::Event event;
+		while(m_renderWindow->pollEvent(event))
 		{
-			// the window was closed
-			m_renderWindow->close();
+			m_desktop.HandleEvent(event);
+			if (event.type == sf::Event::Closed)
+			{
+				// the close button was clicked
+				m_renderWindow->close();
+			}
+			else if(event.type == sf::Event::Resized)
+			{
+				// the windows has been resized
+				m_renderWindow->setView(sf::View(sf::Vector2f(event.size.width / 2.0f, event.size.height / 2.0f), sf::Vector2f((float)event.size.width, (float)event.size.height)));
+				m_windowMenu->SetPosition(sf::Vector2f((m_renderWindow->getView().getSize().x - m_windowMenu->GetRequisition().x) / 2.0f, (m_renderWindow->getView().getSize().y - m_windowMenu->GetRequisition().y) / 2.0f + 40.0f));
+				m_textTitle.setPosition(sf::Vector2f(m_renderWindow->getView().getSize().x / 2.0f, m_renderWindow->getView().getSize().y / 2.0f - 100.0f));
+			}
 		}
-		else if(event.type == sf::Event::Resized)
-		{
-			// the windows has been resized
-			m_renderWindow->setView(sf::View(sf::Vector2f(event.size.width / 2.0f, event.size.height / 2.0f), sf::Vector2f((float)event.size.width, (float)event.size.height)));
-			m_windowMenu->SetPosition(sf::Vector2f((m_renderWindow->getView().getSize().x - m_windowMenu->GetRequisition().x) / 2.0f, (m_renderWindow->getView().getSize().y - m_windowMenu->GetRequisition().y) / 2.0f));
-		}
-			
+
+		m_renderWindow->draw(m_spriteBg);
+		m_renderWindow->draw(m_textTitle);
+	}
+	else if(m_gamestate == Starter::Ingame)
+	{
+		m_game->tick(elapsedTime);
+	}
+	else if(m_gamestate == Starter::Editor)
+	{
+		m_editor->tick(elapsedTime);
 	}
 
-	m_renderWindow->draw(m_spriteTest);
+	// update gui desktop
+	m_desktop.Update(elapsedTime.asSeconds());
 
-	// draw testobject
-	m_spriteBody.setRotation(m_bodyTest->GetAngle() * RAD_TO_DEG);	
-	m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f, m_bodyTest->GetPosition().y * 64.0f);
-	m_renderWindow->draw(m_spriteBody);
-	
+	// render gui
+	m_gui.Display(*m_renderWindow);
+
 	// show fps
 	sf::Text text;
 	text.setFont(m_fontSegoe);
@@ -159,12 +171,6 @@ void Starter::tick()
 	text.setPosition(18.0f, 10.0f);
 	text.setCharacterSize(16);
 	m_renderWindow->draw(text);
-	
-	// update gui desktop
-	m_desktop.Update(elapsedTime.asSeconds());
-
-	// render gui
-	m_sfgui.Display(*m_renderWindow);
 
 	// render the whole scene
 	m_renderWindow->display();
@@ -174,5 +180,16 @@ void Starter::cleanup()
 {
 	// cleanup (delete pointers, etc.)
 	delete m_renderWindow;
-	delete m_physWorld;
+	if(m_game) delete m_game;
+	if(m_editor) delete m_editor;
+}
+
+void Starter::hide()
+{
+	m_windowMenu->Show(false);
+}
+
+void Starter::show()
+{
+	m_windowMenu->Show(true);
 }

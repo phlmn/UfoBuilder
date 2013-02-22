@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <SFML\Graphics.hpp>
+#include <SFGUI\SFGUI.hpp>
 #include "StringHelper.h"
 #include <Box2D\Box2D.h>
 #include "GameObject.h"
@@ -18,44 +19,56 @@
 #include "UfoFuelTank.h"
 #include "Level.h"
 #include "Game.h"
-#include <SFGUI\SFGUI.hpp>
+
+class Game;
 
 class Starter
 {
-private:
-	bool init();
-	void tick();
-	void cleanup();
-
-	b2World* m_physWorld;
-	b2Body* m_bodyTest;
-	b2Body* m_bodyGround;
-
-	sf::Clock m_clock;
-	sf::RenderWindow* m_renderWindow;
-	
-	sf::Sprite m_spriteTest;
-	sf::Sprite m_spriteBody;
-
-	sf::Font m_fontSegoe;
-
-	sf::ConvexShape m_polygon;
-
-	sfg::SFGUI m_sfgui;
-	sfg::Desktop m_desktop;
-	sfg::Window::Ptr m_windowMenu;
-
-	float PI;
-	float DEG_TO_RAD;
-	float RAD_TO_DEG;
-
-	void onButtonStartGameClicked();
-	void onButtonEditorClicked();
-	void onButtonExitClicked();
-
 public:
 	Starter();
 	~Starter();
 
 	void run();
+
+	static enum Gamestate
+	{
+		Menu = 1,
+		Ingame,
+		Editor
+	};
+
+	static const float DEG_TO_RAD;
+	static const float RAD_TO_DEG;
+	static const float PI;
+
+	void show();
+	void hide();
+
+private:
+	bool init();
+	void tick();
+	void cleanup();
+
+	Game* m_game;
+	LevelEditor* m_editor;
+
+	sf::Clock m_clock;
+	sf::RenderWindow* m_renderWindow;
+
+	sf::Sprite m_spriteBg;
+
+	sf::Font m_fontSegoe;
+	sf::Font m_fontSegoeBold;
+
+	sf::Text m_textTitle;
+
+	sfg::SFGUI m_gui;
+	sfg::Desktop m_desktop;
+	sfg::Window::Ptr m_windowMenu;
+
+	Gamestate m_gamestate;
+
+	void onButtonStartGameClicked();
+	void onButtonEditorClicked();
+	void onButtonExitClicked();
 };
