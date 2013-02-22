@@ -47,7 +47,7 @@ bool Starter::init()
 	m_textTitle.setFont(m_fontSegoeBold);
 	m_textTitle.setString("UFO Builder");
 	m_textTitle.setCharacterSize(50);
-	m_textTitle.setColor(sf::Color(0, 0, 0, 180));
+	m_textTitle.setColor(sf::Color(0x0, 0x0, 0x0, 0xbb));
 	m_textTitle.setOrigin(m_textTitle.getGlobalBounds().width / 2.0f, m_textTitle.getGlobalBounds().height / 2.0f);
 	m_textTitle.setPosition(sf::Vector2f(m_renderWindow->getView().getSize().x / 2.0f, m_renderWindow->getView().getSize().y / 2.0f - 100.0f));
 
@@ -124,7 +124,7 @@ void Starter::tick()
 	sf::Time elapsedTime = m_clock.restart();
 	float fps = 1000000.0f / elapsedTime.asMicroseconds();
 
-	m_renderWindow->clear(sf::Color(0, 0, 0));
+	m_renderWindow->clear(sf::Color(0x0, 0x0, 0x0));
 
 	if(m_gamestate == Starter::Menu)
 	{
@@ -171,10 +171,10 @@ void Starter::tick()
 	text.setFont(m_fontSegoe);
 	text.setString("FPS: " + StringHelper::toString(fps));
 	text.setCharacterSize(16);
-	text.setColor(sf::Color(0, 0, 0, 100));
+	text.setColor(sf::Color(0x0, 0x0, 0x0, 0x55));
 	text.setPosition(19.0f, 11.0f);
 	m_renderWindow->draw(text);
-	text.setColor(sf::Color(255, 255, 255, 255));
+	text.setColor(sf::Color(0xff, 0xff, 0xff, 0xff));
 	text.setPosition(18.0f, 10.0f);
 	m_renderWindow->draw(text);
 
