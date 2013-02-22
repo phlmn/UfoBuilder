@@ -37,10 +37,12 @@ bool Starter::init()
 {	
 	// create window to render
 	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 600, 32), "UFO Builder");
+	m_renderWindow->setFramerateLimit(60);
 
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
 	m_fontSegoeBold.loadFromFile("fonts/segoeuib.ttf");
+
 
 	m_textTitle.setFont(m_fontSegoeBold);
 	m_textTitle.setString("UFO Builder");
@@ -168,8 +170,12 @@ void Starter::tick()
 	sf::Text text;
 	text.setFont(m_fontSegoe);
 	text.setString("FPS: " + StringHelper::toString(fps));
-	text.setPosition(18.0f, 10.0f);
 	text.setCharacterSize(16);
+	text.setColor(sf::Color(0, 0, 0, 100));
+	text.setPosition(19.0f, 11.0f);
+	m_renderWindow->draw(text);
+	text.setColor(sf::Color(255, 255, 255, 255));
+	text.setPosition(18.0f, 10.0f);
 	m_renderWindow->draw(text);
 
 	// render the whole scene
