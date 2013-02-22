@@ -16,6 +16,9 @@ private:
 
 	sfg::Desktop* m_desktop;
 
+	sf::Sprite m_spriteBg;
+	sf::Sprite m_sidebarBg;
+
 public:
 	LevelEditor(Starter* starter, sf::RenderWindow* window, sfg::Desktop* desktop);
 	~LevelEditor();
