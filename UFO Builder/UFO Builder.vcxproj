@@ -80,6 +80,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Starter.cpp" />
     <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Ufo.cpp" />
     <ClCompile Include="UfoCarriage.cpp" />
     <ClCompile Include="UfoCockpit.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="Starter.h" />
     <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Ufo.h" />
     <ClInclude Include="UfoCarriage.h" />
     <ClInclude Include="UfoCockpit.h" />

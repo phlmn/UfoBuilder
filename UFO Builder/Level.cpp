@@ -47,12 +47,12 @@ std::list<GameObject*>* Level::getObjects()
 	return NULL;
 }
 
-bool Level::save(sf::String filename)
+bool Level::save(std::string filename)
 {
 	return false;
 }
 
-bool Level::load(sf::String filename)
+bool Level::load(std::string filename)
 {
 	return false;
 }

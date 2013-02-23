@@ -15,6 +15,7 @@
 #include "UfoEngine.h"
 #include "UfoFuelTank.h"
 #include "Game.h"
+#include "tinyxml2.h"
 
 class Level
 {
@@ -36,6 +37,6 @@ public:
 	void removeObject(GameObject* object);
 	std::list<GameObject*>* getObjects();
 
-	bool save(sf::String filename);
-	bool load(sf::String filename);
+	bool save(std::string filename);
+	bool load(std::string filename);
 };
