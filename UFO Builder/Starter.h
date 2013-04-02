@@ -5,7 +5,6 @@
 #include <sstream>
 #include <iostream>
 #include <SFML\Graphics.hpp>
-#include <SFGUI\SFGUI.hpp>
 #include "StringHelper.h"
 #include <Box2D\Box2D.h>
 #include "GameObject.h"
@@ -19,10 +18,18 @@
 #include "UfoFuelTank.h"
 #include "Level.h"
 #include "Game.h"
+#include <Awesomium\WebCore.h>
+#include <Awesomium\STLHelpers.h>
+#include <Awesomium\BitmapSurface.h>
+#include <Awesomium\DataPak.h>
+#include "UiRenderer.h"
 
 class Game;
 
-class Starter
+using namespace Awesomium;
+using namespace std;
+
+class Starter : public JSMethodHandler
 {
 public:
 	Starter();
@@ -41,8 +48,9 @@ public:
 	static const float RAD_TO_DEG;
 	static const float PI;
 
-	void show();
-	void hide();
+	WebCore* getWebCore();
+	WebSession* getWebSession();
+	sf::Vector2i getScreenSize();
 
 private:
 	bool init();
@@ -53,6 +61,7 @@ private:
 	LevelEditor* m_editor;
 
 	sf::Clock m_clock;
+	sf::Window* m_window;
 	sf::RenderWindow* m_renderWindow;
 
 	sf::Sprite m_spriteBg;
@@ -60,15 +69,12 @@ private:
 	sf::Font m_fontSegoe;
 	sf::Font m_fontSegoeBold;
 
-	sf::Text m_textTitle;
-
-	sfg::SFGUI m_gui;
-	sfg::Desktop m_desktop;
-	sfg::Window::Ptr m_windowMenu;
-
 	Gamestate m_gamestate;
 
-	void onButtonStartGameClicked();
-	void onButtonEditorClicked();
-	void onButtonExitClicked();
+	WebCore* m_webCore;
+	WebSession* m_webSession;
+	UiRenderer* m_uiRenderer;
+
+	virtual void OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args);
+	virtual JSValue OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args);
 };

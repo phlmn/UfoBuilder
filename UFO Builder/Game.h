@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-#include <SFGUI\SFGUI.hpp>
 #include <Box2D\Box2D.h>
 #include "Starter.h"
 
@@ -21,11 +20,8 @@ private:
 	sf::Sprite m_spriteTest;
 	sf::Sprite m_spriteBody;
 
-	sfg::SFGUI m_gui;
-	sfg::Desktop* m_desktop;
-
 public:
-	Game(Starter* starter, sf::RenderWindow* window, sfg::Desktop* desktop);
+	Game(Starter* starter, sf::RenderWindow* window);
 	~Game();
 
 	void tick(sf::Time elapsedTime);

@@ -1,10 +1,9 @@
 #include "Game.h"
 
-Game::Game(Starter* starter, sf::RenderWindow* window, sfg::Desktop* desktop)
+Game::Game(Starter* starter, sf::RenderWindow* window)
 {
 	m_starter = starter;
 	m_renderWindow = window;
-	m_desktop = desktop;
 
 	// create physical world
 	m_physWorld = new b2World(b2Vec2(0.0f, 9.81f));
@@ -57,7 +56,6 @@ void Game::tick(sf::Time elapsedTime)
 	sf::Event event;
 	while(m_renderWindow->pollEvent(event))
 	{
-		m_desktop->HandleEvent(event);
 		if (event.type == sf::Event::Closed)
 		{
 			// the close button was clicked

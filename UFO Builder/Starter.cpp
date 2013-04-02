@@ -1,7 +1,5 @@
 #include "Starter.h"
 
-using namespace std;
-
 // set some usefull variables
 const float Starter::PI = 3.14159265359f;
 const float Starter::DEG_TO_RAD = 0.0174532925f;
@@ -43,80 +41,33 @@ bool Starter::init()
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
 	m_fontSegoeBold.loadFromFile("fonts/segoeuib.ttf");
 
-
-	m_textTitle.setFont(m_fontSegoeBold);
-	m_textTitle.setString("UFO Builder");
-	m_textTitle.setCharacterSize(50);
-	m_textTitle.setColor(sf::Color(0x0, 0x0, 0x0, 0xbb));
-	m_textTitle.setOrigin(m_textTitle.getGlobalBounds().width / 2.0f, m_textTitle.getGlobalBounds().height / 2.0f);
-	m_textTitle.setPosition(sf::Vector2f(m_renderWindow->getView().getSize().x / 2.0f, m_renderWindow->getView().getSize().y / 2.0f - 100.0f));
-
 	// load images
 	sf::Texture* texture;
 	texture = new sf::Texture();
 	texture->loadFromFile("images/bg_menu.png");
 	m_spriteBg.setTexture(*texture);
+
+	m_webCore = WebCore::Initialize(WebConfig());
+
+	m_webSession = m_webCore->CreateWebSession(WSLit(""), WebPreferences());
+
+	unsigned short filesWritten;
+	WriteDataPak(WSLit("resource.pak"), WSLit("resource"), WSLit(""), filesWritten);
 	
-	// create menu gui
-	m_windowMenu = sfg::Window::Create();	
+	m_webSession->AddDataSource(WSLit("res"), new DataPakSource(WSLit("resource.pak")));
+	
+	m_uiRenderer = new UiRenderer(m_webCore, m_webSession, m_renderWindow, sf::Vector2i(1024, 600), "asset://res/menu.html");
+	
+	m_uiRenderer->registerMethod("startGame", false);
+	m_uiRenderer->registerMethod("startEditor", false);
+	m_uiRenderer->registerMethod("exit", false);
 
-	sfg::Box::Ptr box = sfg::Box::Create(sfg::Box::VERTICAL, 10.0f);
-
-	sfg::Button::Ptr button_start = sfg::Button::Create("Play Game");
-	button_start->GetSignal(sfg::Button::OnLeftClick).Connect(&Starter::onButtonStartGameClicked, this);
-
-	sfg::Button::Ptr button_editor = sfg::Button::Create("Start Editor");
-	button_editor->GetSignal(sfg::Button::OnLeftClick).Connect(&Starter::onButtonEditorClicked, this);
-
-	sfg::Button::Ptr button_exit = sfg::Button::Create("Exit");
-	button_exit->GetSignal(sfg::Button::OnLeftClick).Connect(&Starter::onButtonExitClicked, this);
-
-	box->Pack(button_start);
-	box->Pack(button_editor);
-	box->Pack(button_exit);
-	m_windowMenu->Add(box);
-
-	m_windowMenu->SetRequisition(sf::Vector2f(250.0f, 0.0f));
-	m_windowMenu->SetPosition(sf::Vector2f((m_renderWindow->getView().getSize().x - m_windowMenu->GetRequisition().x) / 2.0f, (m_renderWindow->getView().getSize().y - m_windowMenu->GetRequisition().y) / 2.0f + 40.0f));
-	m_windowMenu->SetStyle(m_windowMenu->GetStyle() & ~sfg::Window::TITLEBAR & ~sfg::Window::RESIZE);
-
-	m_desktop.Add(m_windowMenu);
-
+	m_uiRenderer->setJSMethodHandler(this);
+	
 	// set the gamestate to menu
 	m_gamestate = Starter::Menu;
 
 	return true;
-}
-
-void Starter::onButtonStartGameClicked()
-{
-	if(m_game == NULL)
-	{
-		m_game = new Game(this, m_renderWindow, &m_desktop);
-		if(m_editor) m_editor->hide();
-		hide();
-		m_game->show();
-	}
-
-	m_gamestate = Starter::Ingame;
-}
-
-void Starter::onButtonEditorClicked()
-{
-	if(m_editor == NULL)
-	{
-		m_editor = new LevelEditor(this, m_renderWindow, &m_desktop);
-		if(m_game) m_editor->hide();
-		hide();
-		m_editor->show();
-	}
-
-	m_gamestate = Starter::Editor;
-}
-
-void Starter::onButtonExitClicked()
-{
-	m_renderWindow->close();
 }
 
 void Starter::tick()
@@ -126,14 +77,14 @@ void Starter::tick()
 
 	m_renderWindow->clear(sf::Color(0x0, 0x0, 0x0));
 
+	// update webcore
+	m_webCore->Update();
+
 	if(m_gamestate == Starter::Menu)
 	{
-
-		// user event handling
 		sf::Event event;
 		while(m_renderWindow->pollEvent(event))
 		{
-			m_desktop.HandleEvent(event);
 			if (event.type == sf::Event::Closed)
 			{
 				// the close button was clicked
@@ -143,40 +94,33 @@ void Starter::tick()
 			{
 				// the windows has been resized
 				m_renderWindow->setView(sf::View(sf::Vector2f(event.size.width / 2.0f, event.size.height / 2.0f), sf::Vector2f((float)event.size.width, (float)event.size.height)));
-				m_windowMenu->SetPosition(sf::Vector2f((m_renderWindow->getView().getSize().x - m_windowMenu->GetRequisition().x) / 2.0f, (m_renderWindow->getView().getSize().y - m_windowMenu->GetRequisition().y) / 2.0f + 40.0f));
-				m_textTitle.setPosition(sf::Vector2f(m_renderWindow->getView().getSize().x / 2.0f, m_renderWindow->getView().getSize().y / 2.0f - 100.0f));
+				m_uiRenderer->resize(event.size.width, event.size.height);
 			}
+			m_uiRenderer->handleEvent(event);
 		}
-
 		m_renderWindow->draw(m_spriteBg);
-		m_renderWindow->draw(m_textTitle);
+		m_uiRenderer->render();
 	}
 	else if(m_gamestate == Starter::Ingame)
 	{
 		m_game->tick(elapsedTime);
+
+		// show fps
+		sf::Text text;
+		text.setFont(m_fontSegoe);
+		text.setString("FPS: " + StringHelper::toString(fps));
+		text.setCharacterSize(16);
+		text.setColor(sf::Color(0x0, 0x0, 0x0, 0x55));
+		text.setPosition(19.0f, 11.0f);
+		m_renderWindow->draw(text);
+		text.setColor(sf::Color(0xff, 0xff, 0xff, 0xff));
+		text.setPosition(18.0f, 10.0f);
+		m_renderWindow->draw(text);
 	}
 	else if(m_gamestate == Starter::Editor)
 	{
 		m_editor->tick(elapsedTime);
 	}
-
-	// update gui desktop
-	m_desktop.Update(elapsedTime.asSeconds());
-
-	// render gui
-	m_gui.Display(*m_renderWindow);
-
-	// show fps
-	sf::Text text;
-	text.setFont(m_fontSegoe);
-	text.setString("FPS: " + StringHelper::toString(fps));
-	text.setCharacterSize(16);
-	text.setColor(sf::Color(0x0, 0x0, 0x0, 0x55));
-	text.setPosition(19.0f, 11.0f);
-	m_renderWindow->draw(text);
-	text.setColor(sf::Color(0xff, 0xff, 0xff, 0xff));
-	text.setPosition(18.0f, 10.0f);
-	m_renderWindow->draw(text);
 
 	// render the whole scene
 	m_renderWindow->display();
@@ -190,12 +134,48 @@ void Starter::cleanup()
 	if(m_editor) delete m_editor;
 }
 
-void Starter::hide()
+void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args)
 {
-	m_windowMenu->Show(false);
+	if(method_name == WSLit("startGame"))
+	{
+		if(m_game == NULL)
+		{
+			m_game = new Game(this, m_renderWindow);
+		}
+
+		m_gamestate = Starter::Ingame;
+	}
+	else if(method_name == WSLit("startEditor"))
+	{
+		if(m_editor == NULL)
+		{
+			m_editor = new LevelEditor(this, m_renderWindow);
+		}
+
+		m_gamestate = Starter::Editor;
+	}
+	else if(method_name == WSLit("exit"))
+	{
+		m_renderWindow->close();
+	}
 }
 
-void Starter::show()
+JSValue Starter::OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args)
 {
-	m_windowMenu->Show(true);
+	return JSValue();
+}
+
+WebCore* Starter::getWebCore()
+{
+	return m_webCore;
+}
+
+WebSession* Starter::getWebSession()
+{
+	return m_webSession;
+}
+
+sf::Vector2i Starter::getScreenSize()
+{
+	return sf::Vector2i(m_renderWindow->getSize().x, m_renderWindow->getSize().y);
 }

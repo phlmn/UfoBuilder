@@ -1,0 +1,122 @@
+/* =====  Common ===== */
+
+body {
+	font: 14px 'Segoe UI';
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+* {
+	-webkit-user-select: none;
+}
+
+
+a.button {
+	display: block;
+	background: #f3f3f3;
+	padding: 8px;
+	margin: 8px 20px;
+	text-align: center;
+	color: #333;
+	text-decoration: none;
+}
+
+a.button:hover {
+	background: #009cff;
+	color: #fff; 
+}
+
+/* ===== Menu ===== */
+
+#menu {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background: #fff;
+	-webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+	width: 280px;
+	height: 200px;
+	margin: -100px 0 0 -140px;
+}
+
+#menu h1 {
+	font-size: 24px;
+	line-height: 26px;
+	text-align: center;
+}
+
+/* ===== Editor ===== */
+
+#editor .menubar {
+	position: absolute;
+	top: 0;	
+	left: 0;
+	right: 0;
+	height: 31px;
+	background: #fff;
+	padding: 0 12px;
+}
+
+#editor .menubar .left {
+	float: left;	
+}
+
+#editor .menubar .right {
+	float: right;	
+}
+
+#editor .menubar li {
+	margin: 0 2px;
+}
+
+#editor .menubar li > a {
+	display: block;
+	padding: 6px 8px;
+	color: #333;
+	text-decoration: none;
+}
+
+#editor .menubar ul {
+	margin: 0;
+	padding: 0;	
+}
+
+#editor .menubar ul > li {
+	float: left;
+	position: relative;
+}
+
+#editor .menubar li > a > img.icon {
+	height: 19px;
+	widht: auto;	
+}
+
+#editor .menubar li > ul {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 30px;
+	padding: 6px 0;
+	background: #fff;
+	-webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+	min-width: 120px;
+}
+
+#editor .menubar li:hover > ul {
+	display: block;
+}
+
+#editor .menubar li > ul > li {
+	min-width: 100%;
+	margin: 1px 0;
+}
+
+#editor .menubar li > ul li > a {
+	padding: 2px 12px;
+}
+
+#editor .menubar a:hover {
+	background: #009cff;
+	color: #fff;
+}

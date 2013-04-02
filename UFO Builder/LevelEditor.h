@@ -1,9 +1,13 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
-#include <SFGUI\SFGUI.hpp>
+#include <Awesomium\WebCore.h>
+#include <Awesomium\STLHelpers.h>
+#include "UiRenderer.h"
 
 class Starter;
+
+using namespace Awesomium;
 
 class LevelEditor
 {
@@ -12,18 +16,13 @@ private:
 
 	sf::RenderWindow* m_renderWindow;
 
-	sfg::SFGUI m_gui;
-
-	sfg::Desktop* m_desktop;
-
 	sf::Sprite m_spriteBg;
-	sf::Sprite m_sidebarBg;
+
+	UiRenderer* m_uiRenderer;
 
 public:
-	LevelEditor(Starter* starter, sf::RenderWindow* window, sfg::Desktop* desktop);
+	LevelEditor(Starter* starter, sf::RenderWindow* window);
 	~LevelEditor();
 
 	void tick(sf::Time elapsedTime);
-	void show();
-	void hide();
 };
