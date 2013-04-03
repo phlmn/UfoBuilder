@@ -87,6 +87,10 @@ void UiRenderer::handleEvent(sf::Event event)
 	{
 		m_webView->InjectMouseMove(event.mouseMove.x, event.mouseMove.y);
 	}
+	else if(event.type == sf::Event::MouseWheelMoved)
+	{
+		m_webView->InjectMouseWheel(event.mouseWheel.delta * 50, 0);
+	}
 }
 
 void UiRenderer::setJSMethodHandler(JSMethodHandler* handler)

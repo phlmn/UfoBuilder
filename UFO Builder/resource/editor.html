@@ -1,6 +1,50 @@
 <html>
     <head>    
-		<link rel="stylesheet" href="asset://res/style.css" />
+		<link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" src="jquery/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="jquery/jquery-ui-1.10.2.js"></script>
+        <script type="text/javascript" src="jquery/jquery.ba-resize.min.js"></script>
+        
+        <script type="text/javascript">		
+		
+			var openDialog = "";
+				
+			$(document).ready(function(e) {
+                $(".dialog").each(function(index, element) {
+                    $(element).css('margin-top', - $(element).outerHeight() / 2);
+					$(element).bind('resize', function(e) {
+                        $(this).css('margin-top', - $(this).outerHeight() / 2);
+                    });
+                });
+			});
+			
+			function overlay(show) {
+				if(show)
+					$("#overlay").fadeIn(300);
+				else	
+					$("#overlay").fadeOut(300);
+			}
+			
+			function showDialog(name) {
+				if(openDialog == name) return;
+				if(openDialog != "")
+					hideDialog();
+				var container = $("div.dialog." + name);
+				if(container.length == 0) return;
+				overlay(true);
+				container.addClass("visible");
+				openDialog = name;
+			}
+			
+			function hideDialog() {
+				if(openDialog == "") return;
+				var container = $("div.dialog." + openDialog);
+				if(container.length == 0) return;
+				overlay(false);
+				container.removeClass("visible");
+				openDialog = "";
+			}
+		</script>
     </head>
 
     <body id="editor">
@@ -29,14 +73,29 @@
                         <li><a href="#">Clone</a></li>
                         <li><a href="#">Edit</a></li>
                         <li><a href="#">Delete</a></li>
-                        <li><a href="#">Physics...</a></li>
-                        <li><a href="#">Settings</a></li>
+                        <li><a href="javascript: showDialog('physics');">Physics...</a></li>
+                        <li><a href="javascript: showDialog('settings');">Settings</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="right">
-            	<li><a href="#"><img class="icon" src="asset://res/object-browser.png" /></a></li>
+            	<li><a href="#"><img class="icon" src="object-browser.png" /></a></li>
             </ul>
         </div>
+        <div class="dialog settings">
+            <h1>Object Settings</h1>
+            <div class="buttons">
+                <a href="#" class="button">Save</a>
+                <a href="javascript: hideDialog();" class="button">Cancel</a>
+            </div>
+        </div>
+        <div class="dialog physics">
+            <h1>Physics</h1>
+            <div class="buttons">
+                <a href="#" class="button">Save</a>
+                <a href="javascript: hideDialog();" class="button">Cancel</a>
+            </div>
+        </div>
+        <div id="overlay"></div>
     </body>
 </html>
