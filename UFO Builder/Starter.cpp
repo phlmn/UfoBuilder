@@ -47,7 +47,9 @@ bool Starter::init()
 	texture->loadFromFile("images/bg_menu.png");
 	m_spriteBg.setTexture(*texture);
 
-	m_webCore = WebCore::Initialize(WebConfig());
+	WebConfig webConfig;
+	webConfig.child_process_path = WSLit("./ufobuilder-ui.exe");
+	m_webCore = WebCore::Initialize(webConfig);
 
 	m_webSession = m_webCore->CreateWebSession(WSLit(""), WebPreferences());
 
