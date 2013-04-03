@@ -5,7 +5,7 @@
 *.pydevproject
 .project
 .metadata
-bin/
+#bin/
 tmp/
 *.tmp
 *.bak
@@ -137,7 +137,7 @@ Desktop.ini
 *.egg
 *.egg-info
 dist
-build
+#build
 eggs
 parts
 #bin
