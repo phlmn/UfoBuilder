@@ -228,3 +228,42 @@ a.button:hover {
 .dialog .buttons {
 	text-align: center;
 }
+
+.layers {
+	position: fixed;
+	background: #fff;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+	padding: 20px;
+	right: 20px;
+	top: 50%;
+	margin-top: -180px;
+	line-height: 26px;
+	max-height: 80%;
+	overflow-y: auto;
+}
+
+.layers h1 {
+	font-size: 20px;
+	margin: 0 0 8px 0;	
+}
+
+.layers form {
+	margin: 0;
+	padding: 0;	
+}
+
+.layers input[type="radio"] {
+	display: none;	
+}
+
+.layers input[type="radio"] + label {
+	padding-left: 22px;
+	background: url("radio.png");
+	background-repeat: no-repeat;
+}
+
+.layers input[type="radio"]:checked + label {
+	background: url("radio.png");
+	background-repeat: no-repeat;
+	background-position: 0 -19px;
+}

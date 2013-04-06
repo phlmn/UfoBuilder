@@ -10,7 +10,7 @@
 			var openDialog = "";
 				
 			$(document).ready(function(e) {
-                $(".dialog").each(function(index, element) {
+                $(".v-center").each(function(index, element) {
                     $(element).css('margin-top', - $(element).outerHeight() / 2);
 					$(element).bind('resize', function(e) {
                         $(this).css('margin-top', - $(this).outerHeight() / 2);
@@ -82,14 +82,30 @@
             	<li><a href="#"><img class="icon" src="object-browser.png" /></a></li>
             </ul>
         </div>
-        <div class="dialog settings">
+        <div class="layers v-center">
+        	<h1>Layer</h1>
+        	<form action="">
+            	<input name="layer" type="radio" value="0" id="layer_0" /><label for="layer_0">Back - fixed</label><br />
+                <input name="layer" type="radio" value="1" id="layer_1" /><label for="layer_1">Back - 25%</label><br />
+                <input name="layer" type="radio" value="2" id="layer_2" /><label for="layer_2">Back - 50%</label><br />
+                <input name="layer" type="radio" value="3" id="layer_3" /><label for="layer_3">Back - 75%</label><br />
+                <input name="layer" type="radio" value="4" id="layer_4" /><label for="layer_4">Back - 100%</label><br />
+                <input name="layer" type="radio" value="5" id="layer_5" checked /><label for="layer_5">Main</label><br />
+                <input name="layer" type="radio" value="6" id="layer_6" /><label for="layer_6">Front - 100%</label><br />
+                <input name="layer" type="radio" value="7" id="layer_7" /><label for="layer_7">Front - 75%</label><br />
+                <input name="layer" type="radio" value="8" id="layer_8" /><label for="layer_8">Front - 50%</label><br />
+                <input name="layer" type="radio" value="9" id="layer_9" /><label for="layer_9">Front - 25%</label><br />
+                <input name="layer" type="radio" value="10" id="layer_10" /><label for="layer_10">Front - fixed</label>
+            </form>
+        </div>
+        <div class="dialog settings v-center">
             <h1>Object Settings</h1>
             <div class="buttons">
                 <a href="#" class="button">Save</a>
                 <a href="javascript: hideDialog();" class="button">Cancel</a>
             </div>
         </div>
-        <div class="dialog physics">
+        <div class="dialog physics v-center">
             <h1>Physics</h1>
             <div class="buttons">
                 <a href="#" class="button">Save</a>
