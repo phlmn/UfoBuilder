@@ -16,6 +16,11 @@
                         $(this).css('margin-top', - $(this).outerHeight() / 2);
                     });
                 });
+				
+				$(".object-list ul").sortable({
+					placeholder: 'placeholder',
+					connectWith: '.object-list ul'
+				});
 			});
 			
 			function overlay(show) {
@@ -43,6 +48,48 @@
 				overlay(false);
 				container.removeClass("visible");
 				openDialog = "";
+			}
+			
+			function appendObject(name, id, layer) {
+				var entry = $(".object-list li.object_" + id);
+				if(entry.length != 0) entry.remove();
+				$(".object-list ul.layer_" + layer).append("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+			}
+			
+			function prependObject(name, id, layer) {
+				var entry = $(".object-list li.object_" + id);
+				if(entry.length != 0) entry.remove();
+				$(".object-list ul.layer_" + layer).prepend("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+			}
+			
+			function addObject(name, id, layer, sortIndex) {
+				var entry = $(".object-list li.object_" + id);
+				if(entry.length != 0) entry.remove();
+				
+				if(sortIndex == 0)
+					$(".object-list ul.layer_" + layer).prepend("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+				else {
+					var created = false;	
+					$(".object-list ul.layer_" + layer + " li").each(function(index, element) {
+						if(index == sortIndex - 1) {
+							$(element).after("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+							created = true;
+							return;
+						}
+					});
+					if(!created)
+						$(".object-list ul.layer_" + layer).append("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+				}
+			}
+			
+			function removeObject(id) {
+				$(".object-list li.object_" + id).remove();
+			}
+			
+			function clearObjects() {
+				$(".object-list ul").each(function(index, element) {
+                    $(element).empty();
+                });	
 			}
 		</script>
     </head>
@@ -82,21 +129,32 @@
             	<li><a href="#"><img class="icon" src="object-browser.png" /></a></li>
             </ul>
         </div>
-        <div class="layers v-center">
-        	<h1>Layer</h1>
-        	<form action="">
-            	<input name="layer" type="radio" value="0" id="layer_0" /><label for="layer_0">Back - fixed</label><br />
-                <input name="layer" type="radio" value="1" id="layer_1" /><label for="layer_1">Back - 25%</label><br />
-                <input name="layer" type="radio" value="2" id="layer_2" /><label for="layer_2">Back - 50%</label><br />
-                <input name="layer" type="radio" value="3" id="layer_3" /><label for="layer_3">Back - 75%</label><br />
-                <input name="layer" type="radio" value="4" id="layer_4" /><label for="layer_4">Back - 100%</label><br />
-                <input name="layer" type="radio" value="5" id="layer_5" checked /><label for="layer_5">Main</label><br />
-                <input name="layer" type="radio" value="6" id="layer_6" /><label for="layer_6">Front - 100%</label><br />
-                <input name="layer" type="radio" value="7" id="layer_7" /><label for="layer_7">Front - 75%</label><br />
-                <input name="layer" type="radio" value="8" id="layer_8" /><label for="layer_8">Front - 50%</label><br />
-                <input name="layer" type="radio" value="9" id="layer_9" /><label for="layer_9">Front - 25%</label><br />
-                <input name="layer" type="radio" value="10" id="layer_10" /><label for="layer_10">Front - fixed</label>
-            </form>
+        <div class="objects">
+        	<h1>Objects</h1>
+            <div class="object-list">
+                <h2>Back - fixed</h2>
+                <ul class="layer_0"></ul>
+                <h2>Back - 25%</h2>
+                <ul class="layer_1"></ul>
+                <h2>Back - 50%</h2>
+                <ul class="layer_2"></ul>
+                <h2>Back - 75%</h2>
+                <ul class="layer_3"></ul>
+                <h2>Back - 100%</h2>
+                <ul class="layer_4"></ul>
+                <h2>Main</h2>
+                <ul class="layer_5"></ul>
+                <h2>Front - 100%</h2>
+                <ul class="layer_6"></ul>
+                <h2>Front - 125%</h2>
+                <ul class="layer_7"></ul>
+                <h2>Front - 150%</h2>
+                <ul class="layer_8"></ul>
+                <h2>Front - 200%</h2>
+                <ul class="layer_9"></ul>
+                <h2>Front - fixed</h2>
+                <ul class="layer_10"></ul>
+        	</div>
         </div>
         <div class="dialog settings v-center">
             <h1>Object Settings</h1>

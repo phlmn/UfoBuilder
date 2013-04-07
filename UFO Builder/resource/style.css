@@ -60,7 +60,7 @@ a.button:hover {
 
 ::-webkit-scrollbar-thumb {
 	background: #bbb;
-	min-height: 70px;
+	min-height: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -71,11 +71,27 @@ a.button:hover {
 	background: #3db2e8;
 }
 
+input[type="radio"] {
+	display: none;	
+}
+
+input[type="radio"] + label {
+	padding-left: 22px;
+	background: url("radio.png");
+	background-repeat: no-repeat;
+}
+
+input[type="radio"]:checked + label {
+	background: url("radio.png");
+	background-repeat: no-repeat;
+	background-position: 0 -19px;
+}
+
 /* ===== ===== */
 
 #overlay {
 	position: fixed;
-	z-index: 1;
+	z-index: 10;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -121,7 +137,7 @@ a.button:hover {
 /* ===== Editor ===== */
 
 #editor .menubar {
-	position: absolute;
+	position: fixed;
 	top: 0;	
 	left: 0;
 	right: 0;
@@ -129,6 +145,7 @@ a.button:hover {
 	background: #fff;
 	padding: 0 12px;
 	box-shadow: 0 0px 6px rgba(0, 0, 0, 0.15);
+	z-index: 2;
 }
 
 #editor .menubar .left {
@@ -202,7 +219,7 @@ a.button:hover {
 	left: 50%;
 	top: 50%;
 	margin: -150px 0 0 -240px;
-	z-index: 2;
+	z-index: 11;
 	top: -50%;
 	max-height: 80%;
 	-webkit-transition: top .5s;
@@ -229,41 +246,94 @@ a.button:hover {
 	text-align: center;
 }
 
-.layers {
-	position: fixed;
-	background: #fff;
-	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
-	padding: 20px;
-	right: 20px;
-	top: 50%;
-	margin-top: -180px;
-	line-height: 26px;
-	max-height: 80%;
-	overflow-y: auto;
-}
-
-.layers h1 {
-	font-size: 20px;
-	margin: 0 0 8px 0;	
-}
-
-.layers form {
+.objects ul {
+	list-style: none;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 }
 
-.layers input[type="radio"] {
-	display: none;	
+.objects h1 {
+	margin: 0;
+	font-size: 16px;
+	padding: 6px 10px;
+	background: #3db2e8;
+	color: #fff;
 }
 
-.layers input[type="radio"] + label {
-	padding-left: 22px;
-	background: url("radio.png");
-	background-repeat: no-repeat;
+.objects h2 {
+	font-size: 11px;
+	text-transform: uppercase;
+	padding: 2px 8px;
+	margin: 8px 0 0 0;
+	color: #777;
+	border-bottom: 1px solid #eee;
 }
 
-.layers input[type="radio"]:checked + label {
-	background: url("radio.png");
-	background-repeat: no-repeat;
-	background-position: 0 -19px;
+.objects h2:hover {
+	background: #3db2e8;
+	color: #fff;
+}
+
+.objects h2:hover:after {
+	content: '+';
+	line-height: 9px;
+	font-size: 16px;
+	float: right;	
+}
+
+.objects {
+	position: fixed;
+	top: 51px;
+	background: #fff;
+	bottom: 20px;
+	left: 20px;
+	width: 200px;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+	z-index: 1;
+}
+
+.objects .object-list {
+	position: absolute;
+	top: 33px;
+	bottom: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	left: 0;
+	right: 0;
+}
+
+.objects .object-list ul {
+	min-height: 12px;
+}
+
+.objects .object-list ul:last-child {
+	padding-bottom: 30px;
+}
+
+.objects li a {
+	display: block;
+	padding: 5px 12px;
+	text-decoration: none;
+	color: #333;
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.objects li:last-child a {
+	border: none;
+}
+
+.objects .object-list .placeholder {
+	border-top: 2px dashed 	3db2e8;
+}
+
+.objects li a:hover {
+	background: #f5f5f5;	
+}
+
+.objects li a:active {
+	background: #fff;
+	box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+	opacity: 0.9;
 }
