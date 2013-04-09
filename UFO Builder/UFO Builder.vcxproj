@@ -37,16 +37,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)sfml\include;$(ProjectDir)Box2D\include;$(ProjectDir)awesomium\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)thor\include;$(ProjectDir)sfml\include;$(ProjectDir)Box2D\include;$(ProjectDir)awesomium\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(ProjectDir)sfml\lib;$(LibraryPath);$(ProjectDir)Box2D\lib;$(ProjectDir)awesomium\build\lib;</LibraryPath>
+    <LibraryPath>$(ProjectDir)thor\lib;$(ProjectDir)sfml\lib;$(LibraryPath);$(ProjectDir)Box2D\lib;$(ProjectDir)awesomium\build\lib;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)sfml\include;$(ProjectDir)Box2D\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)thor\include;$(ProjectDir)sfml\include;$(ProjectDir)Box2D\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(ProjectDir)sfml\lib;$(LibraryPath);$(ProjectDir)Box2D\lib</LibraryPath>
+    <LibraryPath>$(ProjectDir)thor\lib;$(ProjectDir)sfml\lib;$(LibraryPath);$(ProjectDir)Box2D\lib;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -55,7 +55,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-network-d.lib;Box2D.lib;awesomium.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>thor-d.lib;sfml-system-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-network-d.lib;Box2D.lib;awesomium.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,7 +69,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-audio.lib;sfml-window.lib;sfml-network.lib;Box2D.lib;awesomium.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>thor.lib;sfml-system.lib;sfml-graphics.lib;sfml-audio.lib;sfml-window.lib;sfml-network.lib;Box2D.lib;awesomium.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

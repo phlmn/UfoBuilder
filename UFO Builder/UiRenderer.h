@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML\Graphics.hpp>
+#include <Thor\Graphics.hpp>
 #include <Awesomium\WebCore.h>
 #include <Awesomium\STLHelpers.h>
 #include <Awesomium\BitmapSurface.h>
@@ -28,11 +29,11 @@ private:
 
 	JSObject* m_appObject;
 
-	sf::Sprite m_sprite;
-	sf::Texture m_texture;
+	thor::BigSprite m_sprite;
+	thor::BigTexture m_texture;
+	
 
 	sf::RenderWindow* m_renderWindow;
 
 	sf::Vector2i m_screenSize;
 };
-
