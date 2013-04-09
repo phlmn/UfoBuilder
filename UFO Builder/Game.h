@@ -25,6 +25,4 @@ public:
 	~Game();
 
 	void tick(sf::Time elapsedTime);
-	void show();
-	void hide();
 };

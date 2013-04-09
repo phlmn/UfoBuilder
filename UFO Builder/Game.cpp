@@ -75,13 +75,3 @@ void Game::tick(sf::Time elapsedTime)
 	m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f, m_bodyTest->GetPosition().y * 64.0f);
 	m_renderWindow->draw(m_spriteBody);
 }
-
-void Game::show()
-{
-	
-}
-
-void Game::hide()
-{
-	
-}
