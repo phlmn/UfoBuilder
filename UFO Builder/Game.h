@@ -20,6 +20,8 @@ private:
 	sf::Sprite m_spriteTest;
 	sf::Sprite m_spriteBody;
 
+	void resize();
+
 public:
 	Game(Starter* starter, sf::RenderWindow* window);
 	~Game();

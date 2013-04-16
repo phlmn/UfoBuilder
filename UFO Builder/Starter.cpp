@@ -37,6 +37,8 @@ bool Starter::init()
 	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 600, 32), "UFO Builder");
 	m_renderWindow->setFramerateLimit(60);
 
+	m_screenFactor = m_renderWindow->getSize().x / 1920;
+
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
 	m_fontSegoeBold.loadFromFile("fonts/segoeuib.ttf");
@@ -95,8 +97,8 @@ void Starter::tick()
 			else if(event.type == sf::Event::Resized)
 			{
 				// the windows has been resized
-				m_renderWindow->setView(sf::View(sf::Vector2f(event.size.width / 2.0f, event.size.height / 2.0f), sf::Vector2f((float)event.size.width, (float)event.size.height)));
-				m_uiRenderer->resize(event.size.width, event.size.height);
+				resize(event.size.width, event.size.height);
+				m_uiRenderer->resize(event.size.width, event.size.height);				
 			}
 			m_uiRenderer->handleEvent(event);
 		}
@@ -180,4 +182,42 @@ WebSession* Starter::getWebSession()
 sf::Vector2i Starter::getScreenSize()
 {
 	return sf::Vector2i(m_renderWindow->getSize().x, m_renderWindow->getSize().y);
+}
+
+float Starter::getScreenFactor()
+{
+	return m_screenFactor;
+}
+
+void Starter::resize(int width, int height)
+{
+
+	float goalAspect = 16.0f / 9.0f;
+	float viewAspect = width / (float)height;
+
+	float realWidth, realHeight;
+
+	if(goalAspect > viewAspect)
+	{
+		realWidth = width;
+		realHeight = height * (viewAspect / goalAspect);		
+	}
+	else if(goalAspect < viewAspect)
+	{
+		realWidth = width * (goalAspect / viewAspect);
+		realHeight = height;
+	}
+	else
+	{
+		realWidth = width;
+		realHeight = height;
+	}
+
+	m_screenFactor = realWidth / 1920.0f;
+
+	sf::View view = sf::View(sf::Vector2f(realWidth / 2.0f, realHeight / 2.0f), sf::Vector2f(realWidth, realHeight));
+
+	view.setViewport(sf::FloatRect((width - realWidth) / width / 2.0f, (height - realHeight) / height / 2.0f, realWidth / width, realHeight / height));
+
+	m_renderWindow->setView(view);
 }

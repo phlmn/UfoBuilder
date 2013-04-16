@@ -52,6 +52,10 @@ public:
 	WebSession* getWebSession();
 	sf::Vector2i getScreenSize();
 
+	float getScreenFactor();
+
+	void resize(int width, int height);
+
 private:
 	bool init();
 	void tick();
@@ -59,6 +63,8 @@ private:
 
 	Game* m_game;
 	LevelEditor* m_editor;
+
+	float m_screenFactor;
 
 	sf::Clock m_clock;
 	sf::Window* m_window;

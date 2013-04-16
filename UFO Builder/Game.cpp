@@ -64,14 +64,26 @@ void Game::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::Resized)
 		{
 			// the windows has been resized
-			m_renderWindow->setView(sf::View(sf::Vector2f(event.size.width / 2.0f, event.size.height / 2.0f), sf::Vector2f((float)event.size.width, (float)event.size.height)));
+			m_starter->resize(event.size.width, event.size.height);
+			resize();
 		}
 	}
 
 	m_renderWindow->draw(m_spriteTest);
 
+	float scale = m_starter->getScreenFactor();
+
 	// draw testobject
 	m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
-	m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f, m_bodyTest->GetPosition().y * 64.0f);
+	m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);
 	m_renderWindow->draw(m_spriteBody);
+}
+
+
+void Game::resize()
+{
+	float scale = m_starter->getScreenFactor();
+
+	m_spriteBody.setScale(scale, scale);
+	m_spriteTest.setScale(scale * 4.0f, scale * 2.2f);
 }
