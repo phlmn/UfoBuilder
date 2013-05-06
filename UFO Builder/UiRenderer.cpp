@@ -111,3 +111,9 @@ void UiRenderer::resize(int width, int height)
 	m_screenSize = sf::Vector2i(width, height);
 	m_webView->Resize(width, height);
 }
+
+void UiRenderer::resize(sf::Vector2i size)
+{
+	m_screenSize = size;
+	m_webView->Resize(size.x, size.y);
+}

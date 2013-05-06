@@ -34,10 +34,10 @@ void Starter::run()
 bool Starter::init()
 {	
 	// create window to render
-	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 600, 32), "UFO Builder");
+	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 576, 32), "UFO Builder");
 	m_renderWindow->setFramerateLimit(60);
 
-	m_screenFactor = m_renderWindow->getSize().x / 1920;
+	m_screenFactor = m_renderWindow->getSize().x / 1920.0f;
 
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
@@ -166,7 +166,7 @@ void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const
 
 JSValue Starter::OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args)
 {
-	return JSValue();
+	return JSValue::Undefined();
 }
 
 WebCore* Starter::getWebCore()
@@ -177,11 +177,6 @@ WebCore* Starter::getWebCore()
 WebSession* Starter::getWebSession()
 {
 	return m_webSession;
-}
-
-sf::Vector2i Starter::getScreenSize()
-{
-	return sf::Vector2i(m_renderWindow->getSize().x, m_renderWindow->getSize().y);
 }
 
 float Starter::getScreenFactor()
@@ -199,18 +194,18 @@ void Starter::resize(int width, int height)
 
 	if(goalAspect > viewAspect)
 	{
-		realWidth = width;
+		realWidth = (float)width;
 		realHeight = height * (viewAspect / goalAspect);		
 	}
 	else if(goalAspect < viewAspect)
 	{
 		realWidth = width * (goalAspect / viewAspect);
-		realHeight = height;
+		realHeight = (float)height;
 	}
 	else
 	{
-		realWidth = width;
-		realHeight = height;
+		realWidth = (float)width;
+		realHeight = (float)height;
 	}
 
 	m_screenFactor = realWidth / 1920.0f;
@@ -220,4 +215,9 @@ void Starter::resize(int width, int height)
 	view.setViewport(sf::FloatRect((width - realWidth) / width / 2.0f, (height - realHeight) / height / 2.0f, realWidth / width, realHeight / height));
 
 	m_renderWindow->setView(view);
+}
+
+sf::Vector2f Starter::getScreenSize()
+{
+	return m_renderWindow->getView().getSize();
 }

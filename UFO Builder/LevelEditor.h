@@ -9,7 +9,7 @@ class Starter;
 
 using namespace Awesomium;
 
-class LevelEditor
+class LevelEditor : JSMethodHandler
 {
 private:
 	Starter* m_starter;
@@ -19,6 +19,12 @@ private:
 	sf::Sprite m_spriteBg;
 
 	UiRenderer* m_uiRenderer;
+
+	void resize();
+	void createObject(int layer, int id);
+
+	void OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args);
+	JSValue OnMethodCallWithReturnValue(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args);
 
 public:
 	LevelEditor(Starter* starter, sf::RenderWindow* window);

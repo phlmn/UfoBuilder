@@ -21,6 +21,7 @@ public:
 
 	WebView* getWebView();
 	void resize(int width, int height);
+	void resize(sf::Vector2i size);
 
 private:
 	WebCore* m_webCore;

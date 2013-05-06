@@ -22,6 +22,7 @@
 #include <Awesomium\STLHelpers.h>
 #include <Awesomium\BitmapSurface.h>
 #include <Awesomium\DataPak.h>
+#include <SFML\Graphics.hpp>
 #include "UiRenderer.h"
 
 class Game;
@@ -50,11 +51,12 @@ public:
 
 	WebCore* getWebCore();
 	WebSession* getWebSession();
-	sf::Vector2i getScreenSize();
+	sf::Vector2f getScreenSize();
 
 	float getScreenFactor();
 
 	void resize(int width, int height);
+	void toggleFullscreen();
 
 private:
 	bool init();

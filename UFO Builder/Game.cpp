@@ -12,13 +12,15 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile("images/bg1.png");
 	m_spriteTest.setTexture(*texture);
-	m_spriteTest.setScale(2.0f, 1.2f);
 
 	texture = new sf::Texture();
 	texture->loadFromFile("images/body1.png");
 	texture->setSmooth(true);
 	m_spriteBody.setTexture(*texture);
 	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
+
+	// calculate sprite scales
+	resize();
 
 	// create physical bodies
 	b2BodyDef* def = new b2BodyDef();

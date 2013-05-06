@@ -87,7 +87,8 @@ input[type="radio"]:checked + label {
 	background-position: 0 -19px;
 }
 
-/* ===== ===== */
+
+/* ===== Overlay ===== */
 
 #overlay {
 	position: fixed;
@@ -99,6 +100,7 @@ input[type="radio"]:checked + label {
 	background: rgba(0, 0, 0, 0.5);
 	display: none;
 }
+
 
 /* ===== Menu ===== */
 
@@ -134,7 +136,10 @@ input[type="radio"]:checked + label {
 	color: #fff; 
 }
 
+
 /* ===== Editor ===== */
+
+/* == Menubar == */
 
 #editor .menubar {
 	position: fixed;
@@ -211,7 +216,10 @@ input[type="radio"]:checked + label {
 	color: #fff;
 }
 
-.dialog {
+
+/* == Dialogs == */
+
+#editor .dialog {
 	position: fixed;
 	width: 480px;
 	background: #fff;
@@ -228,31 +236,34 @@ input[type="radio"]:checked + label {
 	overflow-y: auto;
 }
 
-.dialog.visible {
+#editor .dialog.visible {
 	top: 50%;	
 }
 
-.dialog h1 {
+#editor .dialog h1 {
 	font-size: 24px;
 	margin-top: 8px;	
 }
 
-.dialog h2 {
+#editor .dialog h2 {
 	font-size: 18px;
 	margin-top: 6px;
 }
 
-.dialog .buttons {
+#editor .dialog .buttons {
 	text-align: center;
 }
 
-.objects ul {
+
+/* == Objects == */
+
+#editor > .objects ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.objects h1 {
+#editor > .objects h1 {
 	margin: 0;
 	font-size: 16px;
 	padding: 6px 10px;
@@ -260,7 +271,7 @@ input[type="radio"]:checked + label {
 	color: #fff;
 }
 
-.objects h2 {
+#editor > .objects h2 {
 	font-size: 11px;
 	text-transform: uppercase;
 	padding: 2px 8px;
@@ -269,19 +280,19 @@ input[type="radio"]:checked + label {
 	border-bottom: 1px solid #eee;
 }
 
-.objects h2:hover {
+#editor > .objects h2:hover {
 	background: #3db2e8;
 	color: #fff;
 }
 
-.objects h2:hover:after {
+#editor > .objects h2:hover:after {
 	content: '+';
 	line-height: 9px;
 	font-size: 16px;
 	float: right;	
 }
 
-.objects {
+#editor > .objects {
 	position: fixed;
 	top: 51px;
 	background: #fff;
@@ -292,7 +303,7 @@ input[type="radio"]:checked + label {
 	z-index: 1;
 }
 
-.objects .object-list {
+#editor > .objects .object-list {
 	position: absolute;
 	top: 33px;
 	bottom: 0;
@@ -302,15 +313,15 @@ input[type="radio"]:checked + label {
 	right: 0;
 }
 
-.objects .object-list ul {
+#editor > .objects .object-list ul {
 	min-height: 12px;
 }
 
-.objects .object-list ul:last-child {
+#editor > .objects .object-list ul:last-child {
 	padding-bottom: 20px;
 }
 
-.objects li a {
+#editor > .objects li a {
 	display: block;
 	padding: 5px 12px;
 	text-decoration: none;
@@ -320,20 +331,109 @@ input[type="radio"]:checked + label {
 	text-overflow: ellipsis;
 }
 
-.objects li:last-child a {
+#editor > .objects li:last-child a {
 	border: none;
 }
 
-.objects .object-list .placeholder {
+#editor > .objects .object-list .placeholder {
 	border-top: 2px dashed 	3db2e8;
 }
 
-.objects li a:hover {
+#editor > .objects li a:hover {
 	background: #f5f5f5;	
 }
 
-.objects li a:active {
+#editor > .objects li a:active {
 	background: #fff;
 	box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
 	opacity: 0.9;
+}
+
+/* == Objectbrowser == */
+
+#editor > .object-browser {
+	position: fixed;
+	top: 20px;
+	bottom: 20px;
+	left: 20px;
+	right: 20px;
+	background: #fff;
+	z-index: 11;
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#editor > .object-browser > .categories {
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 200px;
+	background: #eee;
+	position: absolute;
+	overflow: auto;
+}
+
+#editor > .object-browser > .categories ul {
+	list-style: none;
+	margin: 0;
+	padding: 12px 0;
+}
+
+#editor > .object-browser > .categories li {
+	padding: 6px 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#editor > .object-browser > .categories li:hover {
+	background: #ddd;
+}
+
+#editor > .object-browser > .categories li.active {
+	background: #3db2e8;
+	color: #fff;	
+}
+
+#editor > .object-browser > .objects {
+	left: 200px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	margin: 0;
+	padding: 8px;
+	list-style: none;
+	overflow: auto;
+}
+
+#editor > .object-browser > .objects li {
+	float: left;
+	margin: 8px;
+	height: 100px;
+	width: 100px;
+	background: -webkit-linear-gradient(#f8f8f8,#f2f2f2);
+	border-radius: 6px;
+	border: 1px solid #eee;
+	box-shadow: 0px 1px 0px rgba(0,0,0,0.1);
+	position: relative;
+}
+
+#editor > .object-browser > .objects li:hover {
+	float: left;
+	margin: 8px;
+	height: 100px;
+	width: 100px;
+	background: -webkit-linear-gradient(#fafafa,#f5f5f5);
+	border-radius: 6px;
+	border: 1px solid #eee;
+	box-shadow: 0px 1px 0px rgba(0,0,0,0.1);
+	position: relative;
+}
+
+#editor > .object-browser > .objects li .name {
+	position: absolute;
+	bottom: 8px;
+	left: 0;
+	right: 0;
+	text-align: center;
 }

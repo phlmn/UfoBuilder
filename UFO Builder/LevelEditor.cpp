@@ -11,10 +11,16 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	sf::Texture* texture;
 	texture = new sf::Texture();
 	texture->loadFromFile("images/bg_editor.png");
-	m_spriteBg.setTexture(*texture);
-	m_spriteBg.scale(2.0f, 2.0f);
+	m_spriteBg.setTexture(*texture);	
 
-	m_uiRenderer = new UiRenderer(starter->getWebCore(), starter->getWebSession(), window, starter->getScreenSize(), "asset://res/editor.html");
+	m_uiRenderer = new UiRenderer(starter->getWebCore(), starter->getWebSession(), window, (sf::Vector2i)starter->getScreenSize(), "asset://res/editor.html");
+	m_uiRenderer->setJSMethodHandler(this);
+
+	// register js methods
+	m_uiRenderer->registerMethod("newLevel", false);
+
+	// init sprite resizing
+	resize();
 }
 
 
@@ -25,6 +31,7 @@ LevelEditor::~LevelEditor()
 
 void LevelEditor::tick(sf::Time elapsedTime)
 {
+	
 	// user event handling
 	sf::Event event;
 	while(m_renderWindow->pollEvent(event))
@@ -37,12 +44,46 @@ void LevelEditor::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::Resized)
 		{
 			// the windows has been resized
-			m_renderWindow->setView(sf::View(sf::Vector2f(event.size.width / 2.0f, event.size.height / 2.0f), sf::Vector2f((float)event.size.width, (float)event.size.height)));
-			m_uiRenderer->resize(event.size.width, event.size.height);
+			m_starter->resize(event.size.width, event.size.height);
+			m_uiRenderer->resize((sf::Vector2i)m_starter->getScreenSize());
+			resize();
 		}
 		m_uiRenderer->handleEvent(event);
 	}
 
 	m_renderWindow->draw(m_spriteBg);
 	m_uiRenderer->render();
+}
+
+void LevelEditor::resize()
+{
+	float scale = m_starter->getScreenFactor();
+
+	m_spriteBg.setScale(3.2f * scale, 3.2f * scale);
+}
+
+void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args)
+{
+	if(method_name == WSLit("newLevel"))
+	{
+
+	}
+	else if(method_name == WSLit("createObject"))
+	{
+		if(args.size() == 2)
+		{
+			createObject(args.At(0).ToInteger(), args.At(1).ToInteger());
+		}
+	}
+}
+
+JSValue LevelEditor::OnMethodCallWithReturnValue(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args)
+{
+	cout << "bla";
+	return JSValue::Undefined();
+}
+
+void LevelEditor::createObject(int layer, int id)
+{
+	
 }

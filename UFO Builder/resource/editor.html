@@ -100,7 +100,7 @@
             	<li>
                 	<a href="#">File</a>
                     <ul>
-                    	<li><a href="#">New Level</a></li>
+                    	<li><a href="javascript: App.newLevel();">New Level</a></li>
                         <li><a href="#">Open...</a></li>
                    		<li><a href="#">Save</a></li>
                         <li><a href="#">Save as...</a></li>                        
@@ -132,27 +132,27 @@
         <div class="objects">
         	<h1>Objects</h1>
             <div class="object-list">
-                <h2>Back - fixed</h2>
+                <h2 onClick="showObjectDialog(0)">Back - fixed</h2>
                 <ul class="layer_0"></ul>
-                <h2>Back - 25%</h2>
+                <h2 onClick="showObjectDialog(1)">Back - 25%</h2>
                 <ul class="layer_1"></ul>
-                <h2>Back - 50%</h2>
+                <h2 onClick="showObjectDialog(2)">Back - 50%</h2>
                 <ul class="layer_2"></ul>
-                <h2>Back - 75%</h2>
+                <h2 onClick="showObjectDialog(3)">Back - 75%</h2>
                 <ul class="layer_3"></ul>
-                <h2>Back - 100%</h2>
+                <h2 onClick="showObjectDialog(4)">Back - 100%</h2>
                 <ul class="layer_4"></ul>
-                <h2>Main</h2>
+                <h2 onClick="showObjectDialog(5)">Main</h2>
                 <ul class="layer_5"></ul>
-                <h2>Front - 100%</h2>
+                <h2 onClick="showObjectDialog(6)">Front - 100%</h2>
                 <ul class="layer_6"></ul>
-                <h2>Front - 125%</h2>
+                <h2 onClick="showObjectDialog(7)">Front - 125%</h2>
                 <ul class="layer_7"></ul>
-                <h2>Front - 150%</h2>
+                <h2 onClick="showObjectDialog(8)">Front - 150%</h2>
                 <ul class="layer_8"></ul>
-                <h2>Front - 200%</h2>
+                <h2 onClick="showObjectDialog(9)">Front - 200%</h2>
                 <ul class="layer_9"></ul>
-                <h2>Front - fixed</h2>
+                <h2 onClick="showObjectDialog(10)">Front - fixed</h2>
                 <ul class="layer_10"></ul>
         	</div>
         </div>
@@ -169,6 +169,109 @@
                 <a href="#" class="button">Save</a>
                 <a href="javascript: hideDialog();" class="button">Cancel</a>
             </div>
+        </div>
+        <div class="object-browser">
+        	<div class="categories">
+                <ul>
+                    <li class="active">Sky</li>
+                    <li>Ground</li>
+                    <li>Trees</li>
+                    <li>Grass</li>
+                    <li>Builings</li>
+                </ul>
+            </div>
+            <ul class="objects">
+				<li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>
+                <li><div class="name">Testblbla</div></li>                
+            </ul>
         </div>
         <div id="overlay"></div>
     </body>
