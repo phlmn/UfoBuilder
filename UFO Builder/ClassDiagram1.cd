@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAACAAAAAAAAAAAAAAgAAAiAAAAAAUABQAIAAIA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="1" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAIAAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IngameObject" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAUBCAAECAAAAAAABAmQAAgAAACAQAAAAQAQAA=</HashCode>
+      <FileName>IngameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADAAgEAAICAAAAgAAAEACAAAAAgAAAhAAAAAAAAIAA=</HashCode>
+      <FileName>Level.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelEditor" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABQAAACAAAAAgAAAABAAEAAAAAAAAAAAQAAQAgAEIA=</HashCode>
+      <FileName>LevelEditor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Starter" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>WABQAgADAAAAEBAAAABAAAAACCEggRoAg0gAAACgEAA=</HashCode>
+      <FileName>Starter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StringHelper" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StringHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ufo" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ufo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UfoCarriage" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAEAA=</HashCode>
+      <FileName>UfoCarriage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UfoCockpit" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>UfoCockpit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UfoEditor" Collapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UfoEditor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UfoEngine" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UfoEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UfoFuelTank" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>UfoFuelTank.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UfoPart" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UfoPart.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UiRenderer" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAQgCAAAAEBAEAAAAAABgAAAAQAAAAQgJAAAQAAA=</HashCode>
+      <FileName>UiRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
