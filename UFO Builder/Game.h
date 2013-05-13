@@ -4,8 +4,6 @@
 #include <Box2D\Box2D.h>
 #include "Starter.h"
 
-class Starter;
-
 class Game
 {
 private:

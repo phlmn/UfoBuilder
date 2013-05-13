@@ -360,6 +360,7 @@ input[type="radio"]:checked + label {
 	background: #fff;
 	z-index: 11;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+	display: none;
 }
 
 #editor > .object-browser > .categories {

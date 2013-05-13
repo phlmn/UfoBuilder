@@ -1,34 +1,17 @@
 #pragma once
 
-#include <list>
-#include <string>
-#include <sstream>
-#include <iostream>
 #include <SFML\Graphics.hpp>
-#include "StringHelper.h"
 #include <Box2D\Box2D.h>
-#include "GameObject.h"
-#include "LevelEditor.h"
-#include "Ufo.h"
-#include "UfoEditor.h"
-#include "UfoPart.h"
-#include "UfoCarriage.h"
-#include "UfoCockpit.h"
-#include "UfoEngine.h"
-#include "UfoFuelTank.h"
-#include "Level.h"
-#include "Game.h"
 #include <Awesomium\WebCore.h>
 #include <Awesomium\STLHelpers.h>
-#include <Awesomium\BitmapSurface.h>
 #include <Awesomium\DataPak.h>
 #include <SFML\Graphics.hpp>
+
 #include "UiRenderer.h"
+#include "StringHelper.h"
 
 class Game;
-
-using namespace Awesomium;
-using namespace std;
+class LevelEditor;
 
 class Starter : public JSMethodHandler
 {

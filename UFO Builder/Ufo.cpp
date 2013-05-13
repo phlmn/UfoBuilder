@@ -1,11 +1,11 @@
 #include "Ufo.h"
 
 
-Ufo::Ufo(void)
+Ufo::Ufo()
 {
 }
 
 
-Ufo::~Ufo(void)
+Ufo::~Ufo()
 {
 }

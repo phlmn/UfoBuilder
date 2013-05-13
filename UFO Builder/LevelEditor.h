@@ -3,9 +3,11 @@
 #include <SFML\Graphics.hpp>
 #include <Awesomium\WebCore.h>
 #include <Awesomium\STLHelpers.h>
-#include "UiRenderer.h"
 
-class Starter;
+#include "UiRenderer.h"
+#include "Starter.h"
+
+class Level;
 
 using namespace Awesomium;
 
@@ -15,10 +17,11 @@ private:
 	Starter* m_starter;
 
 	sf::RenderWindow* m_renderWindow;
-
 	sf::Sprite m_spriteBg;
 
 	UiRenderer* m_uiRenderer;
+
+	Level* m_level;
 
 	void resize();
 	void createObject(int layer, int id);

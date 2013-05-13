@@ -1,5 +1,8 @@
 #include "Starter.h"
 
+#include "Game.h"
+#include "LevelEditor.h"
+
 // set some usefull variables
 const float Starter::PI = 3.14159265359f;
 const float Starter::DEG_TO_RAD = 0.0174532925f;
@@ -14,7 +17,7 @@ Starter::Starter()
 
 Starter::~Starter()
 {
-
+	delete m_uiRenderer;
 }
 
 void Starter::run()

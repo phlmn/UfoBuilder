@@ -1,23 +1,25 @@
 #include "LevelEditor.h"
-#include "Starter.h"
 
+#include "Level.h"
 
 LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 {
 	m_starter = starter;
 	m_renderWindow = window;
+	m_level = new Level();
 
 	// load images
 	sf::Texture* texture;
 	texture = new sf::Texture();
 	texture->loadFromFile("images/bg_editor.png");
-	m_spriteBg.setTexture(*texture);	
+	m_spriteBg.setTexture(*texture);
 
 	m_uiRenderer = new UiRenderer(starter->getWebCore(), starter->getWebSession(), window, (sf::Vector2i)starter->getScreenSize(), "asset://res/editor.html");
 	m_uiRenderer->setJSMethodHandler(this);
 
 	// register js methods
 	m_uiRenderer->registerMethod("newLevel", false);
+	m_uiRenderer->registerMethod("createObject", false);
 
 	// init sprite resizing
 	resize();
@@ -26,7 +28,10 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 
 LevelEditor::~LevelEditor()
 {
+	if(m_level != NULL)
+		delete m_level;
 
+	delete m_uiRenderer;
 }
 
 void LevelEditor::tick(sf::Time elapsedTime)
@@ -79,7 +84,6 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 
 JSValue LevelEditor::OnMethodCallWithReturnValue(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args)
 {
-	cout << "bla";
 	return JSValue::Undefined();
 }
 

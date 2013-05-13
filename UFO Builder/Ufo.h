@@ -3,6 +3,6 @@
 class Ufo
 {
 public:
-	Ufo(void);
-	~Ufo(void);
+	Ufo();
+	~Ufo();
 };
