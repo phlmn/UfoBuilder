@@ -79,7 +79,10 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SaveObject.cpp" />
     <ClCompile Include="Starter.cpp" />
+    <ClCompile Include="StorableFixture.cpp" />
+    <ClCompile Include="StorablePhysProps.cpp" />
     <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Ufo.cpp" />
@@ -92,12 +95,16 @@
     <ClCompile Include="UiRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="enums.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IngameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelEditor.h" />
+    <ClInclude Include="SaveObject.h" />
     <ClInclude Include="Starter.h" />
+    <ClInclude Include="StorableFixture.h" />
+    <ClInclude Include="StorablePhysProps.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Ufo.h" />

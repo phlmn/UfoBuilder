@@ -71,7 +71,7 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 {
 	if(method_name == WSLit("newLevel"))
 	{
-
+		
 	}
 	else if(method_name == WSLit("createObject"))
 	{

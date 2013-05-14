@@ -6,10 +6,9 @@
 
 #include "UiRenderer.h"
 #include "Starter.h"
+#include "SaveObject.h"
 
 class Level;
-
-using namespace Awesomium;
 
 class LevelEditor : JSMethodHandler
 {

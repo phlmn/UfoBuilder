@@ -19,12 +19,16 @@ IngameObject::IngameObject(GameObject gameObject)
 	m_opacity = 1.0f;
 	m_angle = 0.0f;
 	m_layer = 0;
+	m_sprite = NULL;
 
-	sf::Texture texture;
-	texture.loadFromFile(string("objects\\") + m_objectID + string("\\body.png"));
+	if(!m_imageFile.isEmpty())
+	{
+		sf::Texture texture;
+		texture.loadFromFile(string("objects\\images\\") + m_objectID + m_imageFile);
 
-	m_sprite = new sf::Sprite();
-	m_sprite->setTexture(texture);
+		m_sprite = new sf::Sprite();
+		m_sprite->setTexture(texture);
+	}
 }
 
 IngameObject::IngameObject(GameObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle)
