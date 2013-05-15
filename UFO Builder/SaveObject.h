@@ -4,6 +4,7 @@
 #include <string>
 
 #include "StorablePhysProps.h"
+#include "StorableFixture.h"
 #include "tinyxml2.h"
 
 class SaveObject

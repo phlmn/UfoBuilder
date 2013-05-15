@@ -94,40 +94,87 @@ bool SaveObject::load(std::string objectID)
 }
 
 bool SaveObject::save()
-{
-	//TODO: save the object
-
-	// example
+{	
 	XMLDocument doc;
-	
-	XMLElement* node = doc.NewElement("object");
-	node->SetAttribute("id", m_objectID.c_str());
-	node->SetAttribute("name", m_objectID.c_str());
-	node->SetAttribute("image", m_objectID.c_str());
 
+	// create object node
+	XMLElement* objectNode = doc.NewElement("object");
+	if(objectNode == NULL)
+		return false;
+
+	// set attributes
+	objectNode->SetAttribute("id", m_objectID.c_str());
+	objectNode->SetAttribute("name", m_name.c_str());
+	objectNode->SetAttribute("image", m_imageFile.c_str());
+
+	// create physics node
 	XMLElement* physicsNode = doc.NewElement("physics");
-	physicsNode->SetAttribute("type", "dynamic");
-	node->InsertEndChild(physicsNode);
+	objectNode->InsertEndChild(physicsNode);
 
-	XMLElement* fixtureNode = doc.NewElement("fixture");
-	fixtureNode->SetAttribute("type", "polygon");
-	fixtureNode->SetAttribute("x", "0");
-	fixtureNode->SetAttribute("y", "0");
-	fixtureNode->SetAttribute("density", "1.5");
-	fixtureNode->SetAttribute("friction", "0.5");
-	physicsNode->InsertEndChild(fixtureNode);
+	// set body type
+	if(m_physProps.getBodyType() == PhysBodyType::Dynamic)
+		physicsNode->SetAttribute("type", "dynamic");
+	else
+		physicsNode->SetAttribute("type", "static");
 
-	XMLElement* fixPointNode = doc.NewElement("point");
-	fixPointNode->SetAttribute("x", "0");
-	fixPointNode->SetAttribute("y", "0");
-	fixtureNode->InsertEndChild(fixPointNode);
 
-	doc.InsertEndChild(node);
 
-	XMLError error = doc.SaveFile(("objects\\" + m_objectID + ".xml").c_str());
+	std::list<StorableFixture>::iterator pos = m_physProps.getFixtures()->begin();
+	while(pos != m_physProps.getFixtures()->end())
+	{
+		
+		// create fixture node
+		XMLElement* fixtureNode = doc.NewElement("fixture");
+		physicsNode->InsertEndChild(fixtureNode);
 
-	if(error == XMLError::XML_SUCCESS)
-		return true;
-	
-	return false;
+		std::string type;
+		switch(pos->getType())
+		{
+		case Line:
+			type = "line";
+			break;
+		case Poly:
+			type = "polygon";
+			break;
+		case Circle:
+			type = "circle";
+			break;
+		default: 
+			type = "chain";
+		}
+
+		fixtureNode->SetAttribute("type", type.c_str());
+
+		fixtureNode->SetAttribute("x", pos->getPosition().x);
+		fixtureNode->SetAttribute("y", pos->getPosition().y);
+
+		fixtureNode->SetAttribute("friction", pos->getFriction());
+		fixtureNode->SetAttribute("density", pos->getDensity());
+
+		// save point
+
+		std::list<b2Vec2>::iterator pointPos = pos->getVertices()->begin();
+
+		while(pointPos != pos->getVertices()->end())
+		{
+			XMLElement* pointNode = doc.NewElement("point");
+
+			pointNode->SetAttribute("x", pointPos->x);
+			pointNode->SetAttribute("y", pointPos->y);
+
+			fixtureNode->InsertEndChild(pointNode);
+
+			pointPos++;
+		}
+
+		pos++;
+	}
+
+	doc.InsertEndChild(objectNode);
+
+
+	if(doc.SaveFile(("objects\\" + m_objectID + ".xml").c_str()) != XMLError::XML_SUCCESS)
+		return false;
+
+	return true;
 }
