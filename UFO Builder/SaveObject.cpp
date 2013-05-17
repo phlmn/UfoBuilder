@@ -20,7 +20,7 @@ bool SaveObject::load(std::string objectID)
 	XMLDocument doc;
 
 	// load XML file
-	if(doc.LoadFile(("objects\\" + objectID + ".xml").c_str()) != XMLError::XML_SUCCESS)
+	if(doc.LoadFile(("objects\\" + objectID + ".xml").c_str()) != XML_SUCCESS)
 		return false;
 
 	// get object node
@@ -45,9 +45,9 @@ bool SaveObject::load(std::string objectID)
 
 	// parse body type
 	if(physicsNode->Attribute("type") == "dynamic")
-		m_physProps.setBodyType(PhysBodyType::Dynamic);
+		m_physProps.setBodyType(StorablePhysProps::Dynamic);
 	else
-		m_physProps.setBodyType(PhysBodyType::Static);
+		m_physProps.setBodyType(StorablePhysProps::Static);
 
 	// parse fixtures
 	m_physProps.getFixtures()->clear();
@@ -60,13 +60,13 @@ bool SaveObject::load(std::string objectID)
 		// parse fixture type
 		std::string type = fixtureNode->Attribute("type");
 		if(type == "line")
-			fixture.setType(Line);
+			fixture.setType(StorableFixture::Line);
 		else if(type == "polygon")
-			fixture.setType(Poly);
+			fixture.setType(StorableFixture::Polygon);
 		else if(type == "circle")
-			fixture.setType(Circle);
+			fixture.setType(StorableFixture::Circle);
 		else
-			fixture.setType(Chain);
+			fixture.setType(StorableFixture::Chain);
 
 		// parse fixture position
 		fixture.setPosition(b2Vec2(std::stof(fixtureNode->Attribute("x")), std::stof(fixtureNode->Attribute("y"))));
@@ -112,7 +112,7 @@ bool SaveObject::save()
 	objectNode->InsertEndChild(physicsNode);
 
 	// set body type
-	if(m_physProps.getBodyType() == PhysBodyType::Dynamic)
+	if(m_physProps.getBodyType() == StorablePhysProps::Dynamic)
 		physicsNode->SetAttribute("type", "dynamic");
 	else
 		physicsNode->SetAttribute("type", "static");
@@ -130,13 +130,13 @@ bool SaveObject::save()
 		std::string type;
 		switch(pos->getType())
 		{
-		case Line:
+		case StorableFixture::Line:
 			type = "line";
 			break;
-		case Poly:
+		case StorableFixture::Polygon:
 			type = "polygon";
 			break;
-		case Circle:
+		case StorableFixture::Circle:
 			type = "circle";
 			break;
 		default: 
@@ -173,7 +173,7 @@ bool SaveObject::save()
 	doc.InsertEndChild(objectNode);
 
 
-	if(doc.SaveFile(("objects\\" + m_objectID + ".xml").c_str()) != XMLError::XML_SUCCESS)
+	if(doc.SaveFile(("objects\\" + m_objectID + ".xml").c_str()) != XML_SUCCESS)
 		return false;
 
 	return true;

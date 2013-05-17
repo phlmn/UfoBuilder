@@ -95,7 +95,6 @@
     <ClCompile Include="UiRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="enums.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IngameObject.h" />

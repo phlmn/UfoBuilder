@@ -3,20 +3,25 @@
 #include <list>
 
 #include "StorableFixture.h"
-#include "enums.h"
 
 class StorablePhysProps
 {
+public:
+	enum BodyType
+	{
+		Static,
+		Dynamic
+	};
 private:
-	PhysBodyType m_type;
+	BodyType m_type;
 	std::list<StorableFixture> m_fixtures;
 
 public:
 	StorablePhysProps();
 	~StorablePhysProps();
 
-	void setBodyType(PhysBodyType bodyType);
-	PhysBodyType getBodyType();
+	void setBodyType(BodyType bodyType);
+	BodyType getBodyType();
 
 	std::list<StorableFixture>* getFixtures();
 };

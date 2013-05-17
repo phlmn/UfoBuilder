@@ -11,12 +11,12 @@ StorablePhysProps::~StorablePhysProps()
 
 }
 
-void StorablePhysProps::setBodyType(PhysBodyType bodyType)
+void StorablePhysProps::setBodyType(BodyType bodyType)
 {
 	m_type = bodyType;
 }
 
-PhysBodyType StorablePhysProps::getBodyType()
+StorablePhysProps::BodyType StorablePhysProps::getBodyType()
 {
 	return m_type;
 }
