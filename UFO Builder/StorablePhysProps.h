@@ -20,4 +20,3 @@ public:
 
 	std::list<StorableFixture>* getFixtures();
 };
-

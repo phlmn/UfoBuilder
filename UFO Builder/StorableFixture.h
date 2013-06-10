@@ -32,4 +32,3 @@ public:
 
 	std::list<b2Vec2>* getVertices();
 };
-

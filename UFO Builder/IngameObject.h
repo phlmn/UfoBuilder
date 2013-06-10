@@ -35,4 +35,3 @@ public:
 	void setAngle(float angle);
 	float getAngle();
 };
-

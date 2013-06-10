@@ -23,4 +23,3 @@ public:
 	bool save();
 	bool load(std::string objectID);
 };
-
