@@ -20,12 +20,12 @@ float StorableFixture::getDensity()
 	return m_density;
 }
 
-void StorableFixture::setType(PhysFixtureType type)
+void StorableFixture::setType(Type type)
 {
 	m_type = type;
 }
 
-PhysFixtureType StorableFixture::getType()
+StorableFixture::Type StorableFixture::getType()
 {
 	return m_type;
 }
