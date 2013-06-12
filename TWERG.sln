@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UFO Builder", "UFO Builder\UFO Builder.vcxproj", "{386105BF-24A9-4CEB-8209-6F836D853D7C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UFO Builder Splash", "UFO Builder Splash\UFO Builder Splash.vcxproj", "{A9E8AB16-6D86-4E78-8B1D-69C0F2B3A50B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{386105BF-24A9-4CEB-8209-6F836D853D7C} = {386105BF-24A9-4CEB-8209-6F836D853D7C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

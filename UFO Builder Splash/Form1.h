@@ -8,6 +8,8 @@ namespace UFOBuilderSplash {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Diagnostics;
+
 
 	/// <summary>
 	/// Zusammenfassung für Form1
@@ -35,13 +37,15 @@ namespace UFOBuilderSplash {
 			}
 		}
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::ComponentModel::IContainer^  components;
 	protected: 
 
 	private:
 		/// <summary>
 		/// Erforderliche Designervariable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -50,7 +54,9 @@ namespace UFOBuilderSplash {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -63,6 +69,12 @@ namespace UFOBuilderSplash {
 			this->pictureBox1->Size = System::Drawing::Size(647, 426);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
+			// 
+			// timer1
+			// 
+			this->timer1->Enabled = true;
+			this->timer1->Interval = 3000;
+			this->timer1->Tick += gcnew System::EventHandler(this, &Form1::timer1_Tick);
 			// 
 			// Form1
 			// 
@@ -80,6 +92,10 @@ namespace UFOBuilderSplash {
 
 		}
 #pragma endregion
+	private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e) {
+				Process::Start("UFO Builder.exe");
+				Application::Exit();
+			 }
 	};
 }
 
