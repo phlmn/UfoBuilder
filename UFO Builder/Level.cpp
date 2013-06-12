@@ -1,6 +1,6 @@
 #include "Level.h"
 
-#include "GameObject.h"
+#include "LevelObject.h"
 
 
 Level::Level()

@@ -75,7 +75,6 @@
   <ItemGroup>
     <ClCompile Include="CatalogObject.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LevelObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
@@ -97,7 +96,6 @@
   <ItemGroup>
     <ClInclude Include="CatalogObject.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="LevelObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelEditor.h" />
