@@ -3,6 +3,7 @@
 #include "CatalogObject.h"
 
 using namespace std;
+using namespace tinyxml2;
 
 LevelObject::LevelObject()
 {
@@ -14,6 +15,21 @@ LevelObject::LevelObject()
 	m_sprite = NULL;
 }
 
+LevelObject::LevelObject(XMLElement element)
+{
+	m_layer = atoi(element.Attribute("layer"));
+
+	m_position = sf::Vector2f(atof(element.Attribute("x")), atof(element.Attribute("y")));
+
+	m_angle = atof(element.Attribute("angle"));
+	m_scale = atof(element.Attribute("scale"));
+	m_opacity = atof(element.Attribute("opacity"));
+
+	CatalogObject catObj;
+	if(catObj.load(element.Attribute("id")))
+		getDataFromCatalogObject(catObj);
+}
+
 LevelObject::LevelObject(CatalogObject gameObject)
 {
 	m_position = sf::Vector2f();
@@ -21,6 +37,12 @@ LevelObject::LevelObject(CatalogObject gameObject)
 	m_opacity = 1.0f;
 	m_angle = 0.0f;
 	m_layer = 0;
+
+	getDataFromCatalogObject(gameObject);
+}
+
+void LevelObject::getDataFromCatalogObject(CatalogObject catObj)
+{
 	m_sprite = NULL;
 
 	if(!m_imageFile.isEmpty())

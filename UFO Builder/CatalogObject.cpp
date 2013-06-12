@@ -1,5 +1,6 @@
 #include "CatalogObject.h"
 
+using namespace std;
 using namespace tinyxml2;
 
 CatalogObject::CatalogObject()
@@ -14,7 +15,7 @@ CatalogObject::~CatalogObject()
 
 }
 
-bool CatalogObject::load(std::string objectID)
+bool CatalogObject::load(string objectID)
 {
 	XMLDocument doc;
 
@@ -57,7 +58,7 @@ bool CatalogObject::load(std::string objectID)
 		StorableFixture fixture;
 
 		// parse fixture type
-		std::string type = fixtureNode->Attribute("type");
+		string type = fixtureNode->Attribute("type");
 		if(type == "line")
 			fixture.setType(StorableFixture::Line);
 		else if(type == "polygon")
@@ -68,19 +69,19 @@ bool CatalogObject::load(std::string objectID)
 			fixture.setType(StorableFixture::Chain);
 
 		// parse fixture position
-		fixture.setPosition(b2Vec2(std::stof(fixtureNode->Attribute("x")), std::stof(fixtureNode->Attribute("y"))));
+		fixture.setPosition(b2Vec2(stof(fixtureNode->Attribute("x")), stof(fixtureNode->Attribute("y"))));
 
 		// parse fixture friction
-		fixture.setFriction(std::stof(fixtureNode->Attribute("friction")));
+		fixture.setFriction(stof(fixtureNode->Attribute("friction")));
 
 		// parse fixture density
-		fixture.setDensity(std::stof(fixtureNode->Attribute("density")));
+		fixture.setDensity(stof(fixtureNode->Attribute("density")));
 
 		// parse fixture vertices
 		XMLElement* pointNode = fixtureNode->FirstChildElement("point");
 		while(pointNode != NULL)
 		{			
-			fixture.getVertices()->push_back(b2Vec2(std::stof(pointNode->Attribute("x")), std::stof(pointNode->Attribute("y"))));
+			fixture.getVertices()->push_back(b2Vec2(stof(pointNode->Attribute("x")), stof(pointNode->Attribute("y"))));
 			pointNode = pointNode->NextSiblingElement("point");
 		}
 
@@ -118,7 +119,7 @@ bool CatalogObject::save()
 
 
 
-	std::list<StorableFixture>::iterator pos = m_physProps.getFixtures()->begin();
+	list<StorableFixture>::iterator pos = m_physProps.getFixtures()->begin();
 	while(pos != m_physProps.getFixtures()->end())
 	{
 		
@@ -126,7 +127,7 @@ bool CatalogObject::save()
 		XMLElement* fixtureNode = doc.NewElement("fixture");
 		physicsNode->InsertEndChild(fixtureNode);
 
-		std::string type;
+		string type;
 		switch(pos->getType())
 		{
 		case StorableFixture::Line:
@@ -152,7 +153,7 @@ bool CatalogObject::save()
 
 		// save point
 
-		std::list<b2Vec2>::iterator pointPos = pos->getVertices()->begin();
+		list<b2Vec2>::iterator pointPos = pos->getVertices()->begin();
 
 		while(pointPos != pos->getVertices()->end())
 		{

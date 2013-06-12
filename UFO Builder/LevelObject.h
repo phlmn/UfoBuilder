@@ -2,6 +2,7 @@
 
 #include <SFML\Graphics.hpp>
 #include <Box2D\Box2D.h>
+#include "tinyxml2.h"
 
 class CatalogObject;
 
@@ -20,11 +21,14 @@ protected:
 
 public:
 	LevelObject();
+	LevelObject(tinyxml2::XMLElement element);
 	LevelObject(CatalogObject gameObject);
 	LevelObject(CatalogObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle);
 	~LevelObject();
 
 	void tick(sf::Time elapsedTime);
+
+	void getDataFromCatalogObject(CatalogObject catObj);
 
 	void setLayer(int layer);
 	int getLayer();

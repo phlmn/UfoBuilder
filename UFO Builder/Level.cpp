@@ -1,8 +1,8 @@
 #include "Level.h"
-
 #include "LevelObject.h"
 
 using namespace std;
+using namespace tinyxml2;
 
 Level::Level()
 {
@@ -59,7 +59,40 @@ bool Level::save(std::string filename)
 	return false;
 }
 
-bool Level::load(std::string filename)
+bool Level::load(std::string levelID)
 {
-	return false;
+	XMLDocument doc;
+
+	m_objects.clear();
+
+	// load XML file
+	if(doc.LoadFile(("objects\\" + levelID + ".xml").c_str()) != XML_SUCCESS)
+		return false;
+
+	// get object node
+	
+	XMLElement* objectNode = doc.RootElement();
+	if(objectNode == NULL)
+		return false;
+
+	// parse attributes
+	if(objectNode->Attribute("id") == NULL)
+		return false;
+	m_levelID = objectNode->Attribute("id");
+
+	if(objectNode->Attribute("bg") == NULL)
+		return false;
+	m_bg = objectNode->Attribute("bg");
+
+	XMLElement* objectNode = objectNode->FirstChildElement("object");
+
+	while(objectNode != NULL)
+	{
+		LevelObject* obj = new LevelObject(objectNode);
+		m_objects.push_back(obj);
+
+		objectNode = objectNode->NextSiblingElement("object");
+	}
+
+	return true;
 }

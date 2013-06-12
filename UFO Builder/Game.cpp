@@ -3,6 +3,7 @@
 Game::Game(Starter* starter, sf::RenderWindow* window)
 {
 	m_starter = starter;
+	m_level = new Level();
 	m_renderWindow = window;
 
 	// create physical world
@@ -18,6 +19,10 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	texture->setSmooth(true);
 	m_spriteBody.setTexture(*texture);
 	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
+
+	if(m_level->load("bagdadbahn")) {
+	} else {
+	}
 
 	// calculate sprite scales
 	resize();
