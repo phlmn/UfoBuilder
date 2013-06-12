@@ -1,6 +1,7 @@
 #include "LevelEditor.h"
 
 #include "Level.h"
+#include "CatalogObject.h"
 
 using namespace std;
 
@@ -25,15 +26,15 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 
 	m_catalogObjects.clear();
 	
-	sf::String bla;
-	
-	ifstream stream = ifstream("objects/allobjects.list");
+	// load object catalog	
+	ifstream stream = ifstream("objects/catalog.list");
 	while(!stream.eof())
 	{
 		char line[128];
 		stream.getline(line, sizeof(line));
-		//CatalogObject object;
-		//m_catalogObjects.push_back(new CatalogObject());
+		CatalogObject* object = new CatalogObject();
+		if(object->load(line))
+			m_catalogObjects.push_back(object);
 	}
 
 

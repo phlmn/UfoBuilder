@@ -7,11 +7,11 @@
 #include <list>
 #include "UiRenderer.h"
 #include "Starter.h"
-#include "LevelObject.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 
+class CatalogObject;
 class Level;
 
 class LevelEditor : JSMethodHandler
