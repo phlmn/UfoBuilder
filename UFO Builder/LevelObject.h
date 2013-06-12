@@ -7,7 +7,7 @@ class CatalogObject;
 
 class LevelObject
 {
-private:
+protected:
 	int m_layer;
 	sf::Vector2f m_position;
 	float m_scale;

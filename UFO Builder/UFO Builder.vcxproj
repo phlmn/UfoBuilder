@@ -86,6 +86,7 @@
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Ufo.cpp" />
     <ClCompile Include="UfoCarriage.cpp" />
+    <ClCompile Include="UfoCatalogPart.cpp" />
     <ClCompile Include="UfoCockpit.cpp" />
     <ClCompile Include="UfoEditor.cpp" />
     <ClCompile Include="UfoEngine.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Ufo.h" />
     <ClInclude Include="UfoCarriage.h" />
+    <ClInclude Include="UfoCatalogPart.h" />
     <ClInclude Include="UfoCockpit.h" />
     <ClInclude Include="UfoEditor.h" />
     <ClInclude Include="UfoEngine.h" />
