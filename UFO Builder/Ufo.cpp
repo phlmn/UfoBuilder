@@ -3,9 +3,19 @@
 
 Ufo::Ufo()
 {
+	
 }
 
 
 Ufo::~Ufo()
 {
+}
+
+void addPart()
+{
+
+}
+void removePart()
+{
+
 }

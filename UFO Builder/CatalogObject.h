@@ -9,8 +9,7 @@
 
 class CatalogObject
 {
-public:
-private:
+protected:
 	std::string m_objectID;
 	std::string m_name;
 	std::string m_imageFile;
