@@ -7,20 +7,6 @@
       <FileName>Game.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GameObject" Collapsed="true">
-    <Position X="1" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAIAAAA=</HashCode>
-      <FileName>GameObject.h</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="IngameObject" Collapsed="true">
-    <Position X="1" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIEAUBCAAECAAAAAAABAmQAAgAAACAQAAAAQAQAA=</HashCode>
-      <FileName>IngameObject.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Level" Collapsed="true">
     <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
