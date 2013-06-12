@@ -78,6 +78,12 @@ LevelObject::~LevelObject()
 	if(m_sprite != NULL) delete m_sprite;
 }
 
+void LevelObject::tick(sf::Time elapsedTime)
+{
+	
+}
+
+
 void LevelObject::setLayer(int layer)
 {
 	m_layer = layer;

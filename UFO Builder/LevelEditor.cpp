@@ -2,6 +2,8 @@
 
 #include "Level.h"
 
+using namespace std;
+
 LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 {
 	m_starter = starter;
@@ -20,6 +22,20 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	// register js methods
 	m_uiRenderer->registerMethod("newLevel", false);
 	m_uiRenderer->registerMethod("createObject", false);
+
+	m_catalogObjects.clear();
+	
+	sf::String bla;
+	
+	ifstream stream = ifstream("objects/allobjects.list");
+	while(!stream.eof())
+	{
+		char line[128];
+		stream.getline(line, sizeof(line));
+		//CatalogObject object;
+		//m_catalogObjects.push_back(new CatalogObject());
+	}
+
 
 	// init sprite resizing
 	resize();

@@ -4,9 +4,13 @@
 #include <Awesomium\WebCore.h>
 #include <Awesomium\STLHelpers.h>
 
+#include <list>
 #include "UiRenderer.h"
 #include "Starter.h"
 #include "LevelObject.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
 class Level;
 
@@ -21,6 +25,8 @@ private:
 	UiRenderer* m_uiRenderer;
 
 	Level* m_level;
+
+	std::list<CatalogObject*> m_catalogObjects;
 
 	void resize();
 	void createObject(int layer, int id);

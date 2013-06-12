@@ -17,11 +17,14 @@ private:
 	sf::String m_imageFile;
 	sf::String m_objectID;
 	b2BodyDef m_bodyDef;
+
 public:
 	LevelObject();
 	LevelObject(CatalogObject gameObject);
 	LevelObject(CatalogObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle);
 	~LevelObject();
+
+	void tick(sf::Time elapsedTime);
 
 	void setLayer(int layer);
 	int getLayer();

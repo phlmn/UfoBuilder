@@ -9,7 +9,6 @@ CatalogObject::CatalogObject()
 	m_objectID = "";
 }
 
-
 CatalogObject::~CatalogObject()
 {
 
