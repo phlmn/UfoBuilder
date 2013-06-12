@@ -15,18 +15,18 @@ LevelObject::LevelObject()
 	m_sprite = NULL;
 }
 
-LevelObject::LevelObject(XMLElement element)
+LevelObject::LevelObject(XMLElement* element)
 {
-	m_layer = atoi(element.Attribute("layer"));
+	m_layer = atoi(element->Attribute("layer"));
 
-	m_position = sf::Vector2f(atof(element.Attribute("x")), atof(element.Attribute("y")));
+	m_position = sf::Vector2f((float)atof(element->Attribute("x")), (float)atof(element->Attribute("y")));
 
-	m_angle = atof(element.Attribute("angle"));
-	m_scale = atof(element.Attribute("scale"));
-	m_opacity = atof(element.Attribute("opacity"));
+	m_angle = (float)atof(element->Attribute("angle"));
+	m_scale = (float)atof(element->Attribute("scale"));
+	m_opacity = (float)atof(element->Attribute("opacity"));
 
 	CatalogObject catObj;
-	if(catObj.load(element.Attribute("id")))
+	if(catObj.load(element->Attribute("id")))
 		getDataFromCatalogObject(catObj);
 }
 

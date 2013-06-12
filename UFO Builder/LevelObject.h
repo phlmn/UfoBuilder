@@ -21,7 +21,7 @@ protected:
 
 public:
 	LevelObject();
-	LevelObject(tinyxml2::XMLElement element);
+	LevelObject(tinyxml2::XMLElement* element);
 	LevelObject(CatalogObject gameObject);
 	LevelObject(CatalogObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle);
 	~LevelObject();

@@ -71,20 +71,20 @@ bool Level::load(std::string levelID)
 
 	// get object node
 	
-	XMLElement* objectNode = doc.RootElement();
-	if(objectNode == NULL)
+	XMLElement* levelNode = doc.RootElement();
+	if(levelNode == NULL)
 		return false;
 
 	// parse attributes
-	if(objectNode->Attribute("id") == NULL)
+	if(levelNode->Attribute("id") == NULL)
 		return false;
-	m_levelID = objectNode->Attribute("id");
+	m_levelID = levelNode->Attribute("id");
 
-	if(objectNode->Attribute("bg") == NULL)
+	if(levelNode->Attribute("bg") == NULL)
 		return false;
-	m_bg = objectNode->Attribute("bg");
+	m_bg = levelNode->Attribute("bg");
 
-	XMLElement* objectNode = objectNode->FirstChildElement("object");
+	XMLElement* objectNode = levelNode->FirstChildElement("object");
 
 	while(objectNode != NULL)
 	{
