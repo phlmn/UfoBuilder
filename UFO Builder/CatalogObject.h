@@ -7,8 +7,9 @@
 #include "StorableFixture.h"
 #include "tinyxml2.h"
 
-class SaveObject
+class CatalogObject
 {
+public:
 private:
 	std::string m_objectID;
 	std::string m_name;
@@ -17,9 +18,10 @@ private:
 	StorablePhysProps m_physProps;
 
 public:
-	SaveObject();
-	~SaveObject();
+	CatalogObject();
+	~CatalogObject();
 
 	bool save();
 	bool load(std::string objectID);
 };
+

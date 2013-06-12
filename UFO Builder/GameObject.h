@@ -3,6 +3,8 @@
 #include <SFML\Graphics.hpp>
 #include <Box2D\Box2D.h>
 
+class SaveObject;
+
 class GameObject
 {
 protected:
@@ -14,6 +16,7 @@ protected:
 	
 public:
 	GameObject();
+	GameObject(SaveObject saveObject);
 	~GameObject();
 
 	void setObjectID(sf::String id);

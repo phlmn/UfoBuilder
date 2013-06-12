@@ -1,8 +1,8 @@
-#include "SaveObject.h"
+#include "CatalogObject.h"
 
 using namespace tinyxml2;
 
-SaveObject::SaveObject()
+CatalogObject::CatalogObject()
 {
 	m_imageFile = "";
 	m_name = "";
@@ -10,12 +10,12 @@ SaveObject::SaveObject()
 }
 
 
-SaveObject::~SaveObject()
+CatalogObject::~CatalogObject()
 {
 
 }
 
-bool SaveObject::load(std::string objectID)
+bool CatalogObject::load(std::string objectID)
 {
 	XMLDocument doc;
 
@@ -93,7 +93,7 @@ bool SaveObject::load(std::string objectID)
 	return true;
 }
 
-bool SaveObject::save()
+bool CatalogObject::save()
 {	
 	XMLDocument doc;
 

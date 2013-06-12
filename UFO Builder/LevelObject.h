@@ -2,10 +2,9 @@
 
 #include <SFML\Graphics.hpp>
 
-#include "GameObject.h"
+class CatalogObject;
 
-
-class IngameObject : public GameObject
+class LevelObject
 {
 private:
 	int m_layer;
@@ -14,11 +13,14 @@ private:
 	float m_opacity;
 	float m_angle;
 	sf::Sprite* m_sprite;
+	sf::String m_imageFile;
+	sf::String m_objectID;
+	b2BodyDef m_bodyDef;
 public:
-	IngameObject();
-	IngameObject(GameObject gameObject);
-	IngameObject(GameObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle);
-	~IngameObject();
+	LevelObject();
+	LevelObject(CatalogObject gameObject);
+	LevelObject(CatalogObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle);
+	~LevelObject();
 
 	void setLayer(int layer);
 	int getLayer();
