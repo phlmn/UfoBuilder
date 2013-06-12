@@ -6,13 +6,13 @@
 #include "StringHelper.h"
 #include <Box2D\Box2D.h>
 
-class GameObject;
+class LevelObject;
 
 class Level
 {
 private:
 	sf::Sprite m_spriteBackground;
-	std::list<GameObject*> m_objects;
+	std::list<LevelObject*> m_objects;
 
 public:
 	Level();
@@ -24,9 +24,9 @@ public:
 	void pause();
 	void stop();
 
-	void addObject(GameObject* object);
-	void removeObject(GameObject* object);
-	std::list<GameObject*>* getObjects();
+	void addObject(LevelObject* object);
+	void removeObject(LevelObject* object);
+	std::list<LevelObject*>* getObjects();
 
 	bool save(std::string filename);
 	bool load(std::string filename);
