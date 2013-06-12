@@ -73,13 +73,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CatalogObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="IngameObject.cpp" />
+    <ClCompile Include="LevelObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SaveObject.cpp" />
     <ClCompile Include="Starter.cpp" />
     <ClCompile Include="StorableFixture.cpp" />
     <ClCompile Include="StorablePhysProps.cpp" />
@@ -95,12 +95,12 @@
     <ClCompile Include="UiRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CatalogObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="IngameObject.h" />
+    <ClInclude Include="LevelObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelEditor.h" />
-    <ClInclude Include="SaveObject.h" />
     <ClInclude Include="Starter.h" />
     <ClInclude Include="StorableFixture.h" />
     <ClInclude Include="StorablePhysProps.h" />
