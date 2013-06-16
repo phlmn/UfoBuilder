@@ -4,6 +4,7 @@
 #include "CatalogObject.h"
 
 using namespace std;
+using namespace Awesomium;
 
 LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 {
@@ -34,7 +35,10 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 		stream.getline(line, sizeof(line));
 		CatalogObject* object = new CatalogObject();
 		if(object->load(line))
+		{
 			m_catalogObjects.push_back(object);
+			m_uiRenderer->executeJavascript(ToWebString(string() + "addCatalogObject('" + object->getObjectID() + "', '" + object->getName() + "');"));
+		}
 	}
 
 

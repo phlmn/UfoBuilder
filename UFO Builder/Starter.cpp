@@ -3,6 +3,8 @@
 #include "Game.h"
 #include "LevelEditor.h"
 
+using namespace Awesomium;
+
 // set some usefull variables
 const float Starter::PI = 3.14159265359f;
 const float Starter::DEG_TO_RAD = 0.0174532925f;

@@ -13,7 +13,7 @@
 class Game;
 class LevelEditor;
 
-class Starter : public JSMethodHandler
+class Starter : public Awesomium::JSMethodHandler
 {
 public:
 	Starter();
@@ -32,8 +32,8 @@ public:
 	static const float RAD_TO_DEG;
 	static const float PI;
 
-	WebCore* getWebCore();
-	WebSession* getWebSession();
+	Awesomium::WebCore* getWebCore();
+	Awesomium::WebSession* getWebSession();
 	sf::Vector2f getScreenSize();
 
 	float getScreenFactor();
@@ -62,10 +62,10 @@ private:
 
 	Gamestate m_gamestate;
 
-	WebCore* m_webCore;
-	WebSession* m_webSession;
+	Awesomium::WebCore* m_webCore;
+	Awesomium::WebSession* m_webSession;
 	UiRenderer* m_uiRenderer;
 
-	virtual void OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args);
-	virtual JSValue OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args);
+	virtual void OnMethodCall(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args);
+	virtual Awesomium::JSValue OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args);
 };

@@ -1,5 +1,6 @@
 #include "UiRenderer.h"
 
+using namespace Awesomium;
 
 UiRenderer::UiRenderer(WebCore* webCore, WebSession* webSession, sf::RenderWindow* renderWindow, sf::Vector2i screenSize, char* url)
 {
@@ -104,6 +105,16 @@ void UiRenderer::registerMethod(char* name, bool hasReturnValue)
 	JSValue result = m_webView->CreateGlobalJavascriptObject(WSLit("App"));
 	m_appObject = &result.ToObject();
 	m_appObject->SetCustomMethod(WSLit(name), hasReturnValue);
+}
+
+void UiRenderer::executeJavascript(WebString code)
+{
+	m_webView->ExecuteJavascript(code, WSLit(""));
+}
+
+Awesomium::JSValue UiRenderer::executeJavascriptWithResult(WebString code)
+{
+	return m_webView->ExecuteJavascriptWithResult(code, WSLit(""));
 }
 
 void UiRenderer::resize(int width, int height)

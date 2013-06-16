@@ -14,7 +14,7 @@
 class CatalogObject;
 class Level;
 
-class LevelEditor : JSMethodHandler
+class LevelEditor : Awesomium::JSMethodHandler
 {
 private:
 	Starter* m_starter;
@@ -31,8 +31,8 @@ private:
 	void resize();
 	void createObject(int layer, int id);
 
-	void OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args);
-	JSValue OnMethodCallWithReturnValue(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args);
+	void OnMethodCall(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args);
+	Awesomium::JSValue OnMethodCallWithReturnValue(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args);
 
 public:
 	LevelEditor(Starter* starter, sf::RenderWindow* window);

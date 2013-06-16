@@ -22,5 +22,18 @@ public:
 
 	bool save();
 	bool load(std::string objectID);
+
+
+	void setObjectID(std::string objectID);
+	std::string getObjectID();
+
+	void setName(std::string name);
+	std::string getName();
+
+	void setImageFile(std::string imageFile);
+	std::string getImageFile();
+
+	void setPhysProps(StorablePhysProps physProps);
+	StorablePhysProps getPhysProps();
 };
 

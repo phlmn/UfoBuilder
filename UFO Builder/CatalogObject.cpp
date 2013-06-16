@@ -178,3 +178,43 @@ bool CatalogObject::save()
 
 	return true;
 }
+
+void CatalogObject::setObjectID(string objectID)
+{
+	m_objectID = objectID;
+}
+
+std::string CatalogObject::getObjectID()
+{
+	return m_objectID;
+}
+
+void CatalogObject::setName(string name)
+{
+	m_name = name;
+}
+
+std::string CatalogObject::getName()
+{
+	return m_name;
+}
+
+void CatalogObject::setImageFile(string imageFile)
+{
+	m_imageFile = imageFile;
+}
+
+std::string CatalogObject::getImageFile()
+{
+	return m_imageFile;
+}
+
+void CatalogObject::setPhysProps(StorablePhysProps physProps)
+{
+	m_physProps = physProps;
+}
+
+StorablePhysProps CatalogObject::getPhysProps()
+{
+	return m_physProps;
+}

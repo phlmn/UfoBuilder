@@ -6,29 +6,30 @@
 #include <Awesomium\STLHelpers.h>
 #include <Awesomium\BitmapSurface.h>
 
-using namespace Awesomium;
-
 class UiRenderer
 {
 public:
-	UiRenderer(WebCore* webCore, WebSession* webSession, sf::RenderWindow* renderWindow, sf::Vector2i screenSize, char* url);
+	UiRenderer(Awesomium::WebCore* webCore, Awesomium::WebSession* webSession, sf::RenderWindow* renderWindow, sf::Vector2i screenSize, char* url);
 	~UiRenderer();
 
 	void render();
 	void handleEvent(sf::Event event);
-	void setJSMethodHandler(JSMethodHandler* handler);
+	void setJSMethodHandler(Awesomium::JSMethodHandler* handler);
 	void registerMethod(char* name, bool hasReturnValue);
 
-	WebView* getWebView();
+	void executeJavascript(Awesomium::WebString code);
+	Awesomium::JSValue executeJavascriptWithResult(Awesomium::WebString code);
+
+	Awesomium::WebView* getWebView();
 	void resize(int width, int height);
 	void resize(sf::Vector2i size);
 
 private:
-	WebCore* m_webCore;
-	WebView* m_webView;
-	WebSession* m_webSession;
+	Awesomium::WebCore* m_webCore;
+	Awesomium::WebView* m_webView;
+	Awesomium::WebSession* m_webSession;
 
-	JSObject* m_appObject;
+	Awesomium::JSObject* m_appObject;
 
 	thor::BigSprite m_sprite;
 	thor::BigTexture m_texture;
