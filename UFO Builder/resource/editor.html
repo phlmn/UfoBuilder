@@ -91,6 +91,25 @@
                     $(element).empty();
                 });	
 			}
+			
+			var newObjectLayer = 0;
+			function showObjectDialog(layer) {
+				newObjectLayer = layer;
+				$(".object-browser").show(100);
+			}
+			
+			function hideObjectDialog() {
+				$(".object-browser").hide(100);
+			}
+			
+			function addCatalogObject(id, name) {
+				var newItem = $("<li><div class='name'>" + name + "</div></li>");
+				$(".object-browser .objects").append(newItem);
+				newItem.click(function(e) {
+                    App.createObject(id, newObjectLayer);
+					hideObjectDialog();
+                });
+			}
 		</script>
     </head>
 
@@ -181,96 +200,7 @@
                 </ul>
             </div>
             <ul class="objects">
-				<li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>
-                <li><div class="name">Testblbla</div></li>                
+				                           
             </ul>
         </div>
         <div id="overlay"></div>

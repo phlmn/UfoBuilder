@@ -18,6 +18,7 @@ protected:
 	sf::String m_imageFile;
 	sf::String m_objectID;
 	b2BodyDef m_bodyDef;
+	std::string m_name;
 
 public:
 	LevelObject();
@@ -44,4 +45,10 @@ public:
 
 	void setAngle(float angle);
 	float getAngle();
+
+	void setName(std::string name);
+	std::string getName();
+
+	void setObjectID(std::string id);
+	std::string getObjectID();
 };

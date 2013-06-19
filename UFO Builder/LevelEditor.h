@@ -10,8 +10,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "StringHelper.h"
 
 class CatalogObject;
+class LevelObject;
 class Level;
 
 class LevelEditor : Awesomium::JSMethodHandler
@@ -29,7 +31,7 @@ private:
 	std::list<CatalogObject*> m_catalogObjects;
 
 	void resize();
-	void createObject(int layer, int id);
+	void createObject(std::string id, int layer);
 
 	void OnMethodCall(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args);
 	Awesomium::JSValue OnMethodCallWithReturnValue(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args);

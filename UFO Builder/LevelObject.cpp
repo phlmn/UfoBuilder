@@ -44,6 +44,7 @@ LevelObject::LevelObject(CatalogObject gameObject)
 void LevelObject::getDataFromCatalogObject(CatalogObject catObj)
 {
 	m_sprite = NULL;
+	m_name = catObj.getName();
 
 	if(!m_imageFile.isEmpty())
 	{
@@ -154,4 +155,24 @@ void LevelObject::setAngle(float angle)
 float LevelObject::getAngle()
 {
 	return m_angle;
+}
+
+void LevelObject::setName(std::string name)
+{
+	m_name = name;
+}
+
+std::string LevelObject::getName()
+{
+	return m_name;
+}
+
+void LevelObject::setObjectID(std::string id)
+{
+	m_objectID = id;
+}
+
+std::string LevelObject::getObjectID()
+{
+	return m_objectID;
 }

@@ -2,6 +2,7 @@
 
 #include "Level.h"
 #include "CatalogObject.h"
+#include "LevelObject.h"
 
 using namespace std;
 using namespace Awesomium;
@@ -27,7 +28,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 
 	m_catalogObjects.clear();
 	
-	// load object catalog	
+	// load object catalog
 	ifstream stream = ifstream("objects/catalog.list");
 	while(!stream.eof())
 	{
@@ -98,7 +99,7 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 	{
 		if(args.size() == 2)
 		{
-			createObject(args.At(0).ToInteger(), args.At(1).ToInteger());
+			createObject(ToString(args.At(0).ToString()), args.At(1).ToInteger());
 		}
 	}
 }
@@ -108,7 +109,22 @@ JSValue LevelEditor::OnMethodCallWithReturnValue(WebView* caller, unsigned int r
 	return JSValue::Undefined();
 }
 
-void LevelEditor::createObject(int layer, int id)
+void LevelEditor::createObject(string id, int layer)
 {
+	CatalogObject* object = NULL;
+
+	list<CatalogObject*>::iterator pos = m_catalogObjects.begin();
+	while(pos != m_catalogObjects.end())
+	{
+		if((*pos)->getObjectID() == id)
+		{
+			object = (*pos);
+			break;
+		}
+		pos++;
+	}
+
+	LevelObject* levelObject = new LevelObject(*object);
+	m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + levelObject->getName() + "', '" + levelObject->getObjectID() + "', " + StringHelper::toString(layer) + ");"));
 	
 }
