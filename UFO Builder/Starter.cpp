@@ -42,7 +42,7 @@ bool Starter::init()
 	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 576, 32), "UFO Builder");
 	m_renderWindow->setFramerateLimit(60);
 
-	m_screenFactor = m_renderWindow->getSize().x / 1920.0f;
+	m_screenFactor = m_renderWindow->getSize().x / 1920.0f; // aspect ratio from window
 
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
@@ -54,12 +54,15 @@ bool Starter::init()
 	texture->loadFromFile("images/bg_menu.png");
 	m_spriteBg.setTexture(*texture);
 
+	// specify configuration settings for the WebCore
 	WebConfig webConfig;
 	webConfig.child_process_path = WSLit("./ufobuilder-ui.exe");
+	// initialize WebCore with configuration settings from WebConfig
 	m_webCore = WebCore::Initialize(webConfig);
 
 	m_webSession = m_webCore->CreateWebSession(WSLit(""), WebPreferences());
 
+	// pack all files in a certain directory, into a PAK file
 	unsigned short filesWritten;
 	WriteDataPak(WSLit("resource.pak"), WSLit("resource"), WSLit(""), filesWritten);
 	
@@ -67,10 +70,12 @@ bool Starter::init()
 	
 	m_uiRenderer = new UiRenderer(m_webCore, m_webSession, m_renderWindow, sf::Vector2i(1024, 600), "asset://res/menu.html");
 	
+	// convert methods to js-methods and register them
 	m_uiRenderer->registerMethod("startGame", false);
 	m_uiRenderer->registerMethod("startEditor", false);
 	m_uiRenderer->registerMethod("exit", false);
 
+	// register a handler for custom js-object methods
 	m_uiRenderer->setJSMethodHandler(this);
 	
 	// set the gamestate to menu
@@ -81,18 +86,20 @@ bool Starter::init()
 
 void Starter::tick()
 {
+	// put the time counter back to 0, return elapsed time since the clock was started
 	sf::Time elapsedTime = m_clock.restart();
 	float fps = 1000000.0f / elapsedTime.asMicroseconds();
 
-	m_renderWindow->clear(sf::Color(0x0, 0x0, 0x0));
+	m_renderWindow->clear(sf::Color(0x0, 0x0, 0x0)); // clear the entire target with a single color
 
 	// update webcore
 	m_webCore->Update();
 
 	if(m_gamestate == Starter::Menu)
 	{
-		sf::Event event;
-		while(m_renderWindow->pollEvent(event))
+		sf::Event event; // holds all the informations about a system event that just happened
+		// go to the event on top of the event queue and handle it
+		while(m_renderWindow->pollEvent(event))// go to top
 		{
 			if (event.type == sf::Event::Closed)
 			{
@@ -174,6 +181,11 @@ JSValue Starter::OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigne
 	return JSValue::Undefined();
 }
 
+void Starter::setGamestate(Gamestate state)
+{
+	m_gamestate = state;
+}
+
 WebCore* Starter::getWebCore()
 {
 	return m_webCore;
@@ -214,9 +226,10 @@ void Starter::resize(int width, int height)
 	}
 
 	m_screenFactor = realWidth / 1920.0f;
-
+	// "2D camera", defines what region is shown on screen (scroll, rotate, zoom without altering the way objects are drawn
 	sf::View view = sf::View(sf::Vector2f(realWidth / 2.0f, realHeight / 2.0f), sf::Vector2f(realWidth, realHeight));
-
+	// set the target viewport.
+	// the viewprt is the rectangle into which the contents of the view are dislayed (witch factor beetween 0 - 1)
 	view.setViewport(sf::FloatRect((width - realWidth) / width / 2.0f, (height - realHeight) / height / 2.0f, realWidth / width, realHeight / height));
 
 	m_renderWindow->setView(view);

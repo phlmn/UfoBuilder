@@ -74,6 +74,14 @@ void LevelEditor::tick(sf::Time elapsedTime)
 			m_starter->resize(event.size.width, event.size.height);
 			m_uiRenderer->resize((sf::Vector2i)m_starter->getScreenSize());
 			resize();
+		} else if(event.type == sf::Event::KeyPressed)
+		{
+			// key has been pressed
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				// escape has been pressed -> call Menu
+				m_starter->setGamestate(m_starter->Menu);
+			}
 		}
 		m_uiRenderer->handleEvent(event);
 	}

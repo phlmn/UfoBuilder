@@ -52,6 +52,7 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 Game::~Game()
 {
 	if(m_physWorld) delete m_physWorld;
+	delete m_level;
 }
 
 void Game::tick(sf::Time elapsedTime)
@@ -73,6 +74,14 @@ void Game::tick(sf::Time elapsedTime)
 			// the windows has been resized
 			m_starter->resize(event.size.width, event.size.height);
 			resize();
+		} else if(event.type == sf::Event::KeyPressed)
+		{
+			// key has been pressed
+			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			{
+				// escape has been pressed -> call Menu
+				m_starter->setGamestate(m_starter->Menu);
+			}
 		}
 	}
 
