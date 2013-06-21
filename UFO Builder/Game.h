@@ -25,6 +25,8 @@ private:
 	sf::Vector2i m_mousePosition;
 	sf::Vector2i m_lastClick;
 
+	bool isPressed;
+
 	void resize();
 
 	bool isSelected(const sf::Sprite object);

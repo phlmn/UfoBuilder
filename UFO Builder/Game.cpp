@@ -6,6 +6,8 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_level = new Level();
 	m_renderWindow = window;
 
+	isPressed = false;
+
 	m_mousePosition = sf::Vector2i(0, 0);
 	m_lastClick = sf::Vector2i(0, 0);
 
@@ -95,15 +97,21 @@ void Game::tick(sf::Time elapsedTime)
 			m_mousePosition = sf::Mouse::getPosition();
 		} else if(event.type == sf::Event::MouseButtonPressed)
 		{
-			// mouse has been clicked
+			// mouse down
 			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				// left mouse button has been clicked
 				m_lastClick = sf::Mouse::getPosition();
 
 				if(isSelected(m_spriteBody))
-					MessageBox(NULL, "Ausgewählt", "", NULL);
+					isPressed = true;
 			}
+		} else if(event.type == sf::Event::MouseButtonReleased)
+		{
+			// mouse up
+			//if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				//MessageBox(NULL, "yep", "", 0);
+			isPressed = false;
 		}
 	}
 	#pragma endregion
@@ -112,9 +120,22 @@ void Game::tick(sf::Time elapsedTime)
 
 	float scale = m_starter->getScreenFactor();
 
-	// draw testobject
-	m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
-	m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);
+	if(isPressed)
+	{
+		b2Vec2 pos;
+		float x = m_mousePosition.x - m_spriteBody.getTexture()->getSize().x / 2;
+		float y = m_mousePosition.y - m_spriteBody.getTexture()->getSize().y / 2;
+
+		m_spriteBody.setPosition(x, y);
+		
+		m_bodyTest->SetTransform(b2Vec2(x, y), m_bodyTest->GetAngle());
+	} else {
+		// draw testobject
+		m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
+		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);
+		m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
+	}
+
 	m_renderWindow->draw(m_spriteBody);
 }
 
