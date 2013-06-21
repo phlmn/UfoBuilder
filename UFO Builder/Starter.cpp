@@ -121,17 +121,16 @@ void Starter::tick()
 	{
 		m_game->tick(elapsedTime);
 
+		std::string posstr;
+
 		// show fps
-		sf::Text text;
-		text.setFont(m_fontSegoe);
-		text.setString("FPS: " + StringHelper::toString(fps));
-		text.setCharacterSize(16);
-		text.setColor(sf::Color(0x0, 0x0, 0x0, 0x55));
-		text.setPosition(19.0f, 11.0f);
-		m_renderWindow->draw(text);
-		text.setColor(sf::Color(0xff, 0xff, 0xff, 0xff));
-		text.setPosition(18.0f, 10.0f);
-		m_renderWindow->draw(text);
+		showText("FPS: " + StringHelper::toString(fps), 16, 18.0f, 10.0f, true);
+
+		posstr = StringHelper::toString(m_game->getMousePosition().x) + ", " + StringHelper::toString(m_game->getMousePosition().y);
+		showText("Mouse Position: " + posstr, 16, 18.0f, 30.0f, true);
+
+		posstr = StringHelper::toString(m_game->getLastClick().x) + ", " + StringHelper::toString(m_game->getLastClick().y);
+		showText("Letzer Klick: " + posstr, 16, 18.0f, 50.0f, true);
 	}
 	else if(m_gamestate == Starter::Editor)
 	{
@@ -179,6 +178,25 @@ void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const
 JSValue Starter::OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args)
 {
 	return JSValue::Undefined();
+}
+
+void Starter::showText(std::string value, int size, float x, float y, bool shadow)
+{
+	sf::Text text;
+	text.setFont(m_fontSegoe);
+	text.setString(value);
+	text.setCharacterSize(size);
+
+	if(shadow)
+	{
+		text.setColor(sf::Color(0x0, 0x0, 0x0, 0x55));
+		text.setPosition(x + 1, y + 1);
+		m_renderWindow->draw(text);
+	}
+
+	text.setColor(sf::Color(0xff, 0xff, 0xff, 0xff));
+	text.setPosition(x, y);
+	m_renderWindow->draw(text);
 }
 
 void Starter::setGamestate(Gamestate state)

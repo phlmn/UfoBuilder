@@ -22,11 +22,18 @@ private:
 	sf::Sprite m_spriteTest;
 	sf::Sprite m_spriteBody;
 
+	sf::Vector2i m_mousePosition;
+	sf::Vector2i m_lastClick;
+
 	void resize();
+
+	bool isSelected(const sf::Sprite object);
 
 public:
 	Game(Starter* starter, sf::RenderWindow* window);
 	~Game();
 
 	void tick(sf::Time elapsedTime);
+	sf::Vector2i getMousePosition();
+	sf::Vector2i getLastClick();
 };

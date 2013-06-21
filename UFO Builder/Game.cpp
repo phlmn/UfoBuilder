@@ -6,6 +6,9 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_level = new Level();
 	m_renderWindow = window;
 
+	m_mousePosition = sf::Vector2i(0, 0);
+	m_lastClick = sf::Vector2i(0, 0);
+
 	// create physical world
 	m_physWorld = new b2World(b2Vec2(0.0f, 9.81f));
 
@@ -20,9 +23,12 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_spriteBody.setTexture(*texture);
 	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
 
+	// load level
+	/*
 	if(m_level->load("bagdadbahn")) {
 	} else {
 	}
+	*/
 
 	// calculate sprite scales
 	resize();
@@ -61,6 +67,7 @@ void Game::tick(sf::Time elapsedTime)
 	m_physWorld->Step(elapsedTime.asSeconds(), 6, 2);
 
 	// user event handling
+	#pragma region event handling
 	sf::Event event;
 	while(m_renderWindow->pollEvent(event))
 	{
@@ -82,8 +89,24 @@ void Game::tick(sf::Time elapsedTime)
 				// escape has been pressed -> call Menu
 				m_starter->setGamestate(m_starter->Menu);
 			}
+		} else if(event.type == sf::Event::MouseMoved)
+		{
+			// mouse has been moved
+			m_mousePosition = sf::Mouse::getPosition();
+		} else if(event.type == sf::Event::MouseButtonPressed)
+		{
+			// mouse has been clicked
+			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				// left mouse button has been clicked
+				m_lastClick = sf::Mouse::getPosition();
+
+				if(isSelected(m_spriteBody))
+					MessageBox(NULL, "Ausgewählt", "", NULL);
+			}
 		}
 	}
+	#pragma endregion
 
 	m_renderWindow->draw(m_spriteTest);
 
@@ -102,4 +125,24 @@ void Game::resize()
 
 	m_spriteBody.setScale(scale, scale);
 	m_spriteTest.setScale(scale * 4.0f, scale * 2.2f);
+}
+
+sf::Vector2i Game::getMousePosition()
+{
+	return m_mousePosition;
+}
+
+sf::Vector2i Game::getLastClick()
+{
+	return m_lastClick;
+}
+
+bool Game::isSelected(const sf::Sprite object)
+{
+	if(m_lastClick.x >= object.getPosition().x)
+		if(m_lastClick.x <= object.getPosition().x + object.getTexture()->getSize().x)
+			if(m_lastClick.y >= object.getPosition().y)
+				if(m_lastClick.y <=  object.getPosition().y + object.getTexture()->getSize().y)
+					return true;
+	return false;
 }

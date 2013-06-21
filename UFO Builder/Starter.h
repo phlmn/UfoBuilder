@@ -70,6 +70,7 @@ public:
 	float getScreenFactor(); // aspect ratio from window
 
 	void setGamestate(Gamestate state);
+	void showText(std::string value, int size, float x, float y, bool shadow);
 
 	void resize(int width, int height);
 	void toggleFullscreen();
