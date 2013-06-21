@@ -60,7 +60,7 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 Game::~Game()
 {
 	if(m_physWorld) delete m_physWorld;
-	delete m_level;
+	if(m_level) delete m_level;
 }
 
 void Game::tick(sf::Time elapsedTime)
@@ -83,7 +83,8 @@ void Game::tick(sf::Time elapsedTime)
 			// the windows has been resized
 			m_starter->resize(event.size.width, event.size.height);
 			resize();
-		} else if(event.type == sf::Event::KeyPressed)
+		}
+		else if(event.type == sf::Event::KeyPressed)
 		{
 			// key has been pressed
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -91,11 +92,13 @@ void Game::tick(sf::Time elapsedTime)
 				// escape has been pressed -> call Menu
 				m_starter->setGamestate(m_starter->Menu);
 			}
-		} else if(event.type == sf::Event::MouseMoved)
+		}
+		else if(event.type == sf::Event::MouseMoved)
 		{
 			// mouse has been moved
 			m_mousePosition = sf::Mouse::getPosition();
-		} else if(event.type == sf::Event::MouseButtonPressed)
+		}
+		else if(event.type == sf::Event::MouseButtonPressed)
 		{
 			// mouse down
 			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -106,7 +109,8 @@ void Game::tick(sf::Time elapsedTime)
 				if(isSelected(m_spriteBody))
 					isPressed = true;
 			}
-		} else if(event.type == sf::Event::MouseButtonReleased)
+		}
+		else if(event.type == sf::Event::MouseButtonReleased)
 		{
 			// mouse up
 			//if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -129,7 +133,9 @@ void Game::tick(sf::Time elapsedTime)
 		m_spriteBody.setPosition(x, y);
 		
 		m_bodyTest->SetTransform(b2Vec2(x, y), m_bodyTest->GetAngle());
-	} else {
+	}
+	else
+	{
 		// draw testobject
 		m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
 		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);

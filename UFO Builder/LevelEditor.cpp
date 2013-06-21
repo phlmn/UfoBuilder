@@ -50,9 +50,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 
 LevelEditor::~LevelEditor()
 {
-	if(m_level != NULL)
-		delete m_level;
-
+	if(m_level) delete m_level;
 	delete m_uiRenderer;
 }
 
@@ -74,7 +72,8 @@ void LevelEditor::tick(sf::Time elapsedTime)
 			m_starter->resize(event.size.width, event.size.height);
 			m_uiRenderer->resize((sf::Vector2i)m_starter->getScreenSize());
 			resize();
-		} else if(event.type == sf::Event::KeyPressed)
+		}
+		else if(event.type == sf::Event::KeyPressed)
 		{
 			// key has been pressed
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -134,5 +133,4 @@ void LevelEditor::createObject(string id, int layer)
 
 	LevelObject* levelObject = new LevelObject(*object);
 	m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + levelObject->getName() + "', '" + levelObject->getObjectID() + "', " + StringHelper::toString(layer) + ");"));
-	
 }
