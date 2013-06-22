@@ -1,4 +1,4 @@
-<object id="floor" name="Gras" group="grass" image="icon/gras.png">
+<object id="buildings" name="Gebäude" group="buildings" image="icon/buildings.png">
 	<physics type="static">
 		<fixture type="chain" x="20" y="20" density="0" friction="1">
 			<point x="0" y="0"/>

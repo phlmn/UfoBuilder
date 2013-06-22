@@ -13,6 +13,7 @@ protected:
 	std::string m_objectID;
 	std::string m_name;
 	std::string m_imageFile;
+	std::string m_group;
 
 	StorablePhysProps m_physProps;
 
@@ -29,6 +30,9 @@ public:
 
 	void setName(std::string name);
 	std::string getName();
+
+	void setGroup(std::string group);
+	std::string getGroup();
 
 	void setImageFile(std::string imageFile);
 	std::string getImageFile();
