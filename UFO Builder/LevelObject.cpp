@@ -13,6 +13,7 @@ LevelObject::LevelObject()
 	m_angle = 0.0f;
 	m_layer = 0;
 	m_sprite = NULL;
+	m_id = 0;
 }
 
 LevelObject::LevelObject(XMLElement* element)
@@ -175,4 +176,14 @@ void LevelObject::setObjectID(std::string id)
 std::string LevelObject::getObjectID()
 {
 	return m_objectID;
+}
+
+void LevelObject::setID(long id)
+{
+	m_id = id;
+}
+
+long LevelObject::getID()
+{
+	return m_id;
 }

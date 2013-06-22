@@ -19,6 +19,7 @@ protected:
 	sf::String m_objectID;
 	b2BodyDef m_bodyDef;
 	std::string m_name;
+	long m_id;
 
 public:
 	LevelObject();
@@ -51,4 +52,7 @@ public:
 
 	void setObjectID(std::string id);
 	std::string getObjectID();
+
+	void setID(long id);
+	long getID();
 };
