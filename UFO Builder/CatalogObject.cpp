@@ -6,6 +6,7 @@ using namespace tinyxml2;
 CatalogObject::CatalogObject()
 {
 	m_imageFile = "";
+	m_iconFile = "";
 	m_name = "";
 	m_objectID = "";
 	m_group = "";
@@ -40,6 +41,9 @@ bool CatalogObject::load(string objectID)
 
 	if(objectNode->Attribute("group") != NULL)
 		m_group = objectNode->Attribute("group");
+
+	if(objectNode->Attribute("icon") != NULL)
+		m_iconFile = objectNode->Attribute("icon");
 
 	if(objectNode->Attribute("image") != NULL)
 		m_imageFile = objectNode->Attribute("image");
@@ -109,6 +113,7 @@ bool CatalogObject::save()
 	// set attributes
 	objectNode->SetAttribute("id", m_objectID.c_str());
 	objectNode->SetAttribute("name", m_name.c_str());
+	objectNode->SetAttribute("icon", m_iconFile.c_str());
 	objectNode->SetAttribute("image", m_imageFile.c_str());
 
 	// create physics node
@@ -211,6 +216,16 @@ void CatalogObject::setGroup(std::string group)
 std::string CatalogObject::getGroup()
 {
 	return m_group;
+}
+
+void CatalogObject::setIconFile(std::string iconFile)
+{
+	m_iconFile = iconFile;
+}
+
+std::string CatalogObject::getIconFile()
+{
+	return m_iconFile;
 }
 
 void CatalogObject::setImageFile(string imageFile)

@@ -38,7 +38,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 		if(object->load(line))
 		{
 			m_catalogObjects.push_back(object);
-			m_uiRenderer->executeJavascript(ToWebString(string() + "addCatalogObject('" + object->getObjectID() + "', '" + object->getName() + "', '" + object->getGroup() + "', '" + object->getImageFile() + "');"));
+			m_uiRenderer->executeJavascript(ToWebString(string() + "addCatalogObject('" + object->getObjectID() + "', '" + object->getName() + "', '" + object->getGroup() + "', '" + object->getIconFile() + "');"));
 		}
 	}
 

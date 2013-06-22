@@ -1,4 +1,4 @@
-<object id="sky" name="Blauer Himmel" group="sky" image="icon/bluesky.png">
+<object id="grass1" name="Gras" group="grass" icon="icon/gras.png">
 	<physics type="static">
 		<fixture type="chain" x="20" y="20" density="0" friction="1">
 			<point x="0" y="0"/>
