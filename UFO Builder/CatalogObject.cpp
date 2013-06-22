@@ -21,7 +21,7 @@ bool CatalogObject::load(string objectID)
 	XMLDocument doc;
 
 	// load XML file
-	if(doc.LoadFile(("objects\\" + objectID + ".xml").c_str()) != XML_SUCCESS)
+	if(doc.LoadFile(("objects\\level\\" + objectID + ".xml").c_str()) != XML_SUCCESS)
 		return false;
 
 	// get object node

@@ -12,6 +12,7 @@
 
 class Game;
 class LevelEditor;
+class UfoEditor;
 
 class Starter : public Awesomium::JSMethodHandler
 {
@@ -20,7 +21,8 @@ public:
 	{
 		Menu = 1,
 		Ingame,
-		Editor
+		Editor,
+		Builder
 	};
 
 private:
@@ -30,6 +32,7 @@ private:
 
 	Game* m_game;
 	LevelEditor* m_editor;
+	UfoEditor* m_builder;
 
 	float m_screenFactor;
 

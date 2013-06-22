@@ -1,8 +1,15 @@
 #pragma once
 
-class UfoEditor
+#include "LevelEditor.h"
+
+class UfoCatalogPart;
+class Ufo;
+
+class UfoEditor : public LevelEditor
 {
+private:
+	Ufo* m_ufo;
 public:
-	UfoEditor();
+	UfoEditor(Starter* starter, sf::RenderWindow* window);
 	~UfoEditor();
 };
