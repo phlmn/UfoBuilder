@@ -38,7 +38,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 		if(object->load(line))
 		{
 			m_catalogObjects.push_back(object);
-			m_uiRenderer->executeJavascript(ToWebString(string() + "addCatalogObject('" + object->getObjectID() + "', '" + object->getName() + "');"));
+			m_uiRenderer->executeJavascript(ToWebString(string() + "addCatalogObject('" + object->getObjectID() + "', '" + object->getName() + "', '" + object->getImageFile() + "');"));
 		}
 	}
 
@@ -100,7 +100,20 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 {
 	if(method_name == WSLit("newLevel"))
 	{
-		
+		int save = MessageBoxA(NULL, "Sollen die Änderungen gespeichert werden?", "Neues Level", IDOK | IDCANCEL);
+
+		if(save == 6)
+		{
+			m_level->save(m_level->getLevelID());
+
+			delete m_level;
+			m_level = new Level();
+		}
+		else if(save == 7)
+		{
+			delete m_level;
+			m_level = new Level();
+		}
 	}
 	else if(method_name == WSLit("createObject"))
 	{

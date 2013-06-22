@@ -131,9 +131,9 @@ void Game::tick(sf::Time elapsedTime)
 	else
 	{
 		// draw testobject
-		m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
+		//m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
 		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);
-		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
+		m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
 	}
 
 	m_renderWindow->draw(m_spriteBody);
@@ -162,8 +162,8 @@ bool Game::isSelected(const sf::Sprite object)
 {
 	if(m_lastClick.x >= object.getPosition().x)
 		if(m_lastClick.x <= object.getPosition().x + object.getTexture()->getSize().x)
-			if(m_lastClick.y >= object.getPosition().y + object.getTexture()->getSize().y / 2)
-				if(m_lastClick.y <= object.getPosition().y + object.getTexture()->getSize().y + object.getTexture()->getSize().y / 2)
+			if(m_lastClick.y >= object.getPosition().y)
+				if(m_lastClick.y <= object.getPosition().y + object.getTexture()->getSize().y)
 					return true;
 	return false;
 }

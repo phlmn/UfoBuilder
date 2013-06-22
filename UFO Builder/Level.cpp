@@ -54,6 +54,11 @@ std::list<LevelObject*>* Level::getObjects()
 	return &m_objects;
 }
 
+std::string Level::getLevelID()
+{
+	return m_levelID;
+}
+
 bool Level::save(std::string filename)
 {
 	return false;
