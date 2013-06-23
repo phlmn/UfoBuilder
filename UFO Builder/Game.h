@@ -22,4 +22,7 @@ public:
 	~Game();
 
 	void tick(sf::Time elapsedTime);
+
+	UfoEditor* getUfoEditor();
+	Level* getLevel();
 };

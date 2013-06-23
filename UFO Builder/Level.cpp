@@ -7,6 +7,7 @@ using namespace tinyxml2;
 
 Level::Level(sf::RenderWindow* window)
 {
+	m_renderWindow = window;
 	m_objects.clear();
 	m_ufo = NULL;
 }

@@ -64,9 +64,19 @@ void Game::tick(sf::Time elapsedTime)
 	m_level->tick(elapsedTime);
 }
 
-
 void Game::resize()
 {
 	float scale = m_starter->getScreenFactor();
-	m_level->getUfo()->resize(scale);
+	if(m_level->getUfo())
+		m_level->getUfo()->resize(scale);
+}
+
+UfoEditor* Game::getUfoEditor()
+{
+	return m_ufoEditor;
+}
+
+Level* Game::getLevel()
+{
+	return m_level;
 }

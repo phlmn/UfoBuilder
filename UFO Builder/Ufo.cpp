@@ -18,6 +18,7 @@ Ufo::Ufo(sf::RenderWindow* window)
 
 	m_sensitivity = 5.0f;
 
+	// load images
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile("images/body1.png");
 	texture->setSmooth(true);
@@ -82,7 +83,7 @@ void Ufo::tick(sf::Time elapsedTime)
 			{
 				// left mouse button has been clicked
 				m_lastClick = sf::Mouse::getPosition(*m_renderWindow);
-				m_difference = sf::Vector2i(m_lastClick.x - m_spriteBody.getPosition().x, m_lastClick.y - m_spriteBody.getPosition().y);
+				m_difference = sf::Vector2i(m_lastClick.x - (int)m_spriteBody.getPosition().x, m_lastClick.y - (int)m_spriteBody.getPosition().y);
 
 				if(isSelected(m_spriteBody))
 					m_mouseIsPressed = true;
@@ -99,8 +100,8 @@ void Ufo::tick(sf::Time elapsedTime)
 	if(m_mouseIsPressed)
 	{
 		// Mouse control
-		m_spriteBody.setPosition(m_mousePosition.x - m_difference.x, m_mousePosition.y - m_difference.y);
-		m_bodyTest->SetTransform(b2Vec2(m_mousePosition.x - m_difference.x, m_mousePosition.y - m_difference.y), m_bodyTest->GetAngle());
+		m_spriteBody.setPosition((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y));
+		m_bodyTest->SetTransform(b2Vec2((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y)), m_bodyTest->GetAngle());
 	}
 	else
 	{

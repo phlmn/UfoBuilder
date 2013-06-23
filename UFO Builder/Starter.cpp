@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "LevelEditor.h"
+#include "Ufo.h"
 
 using namespace Awesomium;
 
@@ -120,6 +121,8 @@ void Starter::tick()
 	}
 	else if(m_gamestate == Starter::Ingame)
 	{
+		if(!m_game->getLevel()->getUfo())
+			m_game->getLevel()->setUfo(new Ufo(m_renderWindow));
 		m_game->tick(elapsedTime);
 
 		std::string posstr;

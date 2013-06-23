@@ -16,6 +16,8 @@ private:
 	sf::Sprite m_spriteBackground;
 	std::list<LevelObject*> m_objects;
 
+	sf::RenderWindow* m_renderWindow;
+
 	std::string m_levelID;
 	std::string m_bg;
 
