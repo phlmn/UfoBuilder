@@ -17,7 +17,6 @@ private:
 	sf::RenderWindow* m_renderWindow; // wrapper for sf::Window, allows easy 2D rendering
 	
 	// drawable representation of a texture -> allows to easily display a texture on a render target
-	sf::Sprite m_spriteTest;
 	sf::Sprite m_spriteBody;
 
 	sf::Vector2i m_mousePosition;

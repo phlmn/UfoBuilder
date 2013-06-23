@@ -8,7 +8,7 @@ using namespace tinyxml2;
 Level::Level(sf::RenderWindow* window)
 {
 	m_objects.clear();
-	m_ufo = new Ufo(window);
+	m_ufo = NULL;
 }
 
 
@@ -26,7 +26,7 @@ void Level::tick(sf::Time elapsedTime)
 		pos++;
 	}
 
-	m_ufo->tick(elapsedTime);
+	if(m_ufo) m_ufo->tick(elapsedTime);
 }
 
 void Level::start()
@@ -71,7 +71,7 @@ bool Level::load(std::string levelID)
 	m_objects.clear();
 
 	// load XML file
-	if(doc.LoadFile(("objects\\" + levelID + ".xml").c_str()) != XML_SUCCESS)
+	if(doc.LoadFile(("level/" + levelID + ".xml").c_str()) != XML_SUCCESS)
 		return false;
 
 	// get object node
@@ -100,6 +100,11 @@ bool Level::load(std::string levelID)
 	}
 
 	return true;
+}
+
+void Level::setUfo(Ufo* ufo)
+{
+	m_ufo = ufo;
 }
 
 Ufo* Level::getUfo()

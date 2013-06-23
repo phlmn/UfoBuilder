@@ -18,12 +18,7 @@ Ufo::Ufo(sf::RenderWindow* window)
 
 	m_sensitivity = 5.0f;
 
-	// load textures
 	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("images/bg1.png");
-	m_spriteTest.setTexture(*texture);
-
-	texture = new sf::Texture();
 	texture->loadFromFile("images/body1.png");
 	texture->setSmooth(true);
 	m_spriteBody.setTexture(*texture);
@@ -156,14 +151,11 @@ void Ufo::tick(sf::Time elapsedTime)
 	}
 
 	m_bodyTest->SetTransform(b2Vec2(m_bodyTest->GetPosition().x - (float)m_direcction / m_sensitivity, m_bodyTest->GetPosition().y - (float)m_acceleration / m_sensitivity), m_bodyTest->GetAngle());
-
-	m_renderWindow->draw(m_spriteTest);
 }
 
 void Ufo::resize(float scale)
 {
 	m_spriteBody.setScale(scale, scale);
-	m_spriteTest.setScale(scale * 4.0f, scale * 2.2f);
 }
 
 void addPart()

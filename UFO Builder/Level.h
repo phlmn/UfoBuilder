@@ -38,5 +38,6 @@ public:
 	bool save(std::string levelID);
 	bool load(std::string levelID);
 
+	void setUfo(Ufo* ufo);
 	Ufo* getUfo();
 };
