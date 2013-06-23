@@ -102,10 +102,8 @@
 				$(".object-browser").hide(100);
 			}
 			
-			function addCatalogObject(id, name, image) {
-				if(image == "")
-					image = 'icon/noimage.png';
-				var newItem = $("<li><img class='image' src='" + image + "'/><div class='name'>" + name + "</div></li>");
+			function addCatalogObject(id, name) {
+				var newItem = $("<li><div class='name'>" + name + "</div></li>");
 				$(".object-browser .objects").append(newItem);
 				newItem.click(function(e) {
                     App.createObject(id, newObjectLayer);
@@ -202,10 +200,7 @@
                 </ul>
             </div>
             <ul class="objects">
-            	<div class="close">
-                	<a class="button" href="javascript: hideObjectDialog();">x</a>
-                </div>
-                
+				                           
             </ul>
         </div>
         <div id="overlay"></div>

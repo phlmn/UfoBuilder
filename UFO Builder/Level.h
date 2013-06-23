@@ -32,7 +32,6 @@ public:
 	void removeObject(LevelObject* object);
 	std::list<LevelObject*>* getObjects();
 
-	std::string getLevelID();
 	bool save(std::string levelID);
 	bool load(std::string levelID);
 };
