@@ -13,6 +13,7 @@ protected:
 	std::string m_objectID;
 	std::string m_name;
 	std::string m_imageFile;
+	std::string m_category;
 
 	StorablePhysProps m_physProps;
 
@@ -35,5 +36,8 @@ public:
 
 	void setPhysProps(StorablePhysProps physProps);
 	StorablePhysProps getPhysProps();
+
+	void setCategory(std::string cat);
+	std::string getCategory();
 };
 

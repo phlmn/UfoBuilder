@@ -102,13 +102,39 @@
 				$(".object-browser").hide(100);
 			}
 			
-			function addCatalogObject(id, name) {
+			function addCatalogObject(id, name, cat) {
 				var newItem = $("<li><div class='name'>" + name + "</div></li>");
+				newItem.data("cat", cat);
+				addCategory(cat);
 				$(".object-browser .objects").append(newItem);
 				newItem.click(function(e) {
                     App.createObject(id, newObjectLayer);
 					hideObjectDialog();
                 });
+			}
+			
+			function addCategory(cat) {
+				if($(".object-browser .categories .cat_" + cat).lengt > 0) return;
+				var newCat = $("<li class='cat_" + cat + "'>" + cat + "</li>");
+				newCat.click(function(e) {
+					filter(cat);
+				});
+				$(".object-browser .categories ul").append(newCat);
+			}
+			
+			function filter(cat) {
+				if(cat == "all") {
+					$(".object-browser .objects li").each(function(index, element) {
+						$(element).show();
+					});
+					return;
+				}
+				$(".object-browser .objects li").each(function(index, element) {
+					if($(element).data('cat') == cat)
+						$(element).show();
+					else
+						$(element).hide();
+				});
 			}
 		</script>
     </head>
@@ -192,11 +218,7 @@
         <div class="object-browser">
         	<div class="categories">
                 <ul>
-                    <li class="active">Sky</li>
-                    <li>Ground</li>
-                    <li>Trees</li>
-                    <li>Grass</li>
-                    <li>Builings</li>
+                    <li class="active cat_all" onClick="filter('all');">All</li>
                 </ul>
             </div>
             <ul class="objects">

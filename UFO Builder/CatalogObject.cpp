@@ -218,3 +218,13 @@ StorablePhysProps CatalogObject::getPhysProps()
 {
 	return m_physProps;
 }
+
+void CatalogObject::setCategory(std::string cat)
+{
+	m_category = cat;
+}
+
+std::string CatalogObject::getCategory()
+{
+	return m_category;
+}
