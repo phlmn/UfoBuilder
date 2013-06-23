@@ -6,7 +6,7 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_level = new Level();
 	m_renderWindow = window;
 
-	m_isPressed = false;
+	isPressed = false;
 
 	m_mousePosition = sf::Vector2i(0, 0);
 	m_lastClick = sf::Vector2i(0, 0);
@@ -105,16 +105,17 @@ void Game::tick(sf::Time elapsedTime)
 			{
 				// left mouse button has been clicked
 				m_lastClick = sf::Mouse::getPosition();
-				m_difference = sf::Vector2i(m_lastClick.x - m_spriteBody.getPosition().x, m_lastClick.y - m_spriteBody.getPosition().y);
 
 				if(isSelected(m_spriteBody))
-					m_isPressed = true;
+					isPressed = true;
 			}
 		}
 		else if(event.type == sf::Event::MouseButtonReleased)
 		{
 			// mouse up
-			m_isPressed = false;
+			//if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				//MessageBox(NULL, "yep", "", 0);
+			isPressed = false;
 		}
 	}
 	#pragma endregion
@@ -123,17 +124,22 @@ void Game::tick(sf::Time elapsedTime)
 
 	float scale = m_starter->getScreenFactor();
 
-	if(m_isPressed)
+	if(isPressed)
 	{
-		m_spriteBody.setPosition(m_mousePosition.x - m_difference.x, m_mousePosition.y - m_difference.y);
-		m_bodyTest->SetTransform(b2Vec2(m_mousePosition.x, m_mousePosition.y), m_bodyTest->GetAngle());
+		b2Vec2 pos;
+		float x = m_mousePosition.x - m_spriteBody.getTexture()->getSize().x / 2;
+		float y = m_mousePosition.y - m_spriteBody.getTexture()->getSize().y / 2;
+
+		m_spriteBody.setPosition(x, y);
+		
+		m_bodyTest->SetTransform(b2Vec2(x, y), m_bodyTest->GetAngle());
 	}
 	else
 	{
 		// draw testobject
 		m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
 		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);
-		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
+		m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
 	}
 
 	m_renderWindow->draw(m_spriteBody);
@@ -162,8 +168,8 @@ bool Game::isSelected(const sf::Sprite object)
 {
 	if(m_lastClick.x >= object.getPosition().x)
 		if(m_lastClick.x <= object.getPosition().x + object.getTexture()->getSize().x)
-			if(m_lastClick.y >= object.getPosition().y + object.getTexture()->getSize().y / 2)
-				if(m_lastClick.y <= object.getPosition().y + object.getTexture()->getSize().y + object.getTexture()->getSize().y / 2)
+			if(m_lastClick.y >= object.getPosition().y)
+				if(m_lastClick.y <=  object.getPosition().y + object.getTexture()->getSize().y)
 					return true;
 	return false;
 }
