@@ -40,6 +40,9 @@ bool CatalogObject::load(string objectID)
 	if(objectNode->Attribute("image") != NULL)
 		m_imageFile = objectNode->Attribute("image");
 
+	if(objectNode->Attribute("category") != NULL)
+		m_category = objectNode->Attribute("category");
+
 	// get physics node
 	XMLElement* physicsNode = objectNode->FirstChildElement("physics");
 
@@ -106,6 +109,7 @@ bool CatalogObject::save()
 	objectNode->SetAttribute("id", m_objectID.c_str());
 	objectNode->SetAttribute("name", m_name.c_str());
 	objectNode->SetAttribute("image", m_imageFile.c_str());
+	objectNode->SetAttribute("category", m_category.c_str());
 
 	// create physics node
 	XMLElement* physicsNode = doc.NewElement("physics");
