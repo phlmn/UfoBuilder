@@ -21,6 +21,7 @@ private:
 	// drawable representation of a texture -> allows to easily display a texture on a render target
 	sf::Sprite m_spriteTest;
 	sf::Sprite m_spriteBody;
+	sf::Vector2i m_difference;
 
 	sf::Vector2i m_mousePosition;
 	sf::Vector2i m_lastClick;
