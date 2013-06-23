@@ -141,7 +141,7 @@ void Game::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::MouseMoved)
 		{
 			// mouse has been moved
-			m_mousePosition = sf::Mouse::getPosition();
+			m_mousePosition = sf::Mouse::getPosition(*m_renderWindow);
 		}
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
@@ -149,7 +149,7 @@ void Game::tick(sf::Time elapsedTime)
 			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				// left mouse button has been clicked
-				m_lastClick = sf::Mouse::getPosition();
+				m_lastClick = sf::Mouse::getPosition(*m_renderWindow);
 				m_difference = sf::Vector2i(m_lastClick.x - m_spriteBody.getPosition().x, m_lastClick.y - m_spriteBody.getPosition().y);
 
 				if(isSelected(m_spriteBody))
@@ -159,8 +159,6 @@ void Game::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::MouseButtonReleased)
 		{
 			// mouse up
-			//if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				//MessageBox(NULL, "yep", "", 0);
 			m_mouseIsPressed = false;
 		}
 	}
@@ -251,10 +249,10 @@ sf::Vector2i Game::getLastClick()
 
 bool Game::isSelected(const sf::Sprite object)
 {
-	if(m_lastClick.x >= object.getPosition().x)
-		if(m_lastClick.x <= object.getPosition().x + object.getTexture()->getSize().x)
-			if(m_lastClick.y >= object.getPosition().y)
-				if(m_lastClick.y <=  object.getPosition().y + object.getTexture()->getSize().y)
+	if(m_lastClick.x >= object.getPosition().x - object.getTexture()->getSize().x / 4)
+		if(m_lastClick.x <= object.getPosition().x + object.getTexture()->getSize().x / 4)
+			if(m_lastClick.y >= object.getPosition().y - object.getTexture()->getSize().y / 4)
+				if(m_lastClick.y <= object.getPosition().y + object.getTexture()->getSize().y / 4)
 					return true;
 	return false;
 }
