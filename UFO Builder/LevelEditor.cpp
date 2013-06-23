@@ -29,7 +29,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	m_catalogObjects.clear();
 	
 	// load object catalog
-	ifstream stream = ifstream("objects/catalogLevel.list");
+	ifstream stream = ifstream("objects/catalog.list");
 	while(!stream.eof())
 	{
 		char line[128];

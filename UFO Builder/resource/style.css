@@ -111,8 +111,8 @@ input[type="radio"]:checked + label {
 	background: #fff;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 	width: 280px;
-	height: 240px;
-	margin: -120px 0 0 -140px;
+	height: 200px;
+	margin: -100px 0 0 -140px;
 }
 
 #menu h1 {

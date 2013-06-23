@@ -2,7 +2,6 @@
 
 #include "Game.h"
 #include "LevelEditor.h"
-#include "UfoEditor.h"
 
 using namespace Awesomium;
 
@@ -15,7 +14,6 @@ Starter::Starter()
 {
 	m_game = NULL;
 	m_editor = NULL;
-	m_builder = NULL;
 }
 
 
@@ -75,7 +73,6 @@ bool Starter::init()
 	// convert methods to js-methods and register them
 	m_uiRenderer->registerMethod("startGame", false);
 	m_uiRenderer->registerMethod("startEditor", false);
-	m_uiRenderer->registerMethod("startBuilder", false);
 	m_uiRenderer->registerMethod("exit", false);
 
 	// register a handler for custom js-object methods
@@ -139,10 +136,6 @@ void Starter::tick()
 	{
 		m_editor->tick(elapsedTime);
 	}
-	else if(m_gamestate == Starter::Builder)
-	{
-		m_builder->tick(elapsedTime);
-	}
 
 	// render the whole scene
 	m_renderWindow->display();
@@ -154,7 +147,6 @@ void Starter::cleanup()
 	delete m_renderWindow;
 	if(m_game) delete m_game;
 	if(m_editor) delete m_editor;
-	if(m_builder) delete m_builder;
 }
 
 void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args)
@@ -176,15 +168,6 @@ void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const
 		}
 
 		m_gamestate = Starter::Editor;
-	}
-	else if(method_name == WSLit("startBuilder"))
-	{
-		if(m_builder == NULL)
-		{
-			m_builder = new UfoEditor(this, m_renderWindow);
-		}
-
-		m_gamestate = Starter::Builder;
 	}
 	else if(method_name == WSLit("exit"))
 	{
