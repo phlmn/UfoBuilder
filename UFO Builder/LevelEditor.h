@@ -27,6 +27,7 @@ private:
 	UiRenderer* m_uiRenderer;
 
 	Level* m_level;
+	int m_lastObjectID;
 
 	std::list<CatalogObject*> m_catalogObjects;
 

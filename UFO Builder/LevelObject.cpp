@@ -7,17 +7,25 @@ using namespace tinyxml2;
 
 LevelObject::LevelObject()
 {
+	m_sprite = NULL;
 	m_position = sf::Vector2f();
 	m_scale = 1.0f;
 	m_opacity = 1.0f;
 	m_angle = 0.0f;
 	m_layer = 0;
-	m_sprite = NULL;
+	m_objectID = 0;
+	m_objectType = "";
+	m_category = "";
 }
 
 LevelObject::LevelObject(XMLElement* element)
 {
 	m_layer = atoi(element->Attribute("layer"));
+
+	m_objectID = 0;
+	m_objectType = "";
+	m_category = "";
+	m_sprite = NULL;
 
 	m_position = sf::Vector2f((float)atof(element->Attribute("x")), (float)atof(element->Attribute("y")));
 
@@ -37,6 +45,10 @@ LevelObject::LevelObject(CatalogObject gameObject)
 	m_opacity = 1.0f;
 	m_angle = 0.0f;
 	m_layer = 0;
+	m_objectID = 0;
+	m_objectType = "";
+	m_category = "";
+	m_sprite = NULL;
 
 	getDataFromCatalogObject(gameObject);
 }
@@ -45,11 +57,13 @@ void LevelObject::getDataFromCatalogObject(CatalogObject catObj)
 {
 	m_sprite = NULL;
 	m_name = catObj.getName();
+	m_category = catObj.getCategory();
+	m_objectType = catObj.getObjectID();
 
 	if(!m_imageFile.isEmpty())
 	{
 		sf::Texture texture;
-		texture.loadFromFile(string("objects\\images\\") + m_objectID + m_imageFile);
+		texture.loadFromFile(string("objects/images/") + m_imageFile);
 
 		m_sprite = new sf::Sprite();
 		m_sprite->setTexture(texture);
@@ -90,7 +104,7 @@ LevelObject::LevelObject(CatalogObject gameObject, int layer, sf::Vector2f posit
 	m_angle = angle;
 
 	sf::Texture texture;
-	texture.loadFromFile(string("objects\\") + m_objectID + string("\\body.png"));
+	texture.loadFromFile(string("objects/images/") + gameObject.getImageFile());
 
 	m_sprite = new sf::Sprite();
 	m_sprite->setTexture(texture);
@@ -167,12 +181,32 @@ std::string LevelObject::getName()
 	return m_name;
 }
 
-void LevelObject::setObjectID(std::string id)
+void LevelObject::setObjectType(std::string id)
+{
+	m_objectType = id;
+}
+
+std::string LevelObject::getObjectType()
+{
+	return m_objectType;
+}
+
+void LevelObject::setObjectID(int id)
 {
 	m_objectID = id;
 }
 
-std::string LevelObject::getObjectID()
+int LevelObject::getObjectID()
 {
 	return m_objectID;
+}
+
+void LevelObject::setObjectCategory(std::string cat)
+{
+	m_category = cat;
+}
+
+std::string LevelObject::getObjectCategory()
+{
+	return m_category;
 }

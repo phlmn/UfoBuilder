@@ -16,9 +16,11 @@ protected:
 	float m_angle;
 	sf::Sprite* m_sprite;
 	sf::String m_imageFile;
-	sf::String m_objectID;
+	sf::String m_objectType;
+	sf::String m_category;
 	b2BodyDef m_bodyDef;
 	std::string m_name;
+	int m_objectID;
 
 public:
 	LevelObject();
@@ -49,6 +51,12 @@ public:
 	void setName(std::string name);
 	std::string getName();
 
-	void setObjectID(std::string id);
-	std::string getObjectID();
+	void setObjectType(std::string id);
+	std::string getObjectType();
+
+	void setObjectID(int id);
+	int getObjectID();
+
+	void setObjectCategory(std::string cat);
+	std::string getObjectCategory();
 };

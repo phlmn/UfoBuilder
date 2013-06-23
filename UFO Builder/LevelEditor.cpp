@@ -12,6 +12,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	m_starter = starter;
 	m_renderWindow = window;
 	m_level = new Level();
+	m_lastObjectID = 0;
 
 	// load images
 	sf::Texture* texture;
@@ -132,5 +133,6 @@ void LevelEditor::createObject(string id, int layer)
 	}
 
 	LevelObject* levelObject = new LevelObject(*object);
-	m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + levelObject->getName() + "', '" + levelObject->getObjectID() + "', " + StringHelper::toString(layer) + ");"));
+	levelObject->setObjectID(++m_lastObjectID);
+	m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + levelObject->getName() + "', '" + StringHelper::toString(levelObject->getObjectID()) + "', " + StringHelper::toString(layer) + ");"));
 }
