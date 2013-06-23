@@ -8,7 +8,6 @@ CatalogObject::CatalogObject()
 	m_imageFile = "";
 	m_name = "";
 	m_objectID = "";
-	m_group = "";
 }
 
 CatalogObject::~CatalogObject()
@@ -37,9 +36,6 @@ bool CatalogObject::load(string objectID)
 
 	if(objectNode->Attribute("name") != NULL)
 		m_name = objectNode->Attribute("name");
-
-	if(objectNode->Attribute("group") != NULL)
-		m_group = objectNode->Attribute("group");
 
 	if(objectNode->Attribute("image") != NULL)
 		m_imageFile = objectNode->Attribute("image");
@@ -201,16 +197,6 @@ void CatalogObject::setName(string name)
 std::string CatalogObject::getName()
 {
 	return m_name;
-}
-
-void CatalogObject::setGroup(std::string group)
-{
-	m_group = group;
-}
-
-std::string CatalogObject::getGroup()
-{
-	return m_group;
 }
 
 void CatalogObject::setImageFile(string imageFile)

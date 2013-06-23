@@ -102,34 +102,15 @@
 				$(".object-browser").hide(100);
 			}
 			
-			function addCatalogObject(id, name, group, image) {
-				if(group == "") group = "nogroup";
-				if(image == "") image = "icon/noimage.png";
-				var newItem = $("<li class='" + group + "'><img class='image' src='" + image + "'/><div class='name'>" + name + "</div></li>");
+			function addCatalogObject(id, name, image) {
+				if(image == "")
+					image = 'icon/noimage.png';
+				var newItem = $("<li><img class='image' src='" + image + "'/><div class='name'>" + name + "</div></li>");
 				$(".object-browser .objects").append(newItem);
 				newItem.click(function(e) {
                     App.createObject(id, newObjectLayer);
 					hideObjectDialog();
                 });
-			}
-			
-			function filterObjects(group) {
-				var list = new Array("sky", "ground", "trees", "grass", "buildings", "nogroup");
-				var cl;
-				
-				if(group != 'none') {
-					for(i = 0; i < list.length; i++) {
-						cl = "." + list[i];
-						$(cl).css("display","none");
-					}
-					cl = "." + group;
-					$(cl).css("display", "block");
-				} else {
-					for(i = 0; i < list.length; i++) {
-						cl = "." + list[i];
-						$(cl).css("display", "block");
-					}
-				}
 			}
 		</script>
     </head>
@@ -213,12 +194,11 @@
         <div class="object-browser">
         	<div class="categories">
                 <ul>
-                    <li onClick="javascript: filterObjects('none');" class="active">All</li>
-                    <li onClick="javascript: filterObjects('sky');">Sky</li>
-                    <li onClick="javascript: filterObjects('ground');">Ground</li>
-                    <li onClick="javascript: filterObjects('trees');">Trees</li>
-                    <li onClick="javascript: filterObjects('grass');">Grass</li>
-                    <li onClick="javascript: filterObjects('buildings');">Builings</li>
+                    <li class="active">Sky</li>
+                    <li>Ground</li>
+                    <li>Trees</li>
+                    <li>Grass</li>
+                    <li>Builings</li>
                 </ul>
             </div>
             <ul class="objects">
