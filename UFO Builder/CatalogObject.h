@@ -12,7 +12,6 @@ class CatalogObject
 protected:
 	std::string m_objectID;
 	std::string m_name;
-	std::string m_iconFile;
 	std::string m_imageFile;
 	std::string m_group;
 
@@ -34,9 +33,6 @@ public:
 
 	void setGroup(std::string group);
 	std::string getGroup();
-
-	void setIconFile(std::string iconFile);
-	std::string getIconFile();
 
 	void setImageFile(std::string imageFile);
 	std::string getImageFile();

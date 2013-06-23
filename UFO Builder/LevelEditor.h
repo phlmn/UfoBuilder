@@ -19,14 +19,14 @@ class Level;
 class LevelEditor : Awesomium::JSMethodHandler
 {
 private:
-	Level* m_level;
-protected:
 	Starter* m_starter;
 
 	sf::RenderWindow* m_renderWindow;
 	sf::Sprite m_spriteBg;
 
 	UiRenderer* m_uiRenderer;
+
+	Level* m_level;
 
 	std::list<CatalogObject*> m_catalogObjects;
 
