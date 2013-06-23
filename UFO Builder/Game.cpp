@@ -7,10 +7,6 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_renderWindow = window;
 
 	m_mouseIsPressed = false;
-	m_keyUp = false;
-	m_keyDown = false;
-	m_keyLeft = false;
-	m_keyRight = false;
 
 	m_sensitivity = 5.0f;
 
@@ -96,47 +92,15 @@ void Game::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::KeyPressed)
 		{
 			// key has been pressed
-			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			if(event.key.code == sf::Keyboard::Escape)
 			{
 				// escape has been pressed -> call Menu
 				m_starter->setGamestate(m_starter->Menu);
-			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			{
-				m_keyUp = true;
-			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			{
-				m_keyDown = true;
-			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			{
-				m_keyRight = true;
-			}
-			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				m_keyLeft = true;
 			}
 		}
 		else if(event.type == sf::Event::KeyReleased)
 		{
 			// key has been released
-			if(event.key.code == sf::Keyboard::Up)
-			{
-				m_keyUp = false;
-			}
-			else if(event.key.code == sf::Keyboard::Down)
-			{
-				m_keyDown = false;
-			}
-			else if(event.key.code == sf::Keyboard::Left)
-			{
-				m_keyLeft = false;
-			}
-			else if(event.key.code == sf::Keyboard::Right)
-			{
-				m_keyRight = false;
-			}
 		}
 		else if(event.type == sf::Event::MouseMoved)
 		{
@@ -146,7 +110,7 @@ void Game::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
 			// mouse down
-			if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			if(event.key.code == sf::Mouse::Left)
 			{
 				// left mouse button has been clicked
 				m_lastClick = sf::Mouse::getPosition(*m_renderWindow);
@@ -183,11 +147,11 @@ void Game::tick(sf::Time elapsedTime)
 
 	// Key control
 
-	if(m_keyUp && !m_keyDown)
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		m_acceleration += 2;
 	}
-	else if(m_keyDown && !m_keyUp)
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		m_acceleration -= 2;
 	}
@@ -203,11 +167,11 @@ void Game::tick(sf::Time elapsedTime)
 		}
 	}
 
-	if(m_keyLeft && !m_keyRight)
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		m_direcction += 2;
 	}
-	else if(m_keyRight && !m_keyLeft)
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		m_direcction -= 2;
 	}

@@ -32,10 +32,6 @@ private:
 	int m_acceleration;
 
 	bool m_mouseIsPressed;
-	bool m_keyUp;
-	bool m_keyDown;
-	bool m_keyLeft;
-	bool m_keyRight;
 
 	void resize();
 
