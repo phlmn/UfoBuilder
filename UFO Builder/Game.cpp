@@ -6,10 +6,19 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_level = new Level();
 	m_renderWindow = window;
 
-	isPressed = false;
+	m_mouseIsPressed = false;
+	m_keyUp = false;
+	m_keyDown = false;
+	m_keyLeft = false;
+	m_keyRight = false;
+
+	m_sensitivity = 5.0f;
 
 	m_mousePosition = sf::Vector2i(0, 0);
 	m_lastClick = sf::Vector2i(0, 0);
+
+	m_acceleration = 0;
+	m_direcction = 0;
 
 	// create physical world
 	m_physWorld = new b2World(b2Vec2(0.0f, 9.81f));
@@ -92,6 +101,42 @@ void Game::tick(sf::Time elapsedTime)
 				// escape has been pressed -> call Menu
 				m_starter->setGamestate(m_starter->Menu);
 			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				m_keyUp = true;
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				m_keyDown = true;
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			{
+				m_keyRight = true;
+			}
+			else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			{
+				m_keyLeft = true;
+			}
+		}
+		else if(event.type == sf::Event::KeyReleased)
+		{
+			// key has been released
+			if(event.key.code == sf::Keyboard::Up)
+			{
+				m_keyUp = false;
+			}
+			else if(event.key.code == sf::Keyboard::Down)
+			{
+				m_keyDown = false;
+			}
+			else if(event.key.code == sf::Keyboard::Left)
+			{
+				m_keyLeft = false;
+			}
+			else if(event.key.code == sf::Keyboard::Right)
+			{
+				m_keyRight = false;
+			}
 		}
 		else if(event.type == sf::Event::MouseMoved)
 		{
@@ -107,7 +152,7 @@ void Game::tick(sf::Time elapsedTime)
 				m_lastClick = sf::Mouse::getPosition();
 
 				if(isSelected(m_spriteBody))
-					isPressed = true;
+					m_mouseIsPressed = true;
 			}
 		}
 		else if(event.type == sf::Event::MouseButtonReleased)
@@ -115,7 +160,7 @@ void Game::tick(sf::Time elapsedTime)
 			// mouse up
 			//if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				//MessageBox(NULL, "yep", "", 0);
-			isPressed = false;
+			m_mouseIsPressed = false;
 		}
 	}
 	#pragma endregion
@@ -124,7 +169,9 @@ void Game::tick(sf::Time elapsedTime)
 
 	float scale = m_starter->getScreenFactor();
 
-	if(isPressed)
+	// Mouse control
+
+	if(m_mouseIsPressed)
 	{
 		b2Vec2 pos;
 		float x = m_mousePosition.x - m_spriteBody.getTexture()->getSize().x / 2;
@@ -137,10 +184,54 @@ void Game::tick(sf::Time elapsedTime)
 	else
 	{
 		// draw testobject
-		m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
+		//m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);	
 		//m_spriteBody.setPosition(m_bodyTest->GetPosition().x * 64.0f * scale, m_bodyTest->GetPosition().y * 64.0f * scale);
 		m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
 	}
+
+	// Key control
+
+	if(m_keyUp && !m_keyDown)
+	{
+		m_acceleration += 2;
+	}
+	else if(m_keyDown && !m_keyUp)
+	{
+		m_acceleration -= 2;
+	}
+	else
+	{
+		if(m_acceleration > 0)
+		{
+			m_acceleration--;
+		}
+		else if(m_acceleration < 0)
+		{
+			m_acceleration++;
+		}
+	}
+
+	if(m_keyLeft && !m_keyRight)
+	{
+		m_direcction += 2;
+	}
+	else if(m_keyRight && !m_keyLeft)
+	{
+		m_direcction -= 2;
+	}
+	else
+	{
+		if(m_direcction > 0)
+		{
+			m_direcction--;
+		}
+		else if(m_direcction < 0)
+		{
+			m_direcction++;
+		}
+	}
+
+	m_bodyTest->SetTransform(b2Vec2(m_bodyTest->GetPosition().x - (float)m_direcction / m_sensitivity, m_bodyTest->GetPosition().y - (float)m_acceleration / m_sensitivity), m_bodyTest->GetAngle());
 
 	m_renderWindow->draw(m_spriteBody);
 }
