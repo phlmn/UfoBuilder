@@ -21,6 +21,7 @@ void Level::tick(sf::Time elapsedTime)
 	while(pos != m_objects.end())
 	{
 		(*pos)->tick(elapsedTime);
+		pos++;
 	}
 }
 

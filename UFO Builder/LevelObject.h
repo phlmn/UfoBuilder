@@ -5,6 +5,7 @@
 #include "tinyxml2.h"
 
 class CatalogObject;
+class Starter;
 
 class LevelObject
 {
@@ -21,6 +22,7 @@ protected:
 	b2BodyDef m_bodyDef;
 	std::string m_name;
 	int m_objectID;
+	sf::RenderWindow* m_renderWindow;
 
 public:
 	LevelObject();
@@ -59,4 +61,7 @@ public:
 
 	void setObjectCategory(std::string cat);
 	std::string getObjectCategory();
+
+	void setRenderWindow(sf::RenderWindow* window);
+	sf::RenderWindow* getRenderWindow();
 };

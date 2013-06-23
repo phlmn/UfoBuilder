@@ -13,6 +13,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	m_renderWindow = window;
 	m_level = new Level();
 	m_lastObjectID = 0;
+	m_moveObject = NULL;
 
 	// load images
 	sf::Texture* texture;
@@ -43,6 +44,8 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 		}
 	}
 
+	// init mouse pos
+	m_mouseLastPos = sf::Mouse::getPosition();
 
 	// init sprite resizing
 	resize();
@@ -57,7 +60,10 @@ LevelEditor::~LevelEditor()
 
 void LevelEditor::tick(sf::Time elapsedTime)
 {
-	
+	sf::Vector2i mousePos = sf::Mouse::getPosition();
+	sf::Vector2i mouseDelta = mousePos - m_mouseLastPos;
+	m_mouseLastPos = mousePos;
+
 	// user event handling
 	sf::Event event;
 	while(m_renderWindow->pollEvent(event))
@@ -83,10 +89,20 @@ void LevelEditor::tick(sf::Time elapsedTime)
 				m_starter->setGamestate(m_starter->Menu);
 			}
 		}
+		else if(event.type == sf::Event::MouseButtonPressed)
+		{
+			m_moveObject = NULL;
+		}
 		m_uiRenderer->handleEvent(event);
 	}
 
+	if(m_moveObject)
+	{
+		m_moveObject->setPosition(sf::Vector2f(m_moveObject->getPosition().x + mouseDelta.x / Starter::getScreenFactor(), m_moveObject->getPosition().y + mouseDelta.y / Starter::getScreenFactor()));
+	}
+
 	m_renderWindow->draw(m_spriteBg);
+	m_level->tick(elapsedTime);
 	m_uiRenderer->render();
 }
 
@@ -133,6 +149,10 @@ void LevelEditor::createObject(string id, int layer)
 	}
 
 	LevelObject* levelObject = new LevelObject(*object);
+	m_level->addObject(levelObject);
 	levelObject->setObjectID(++m_lastObjectID);
+	levelObject->setRenderWindow(m_renderWindow);
+	levelObject->setPosition(sf::Vector2f(sf::Mouse::getPosition(*m_renderWindow).x / Starter::getScreenFactor(), sf::Mouse::getPosition(*m_renderWindow).y / Starter::getScreenFactor()));
 	m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + levelObject->getName() + "', '" + StringHelper::toString(levelObject->getObjectID()) + "', " + StringHelper::toString(layer) + ");"));
+	m_moveObject = levelObject;
 }

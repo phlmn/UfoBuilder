@@ -28,8 +28,11 @@ private:
 
 	Level* m_level;
 	int m_lastObjectID;
+	sf::Vector2i m_mouseLastPos;
 
 	std::list<CatalogObject*> m_catalogObjects;
+
+	LevelObject* m_moveObject;
 
 	void resize();
 	void createObject(std::string id, int layer);

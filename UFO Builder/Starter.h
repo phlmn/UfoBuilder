@@ -31,7 +31,7 @@ private:
 	Game* m_game;
 	LevelEditor* m_editor;
 
-	float m_screenFactor;
+	static float screenFactor;
 
 	sf::Clock m_clock; // measures the elapsed time
 	sf::Window* m_window; // window that serves a target for OpenGL rendering
@@ -67,7 +67,7 @@ public:
 	Awesomium::WebSession* getWebSession(); 
 	sf::Vector2f getScreenSize(); // manipulating 2 dimensional vectors (x, y)
 
-	float getScreenFactor(); // aspect ratio from window
+	static float getScreenFactor(); // scale size (factor to Full HD)
 
 	void setGamestate(Gamestate state);
 	void showText(std::string value, int size, float x, float y, bool shadow);

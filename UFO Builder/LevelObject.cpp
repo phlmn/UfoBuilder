@@ -1,6 +1,7 @@
 #include "LevelObject.h"
 
 #include "CatalogObject.h"
+#include "Starter.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -16,6 +17,7 @@ LevelObject::LevelObject()
 	m_objectID = 0;
 	m_objectType = "";
 	m_category = "";
+	m_renderWindow = NULL;
 }
 
 LevelObject::LevelObject(XMLElement* element)
@@ -26,6 +28,7 @@ LevelObject::LevelObject(XMLElement* element)
 	m_objectType = "";
 	m_category = "";
 	m_sprite = NULL;
+	m_renderWindow = NULL;
 
 	m_position = sf::Vector2f((float)atof(element->Attribute("x")), (float)atof(element->Attribute("y")));
 
@@ -49,6 +52,7 @@ LevelObject::LevelObject(CatalogObject gameObject)
 	m_objectType = "";
 	m_category = "";
 	m_sprite = NULL;
+	m_renderWindow = NULL;
 
 	getDataFromCatalogObject(gameObject);
 }
@@ -59,14 +63,17 @@ void LevelObject::getDataFromCatalogObject(CatalogObject catObj)
 	m_name = catObj.getName();
 	m_category = catObj.getCategory();
 	m_objectType = catObj.getObjectID();
+	m_imageFile = catObj.getImageFile();
 
 	if(!m_imageFile.isEmpty())
 	{
-		sf::Texture texture;
-		texture.loadFromFile(string("objects/images/") + m_imageFile);
+		sf::Texture* texture = new sf::Texture();
+		texture->loadFromFile(string("objects/images/") + m_imageFile);
 
 		m_sprite = new sf::Sprite();
-		m_sprite->setTexture(texture);
+		m_sprite->setTexture(*texture);
+		m_sprite->setPosition(m_position);
+		m_sprite->setOrigin(texture->getSize().x / 2.0f, texture->getSize().y / 2.0f);
 	}
 
 	b2World* world = new b2World(b2Vec2(0, 9.81f));
@@ -117,9 +124,14 @@ LevelObject::~LevelObject()
 
 void LevelObject::tick(sf::Time elapsedTime)
 {
-	
+	if(m_renderWindow && m_sprite)
+	{
+		m_sprite->setPosition(m_position.x * Starter::getScreenFactor(), m_position.y * Starter::getScreenFactor());
+		m_sprite->setScale(Starter::getScreenFactor(), Starter::getScreenFactor());
+		m_sprite->setRotation(Starter::RAD_TO_DEG *  m_angle);
+		m_renderWindow->draw(*m_sprite);
+	}
 }
-
 
 void LevelObject::setLayer(int layer)
 {
@@ -209,4 +221,14 @@ void LevelObject::setObjectCategory(std::string cat)
 std::string LevelObject::getObjectCategory()
 {
 	return m_category;
+}
+
+void LevelObject::setRenderWindow(sf::RenderWindow* window)
+{
+	m_renderWindow = window;
+}
+
+sf::RenderWindow* LevelObject::getRenderWindow()
+{
+	return m_renderWindow;
 }

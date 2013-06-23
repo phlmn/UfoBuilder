@@ -9,6 +9,7 @@ using namespace Awesomium;
 const float Starter::PI = 3.14159265359f;
 const float Starter::DEG_TO_RAD = 0.0174532925f;
 const float Starter::RAD_TO_DEG = 57.2957795f;
+float Starter::screenFactor = 1;
 
 Starter::Starter()
 {
@@ -42,7 +43,7 @@ bool Starter::init()
 	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 576, 32), "UFO Builder");
 	m_renderWindow->setFramerateLimit(60);
 
-	m_screenFactor = m_renderWindow->getSize().x / 1920.0f; // aspect ratio from window
+	Starter::screenFactor = m_renderWindow->getSize().x / 1920.0f; // aspect ratio from window
 
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
@@ -216,7 +217,7 @@ WebSession* Starter::getWebSession()
 
 float Starter::getScreenFactor()
 {
-	return m_screenFactor;
+	return Starter::screenFactor;
 }
 
 void Starter::resize(int width, int height)
@@ -243,7 +244,7 @@ void Starter::resize(int width, int height)
 		realHeight = (float)height;
 	}
 
-	m_screenFactor = realWidth / 1920.0f;
+	Starter::screenFactor = realWidth / 1920.0f;
 	// "2D camera", defines what region is shown on screen (scroll, rotate, zoom without altering the way objects are drawn
 	sf::View view = sf::View(sf::Vector2f(realWidth / 2.0f, realHeight / 2.0f), sf::Vector2f(realWidth, realHeight));
 	// set the target viewport.

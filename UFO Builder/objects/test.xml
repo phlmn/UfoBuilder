@@ -1,4 +1,4 @@
-<object id="test" name="Test" category="Test">
+<object id="test" name="Test" category="Test" image="test.png">
 	<physics type="static">
 		<fixture type="chain" x="0" y="0" density="0" friction="1">
 			<point x="0" y="0"/>
