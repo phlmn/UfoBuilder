@@ -11,7 +11,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 {
 	m_starter = starter;
 	m_renderWindow = window;
-	m_level = new Level();
+	m_level = new Level(window);
 	m_lastObjectID = 0;
 	m_moveObject = NULL;
 

@@ -1,12 +1,14 @@
 #include "Level.h"
 #include "LevelObject.h"
+#include "Ufo.h"
 
 using namespace std;
 using namespace tinyxml2;
 
-Level::Level()
+Level::Level(sf::RenderWindow* window)
 {
 	m_objects.clear();
+	m_ufo = new Ufo(window);
 }
 
 
@@ -23,6 +25,8 @@ void Level::tick(sf::Time elapsedTime)
 		(*pos)->tick(elapsedTime);
 		pos++;
 	}
+
+	m_ufo->tick(elapsedTime);
 }
 
 void Level::start()
@@ -96,4 +100,9 @@ bool Level::load(std::string levelID)
 	}
 
 	return true;
+}
+
+Ufo* Level::getUfo()
+{
+	return m_ufo;
 }

@@ -8,6 +8,7 @@
 #include "tinyxml2.h"
 
 class LevelObject;
+class Ufo;
 
 class Level
 {
@@ -18,8 +19,10 @@ private:
 	std::string m_levelID;
 	std::string m_bg;
 
+	Ufo* m_ufo;
+
 public:
-	Level();
+	Level(sf::RenderWindow* window);
 	~Level();
 
 	void tick(sf::Time elapsedTime);
@@ -34,4 +37,6 @@ public:
 
 	bool save(std::string levelID);
 	bool load(std::string levelID);
+
+	Ufo* getUfo();
 };
