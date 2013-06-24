@@ -1,4 +1,4 @@
-<object id="tree_small" name="Small tree" category="Tree" image="tree_small.png">
+<object id="tree_small" name="Small tree" category="Trees" image="tree_small.png">
 	<physics type="none">
 	</physics>
 </object>

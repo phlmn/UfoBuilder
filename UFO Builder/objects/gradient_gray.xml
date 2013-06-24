@@ -1,4 +1,4 @@
-<object id="gradient_gray" name="Gray Gradient" category="Gradient" image="gradient_gray.png">
+<object id="gradient_gray" name="Gray Gradient" category="Gradients" image="gradient_gray.png">
 	<physics type="none">
 	</physics>
 </object>

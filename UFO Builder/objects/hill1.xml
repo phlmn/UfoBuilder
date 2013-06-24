@@ -1,4 +1,4 @@
-<object id="hill1" name="Hill 1" category="Hill" image="hill1.png">
+<object id="hill1" name="Hill 1" category="Hills" image="hill1.png">
 	<physics type="none">
 	</physics>
 </object>
