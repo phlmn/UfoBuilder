@@ -10,6 +10,8 @@ Level::Level(sf::RenderWindow* window)
 	m_renderWindow = window;
 	m_objects.clear();
 	m_ufo = NULL;
+
+	m_levelID = "";
 }
 
 
@@ -32,6 +34,10 @@ void Level::tick(sf::Time elapsedTime)
 
 void Level::start()
 {
+	if(m_levelID == "")
+	{
+		load("test");
+	}
 
 }
 
@@ -101,12 +107,14 @@ bool Level::save(std::string filename)
 
 bool Level::load(std::string levelID)
 {
+	m_levelID = levelID;
+
 	XMLDocument doc;
 
 	m_objects.clear();
 
 	// load XML file
-	if(doc.LoadFile(("level/" + levelID + ".xml").c_str()) != XML_SUCCESS)
+	if(doc.LoadFile(("saves/" + levelID + ".xml").c_str()) != XML_SUCCESS)
 		return false;
 
 	// get object node
@@ -125,6 +133,7 @@ bool Level::load(std::string levelID)
 	while(objectNode != NULL)
 	{
 		LevelObject* obj = new LevelObject(objectNode);
+		obj->setRenderWindow(m_renderWindow);
 		m_objects.push_back(obj);
 
 		objectNode = objectNode->NextSiblingElement("object");

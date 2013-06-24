@@ -33,7 +33,8 @@ LevelObject::LevelObject(XMLElement* element)
 	m_position = sf::Vector2f((float)atof(element->Attribute("x")), (float)atof(element->Attribute("y")));
 
 	m_angle = (float)atof(element->Attribute("angle"));
-	m_scale = (float)atof(element->Attribute("scale"));
+	if(element->Attribute("scale") != NULL)
+		m_scale = (float)atof(element->Attribute("scale"));
 	m_opacity = (float)atof(element->Attribute("opacity"));
 
 	CatalogObject catObj;

@@ -1,0 +1,9 @@
+<level id="" name="level2">
+    <object id="hill4_blurred" x="973.125" y="845.625" layer="0" opacity="0.35" angle="0"/>
+    <object id="hill2_blurred" x="860.625" y="755.625" layer="0" opacity="0.525" angle="0"/>
+    <object id="hill1" x="888.75" y="586.875" layer="0" opacity="1" angle="0"/>
+    <object id="house1" x="1743.75" y="819.375" layer="0" opacity="1" angle="0"/>
+    <object id="tree_small" x="789.375" y="390" layer="0" opacity="1" angle="0"/>
+    <object id="tree_small" x="466.875" y="609.375" layer="0" opacity="1" angle="0"/>
+    <object id="cloud_big" x="1507.5" y="200.625" layer="0" opacity="1.235" angle="0"/>
+</level>

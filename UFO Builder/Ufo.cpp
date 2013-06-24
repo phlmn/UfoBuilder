@@ -21,7 +21,7 @@ Ufo::Ufo(sf::RenderWindow* window)
 	// load images
 	m_spriteBody = new sf::Sprite();
 	sf::Texture* texture = new sf::Texture();
-	texture->loadFromFile("images/body1.png");
+	texture->loadFromFile("objects/images/test.png");
 	texture->setSmooth(true);
 	m_spriteBody->setTexture(*texture);
 	m_spriteBody->setOrigin(m_spriteBody->getTexture()->getSize().x / 2.0f, m_spriteBody->getTexture()->getSize().y / 2.0f);

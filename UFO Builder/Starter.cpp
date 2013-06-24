@@ -123,6 +123,7 @@ void Starter::tick()
 	}
 	else if(m_gamestate == Starter::Ingame)
 	{
+		m_game->getLevel()->start();
 		if(!m_game->getLevel()->getUfo())
 			m_game->getLevel()->setUfo(new Ufo(m_renderWindow));
 		m_game->tick(elapsedTime);
@@ -131,14 +132,6 @@ void Starter::tick()
 
 		// show fps
 		showText("FPS: " + StringHelper::toString(fps), 16, 18.0f, 10.0f, true);
-
-		/*
-		posstr = StringHelper::toString(m_game->getMousePosition().x) + ", " + StringHelper::toString(m_game->getMousePosition().y);
-		showText("Mouse Position: " + posstr, 16, 18.0f, 30.0f, true);
-
-		posstr = StringHelper::toString(m_game->getLastClick().x) + ", " + StringHelper::toString(m_game->getLastClick().y);
-		showText("Letzer Klick: " + posstr, 16, 18.0f, 50.0f, true);
-		*/
 	}
 	else if(m_gamestate == Starter::Editor)
 	{
