@@ -147,7 +147,7 @@
                     <ul>
                     	<li><a href="javascript: App.newLevel();">New Level</a></li>
                         <li><a href="#">Open...</a></li>
-                   		<li><a href="javascript: App.save();">Save</a></li>
+                   		<li><a href="javascript: showDialog('save')">Save</a></li>
                         <li><a href="#">Save as...</a></li>                        
                     </ul>
                 </li>     
@@ -212,6 +212,14 @@
             <h1>Physics</h1>
             <div class="buttons">
                 <a href="#" class="button">Save</a>
+                <a href="javascript: hideDialog();" class="button">Cancel</a>
+            </div>
+        </div>
+        <div class="dialog save v-center">
+        	<h1>Save Level</h1>
+            Name: <input id="safe_file" class="input" name="file" type="text" />
+            <div class="buttons">
+            	<a href="javascript: App.save('test'); hideDialog();" class="button">Save</a>
                 <a href="javascript: hideDialog();" class="button">Cancel</a>
             </div>
         </div>

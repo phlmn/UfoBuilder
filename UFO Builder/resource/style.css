@@ -254,6 +254,15 @@ input[type="radio"]:checked + label {
 	text-align: center;
 }
 
+#editor .dialog .input {
+	width: 400px;
+	margin-left: 10px;
+	border: 1px solid #abadba;
+}
+
+#editor .dialog .input:hover {
+	border-color: #7eb4ea;
+}
 
 /* == Objects == */
 
