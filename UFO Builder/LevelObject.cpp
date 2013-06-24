@@ -127,7 +127,7 @@ void LevelObject::tick(sf::Time elapsedTime)
 	if(m_renderWindow && m_sprite)
 	{
 		m_sprite->setPosition(m_position.x * Starter::getScreenFactor(), m_position.y * Starter::getScreenFactor());
-		m_sprite->setScale(Starter::getScreenFactor(), Starter::getScreenFactor());
+		m_sprite->setScale(Starter::getScreenFactor() * m_scale, Starter::getScreenFactor() * m_scale);
 		m_sprite->setRotation(Starter::RAD_TO_DEG *  m_angle);
 		m_renderWindow->draw(*m_sprite);
 	}

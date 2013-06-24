@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <math.h>
 #include "StringHelper.h"
 
 class CatalogObject;
@@ -19,10 +20,18 @@ class Level;
 class LevelEditor : Awesomium::JSMethodHandler
 {
 private:
+	enum Action
+	{
+		none,
+		move,
+		scale
+	};
 	Starter* m_starter;
 
 	sf::RenderWindow* m_renderWindow;
 	sf::Sprite m_spriteBg;
+
+	Action m_action;
 
 	UiRenderer* m_uiRenderer;
 
@@ -32,7 +41,7 @@ private:
 
 	std::list<CatalogObject*> m_catalogObjects;
 
-	LevelObject* m_moveObject;
+	LevelObject* m_selectedObject;
 
 	void resize();
 	void createObject(std::string id, int layer);

@@ -163,11 +163,11 @@ void Ufo::resize(float scale)
 	m_spriteBody->setScale(scale, scale);
 }
 
-void addPart()
+void Ufo::addPart()
 {
 
 }
-void removePart()
+void Ufo::removePart()
 {
 
 }

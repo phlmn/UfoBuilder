@@ -13,7 +13,8 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	m_renderWindow = window;
 	m_level = new Level(window);
 	m_lastObjectID = 0;
-	m_moveObject = NULL;
+	m_selectedObject = NULL;
+	m_action = none;
 
 	// load images
 	sf::Texture* texture;
@@ -83,22 +84,35 @@ void LevelEditor::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::KeyPressed)
 		{
 			// key has been pressed
-			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			if(event.key.code == sf::Keyboard::Escape)
 			{
 				// escape has been pressed -> call Menu
 				m_starter->setGamestate(m_starter->Menu);
 			}
+			else if(event.key.code == sf::Keyboard::S)
+			{
+				if(m_selectedObject)
+					m_action = scale;
+			}
 		}
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
-			m_moveObject = NULL;
+			if(m_action == move) m_action = none;
+			if(m_action == scale) m_action = none;
 		}
 		m_uiRenderer->handleEvent(event);
 	}
 
-	if(m_moveObject)
+	if(m_action == move)
 	{
-		m_moveObject->setPosition(sf::Vector2f(m_moveObject->getPosition().x + mouseDelta.x / Starter::getScreenFactor(), m_moveObject->getPosition().y + mouseDelta.y / Starter::getScreenFactor()));
+		if(m_selectedObject)
+			m_selectedObject->setPosition(sf::Vector2f(m_selectedObject->getPosition().x + mouseDelta.x / Starter::getScreenFactor(), m_selectedObject->getPosition().y + mouseDelta.y / Starter::getScreenFactor()));
+	}
+	else if(m_action == scale)
+	{
+		if(m_selectedObject)
+			m_selectedObject->setScale(m_selectedObject->getScale() + (mouseDelta.x + mouseDelta.y) / 100.0f);
+	
 	}
 
 	m_renderWindow->draw(m_spriteBg);
@@ -154,5 +168,6 @@ void LevelEditor::createObject(string id, int layer)
 	levelObject->setRenderWindow(m_renderWindow);
 	levelObject->setPosition(sf::Vector2f(sf::Mouse::getPosition(*m_renderWindow).x / Starter::getScreenFactor(), sf::Mouse::getPosition(*m_renderWindow).y / Starter::getScreenFactor()));
 	m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + levelObject->getName() + "', '" + StringHelper::toString(levelObject->getObjectID()) + "', " + StringHelper::toString(layer) + ");"));
-	m_moveObject = levelObject;
+	m_selectedObject = levelObject;
+	m_action = move;
 }
