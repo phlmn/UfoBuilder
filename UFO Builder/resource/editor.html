@@ -32,12 +32,11 @@
 			
 			function showDialog(name) {
 				if(openDialog == name) return;
-				if(openDialog != "")
-					hideDialog();
+				if(openDialog != "") hideDialog();
 				var container = $("div.dialog." + name);
 				if(container.length == 0) return;
 				overlay(true);
-				container.addClass("visible");
+				container.fadeIn(300);
 				openDialog = name;
 			}
 			
@@ -46,7 +45,7 @@
 				var container = $("div.dialog." + openDialog);
 				if(container.length == 0) return;
 				overlay(false);
-				container.removeClass("visible");
+				container.fadeOut(300);
 				openDialog = "";
 			}
 			

@@ -225,19 +225,14 @@ input[type="radio"]:checked + label {
 	background: #fff;
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 	left: 50%;
-	top: 50%;
 	margin: -150px 0 0 -240px;
 	z-index: 11;
-	top: -50%;
+	top: 50%;
 	max-height: 80%;
-	-webkit-transition: top .5s;
 	padding: 20px;
 	overflow-x: hidden;
 	overflow-y: auto;
-}
-
-#editor .dialog.visible {
-	top: 50%;	
+	display: none;
 }
 
 #editor .dialog h1 {
