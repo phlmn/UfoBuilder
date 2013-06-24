@@ -126,7 +126,8 @@ void LevelEditor::tick(sf::Time elapsedTime)
 			if(m_action == opacity) m_action = none;
 			if(m_action == rotate) m_action = none;
 		}
-		m_uiRenderer->handleEvent(event);
+		if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+			m_uiRenderer->handleEvent(event);
 	}
 
 
@@ -153,7 +154,8 @@ void LevelEditor::tick(sf::Time elapsedTime)
 
 	m_renderWindow->draw(m_spriteBg);
 	m_level->tick(elapsedTime);
-	m_uiRenderer->render();
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+		m_uiRenderer->render();
 }
 
 void LevelEditor::resize()
