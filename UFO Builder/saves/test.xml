@@ -1,4 +1,15 @@
 <level id="" name="test">
-    <object id="hill1_blurred" x="834.375" y="641.25" layer="0" opacity="1" angle="0"/>
-    <object id="hill2_blurred" x="1657.5" y="633.75" layer="0" opacity="1" angle="0"/>
+    <object id="test" x="943.125" y="571.875" layer="0" opacity="1" angle="1.575"/>
+    <object id="tree_small" x="1464.37" y="622.5" layer="0" opacity="1" angle="0"/>
+    <object id="hill4_blurred" x="986.25" y="980.625" layer="0" opacity="1" angle="0"/>
+    <object id="cloud_big" x="1155" y="187.5" layer="0" opacity="1" angle="0"/>
+    <object id="tree_small" x="510.282" y="690.04" layer="0" opacity="1" angle="0"/>
+    <object id="tree_small" x="1168.43" y="550.872" layer="0" opacity="1" angle="0"/>
+    <object id="tree_big" x="690.04" y="524.779" layer="0" opacity="1" angle="0"/>
+    <object id="hill4_blurred" x="-66.6846" y="1014.76" layer="0" opacity="1" angle="0"/>
+    <object id="hill2_blurred" x="1454.01" y="843.705" layer="0" opacity="1" angle="0"/>
+    <object id="tree_medium" x="1838.17" y="649.449" layer="0" opacity="1" angle="0"/>
+    <object id="tree_small" x="1613.48" y="761.073" layer="0" opacity="1" angle="0"/>
+    <object id="tree_small" x="323.275" y="750.927" layer="0" opacity="1" angle="0"/>
+    <object id="tree_big" x="149.316" y="574.067" layer="0" opacity="1" angle="0"/>
 </level>

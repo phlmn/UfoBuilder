@@ -1,0 +1,4 @@
+<object id="hill4_blurred" name="Hill 4 blured" category="Hills" image="hill4_blurred.png">
+	<physics type="none">
+	</physics>
+</object>
