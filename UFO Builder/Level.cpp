@@ -79,7 +79,7 @@ bool Level::save(std::string filename)
 		// create object node
 		XMLElement* objectNode = doc.NewElement("object");
 
-		objectNode->SetAttribute("id", (*pos)->getObjectID());
+		objectNode->SetAttribute("id", (*pos)->getObjectType().c_str());
 		objectNode->SetAttribute("x", (*pos)->getPosition().x);
 		objectNode->SetAttribute("y", (*pos)->getPosition().y);
 		objectNode->SetAttribute("layer", (*pos)->getLayer());
