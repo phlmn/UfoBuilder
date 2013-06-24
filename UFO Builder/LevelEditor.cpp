@@ -94,25 +94,60 @@ void LevelEditor::tick(sf::Time elapsedTime)
 				if(m_selectedObject)
 					m_action = scale;
 			}
+			else if(event.key.code == sf::Keyboard::O)
+			{
+				if(m_selectedObject)
+					m_action = opacity;
+			}
+			else if(event.key.code == sf::Keyboard::M)
+			{
+				if(m_selectedObject)
+					m_action = move;
+			}
+			else if(event.key.code == sf::Keyboard::R)
+			{
+				if(m_selectedObject)
+					m_action = rotate;
+			}
+			else if(event.key.code == sf::Keyboard::BackSpace || event.key.code == sf::Keyboard::Delete)
+			{
+				if(m_selectedObject)
+				{
+					m_level->removeObject(m_selectedObject);
+					m_uiRenderer->executeJavascript(ToWebString(string("") + "removeObject(" + StringHelper::toString(m_selectedObject->getObjectID()) + ");")); 
+				}
+			}
 		}
 		else if(event.type == sf::Event::MouseButtonPressed)
 		{
 			if(m_action == move) m_action = none;
 			if(m_action == scale) m_action = none;
+			if(m_action == opacity) m_action = none;
+			if(m_action == rotate) m_action = none;
 		}
 		m_uiRenderer->handleEvent(event);
 	}
 
-	if(m_action == move)
+
+	if(m_selectedObject)
 	{
-		if(m_selectedObject)
+		if(m_action == move)
+		{
 			m_selectedObject->setPosition(sf::Vector2f(m_selectedObject->getPosition().x + mouseDelta.x / Starter::getScreenFactor(), m_selectedObject->getPosition().y + mouseDelta.y / Starter::getScreenFactor()));
-	}
-	else if(m_action == scale)
-	{
-		if(m_selectedObject)
-			m_selectedObject->setScale(m_selectedObject->getScale() + (mouseDelta.x + mouseDelta.y) / 100.0f);
+		}
+		else if(m_action == scale)
+		{
+			m_selectedObject->setScale(m_selectedObject->getScale() + (mouseDelta.x - mouseDelta.y) / 100.0f);
 	
+		}
+		else if(m_action == opacity)
+		{
+			m_selectedObject->setOpacity(m_selectedObject->getOpacity() + (mouseDelta.x - mouseDelta.y) / 200.0f);
+		}
+		else if(m_action == rotate)
+		{
+			m_selectedObject->setAngle(m_selectedObject->getAngle() + (mouseDelta.x - mouseDelta.y) / 200.0f);
+		}
 	}
 
 	m_renderWindow->draw(m_spriteBg);

@@ -24,7 +24,9 @@ private:
 	{
 		none,
 		move,
-		scale
+		scale,
+		opacity,
+		rotate
 	};
 	Starter* m_starter;
 

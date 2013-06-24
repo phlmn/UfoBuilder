@@ -165,6 +165,7 @@ float LevelObject::getScale()
 
 void LevelObject::setOpacity(float opacity)
 {
+	if(m_sprite) m_sprite->setColor(sf::Color(0xff, 0xff, 0xff, 0xff * opacity));
 	m_opacity = opacity;
 }
 
