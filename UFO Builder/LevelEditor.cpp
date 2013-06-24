@@ -27,6 +27,7 @@ LevelEditor::LevelEditor()
 
 	// register js methods
 	m_uiRenderer->registerMethod("newLevel", false);
+	m_uiRenderer->registerMethod("save", false);
 	m_uiRenderer->registerMethod("createObject", false);
 	m_uiRenderer->registerMethod("objectSelected", false);
 
@@ -170,6 +171,10 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 	if(method_name == WSLit("newLevel"))
 	{
 		
+	}
+	else if(method_name == WSLit("save"))
+	{
+		m_level->save("test");
 	}
 	else if(method_name == WSLit("createObject"))
 	{

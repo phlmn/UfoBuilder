@@ -62,7 +62,41 @@ std::list<LevelObject*>* Level::getObjects()
 
 bool Level::save(std::string filename)
 {
-	return false;
+	XMLDocument doc;
+
+	// create level node
+	XMLElement* levelNode = doc.NewElement("level");
+	if(levelNode == NULL)
+		return false;
+
+	// set attributes
+	levelNode->SetAttribute("id", m_levelID.c_str());
+	levelNode->SetAttribute("name", filename.c_str());
+
+	list<LevelObject*>::iterator pos = m_objects.begin();
+	while(pos != m_objects.end())
+	{
+		// create object node
+		XMLElement* objectNode = doc.NewElement("object");
+
+		objectNode->SetAttribute("id", (*pos)->getObjectID());
+		objectNode->SetAttribute("x", (*pos)->getPosition().x);
+		objectNode->SetAttribute("y", (*pos)->getPosition().y);
+		objectNode->SetAttribute("layer", (*pos)->getLayer());
+		objectNode->SetAttribute("opacity", (*pos)->getOpacity());
+		objectNode->SetAttribute("angle", (*pos)->getAngle());
+
+		levelNode->InsertEndChild(objectNode);
+
+		pos++;
+	}
+
+	doc.InsertEndChild(levelNode);
+
+	if(doc.SaveFile(("saves\\" + filename + ".xml").c_str()) != XML_SUCCESS)
+		return false;
+
+	return true;
 }
 
 bool Level::load(std::string levelID)
@@ -85,10 +119,6 @@ bool Level::load(std::string levelID)
 	if(levelNode->Attribute("id") == NULL)
 		return false;
 	m_levelID = levelNode->Attribute("id");
-
-	if(levelNode->Attribute("bg") == NULL)
-		return false;
-	m_bg = levelNode->Attribute("bg");
 
 	XMLElement* objectNode = levelNode->FirstChildElement("object");
 

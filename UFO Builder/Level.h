@@ -18,7 +18,6 @@ private:
 	sf::RenderWindow* m_renderWindow;
 
 	std::string m_levelID;
-	std::string m_bg;
 
 	Ufo* m_ufo;
 
