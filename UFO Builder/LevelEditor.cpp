@@ -174,7 +174,7 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 	}
 	else if(method_name == WSLit("save"))
 	{
-		m_level->save("test");
+		m_level->save(ToString(args.At(0).ToString()));
 	}
 	else if(method_name == WSLit("createObject"))
 	{

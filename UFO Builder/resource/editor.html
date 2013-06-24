@@ -49,6 +49,10 @@
 				openDialog = "";
 			}
 			
+			function setFocus(id) {
+				$(id).focus();
+			}
+			
 			function appendObject(name, id, layer) {
 				var entry = $(".object-list li.object_" + id);
 				if(entry.length != 0) entry.remove();
@@ -146,7 +150,7 @@
                     <ul>
                     	<li><a href="javascript: App.newLevel();">New Level</a></li>
                         <li><a href="#">Open...</a></li>
-                   		<li><a href="javascript: App.save();">Save</a></li>
+                   		<li><a href="javascript: showDialog('save'); setFocus('#save-file')">Save</a></li>
                         <li><a href="#">Save as...</a></li>                        
                     </ul>
                 </li>     
@@ -211,6 +215,14 @@
             <h1>Physics</h1>
             <div class="buttons">
                 <a href="#" class="button">Save</a>
+                <a href="javascript: hideDialog();" class="button">Cancel</a>
+            </div>
+        </div>
+        <div class="dialog save v-center">
+        	<h1>Save Level</h1>
+            <div class="buttons">
+            	<input id="i" type="text" />
+            	<a href="javascript: App.save('testname'); javascript: hideDialog();" class="button">Save</a>
                 <a href="javascript: hideDialog();" class="button">Cancel</a>
             </div>
         </div>
