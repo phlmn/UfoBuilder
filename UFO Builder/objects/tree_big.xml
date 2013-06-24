@@ -1,0 +1,4 @@
+<object id="tree1" name="Big tree" category="Tree" image="tree_big.png">
+	<physics type="none">
+	</physics>
+</object>

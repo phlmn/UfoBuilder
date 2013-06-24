@@ -13,7 +13,6 @@ class Ufo;
 class Level
 {
 private:
-	sf::Sprite m_spriteBackground;
 	std::list<LevelObject*> m_objects;
 
 	sf::RenderWindow* m_renderWindow;

@@ -17,7 +17,7 @@ private:
 	sf::RenderWindow* m_renderWindow; // wrapper for sf::Window, allows easy 2D rendering
 	
 	// drawable representation of a texture -> allows to easily display a texture on a render target
-	sf::Sprite m_spriteBody;
+	sf::Sprite* m_spriteBody;
 
 	sf::Vector2i m_mousePosition;
 	sf::Vector2i m_lastClick;
@@ -29,7 +29,7 @@ private:
 
 	float m_sensitivity;
 
-	bool isSelected(const sf::Sprite object);
+	bool isSelected(const sf::Sprite* object);
 public:
 	Ufo(sf::RenderWindow* window);
 	~Ufo();

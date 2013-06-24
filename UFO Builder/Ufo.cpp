@@ -19,11 +19,12 @@ Ufo::Ufo(sf::RenderWindow* window)
 	m_sensitivity = 5.0f;
 
 	// load images
+	m_spriteBody = new sf::Sprite();
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile("images/body1.png");
 	texture->setSmooth(true);
-	m_spriteBody.setTexture(*texture);
-	m_spriteBody.setOrigin(m_spriteBody.getTexture()->getSize().x / 2.0f, m_spriteBody.getTexture()->getSize().y / 2.0f);
+	m_spriteBody->setTexture(*texture);
+	m_spriteBody->setOrigin(m_spriteBody->getTexture()->getSize().x / 2.0f, m_spriteBody->getTexture()->getSize().y / 2.0f);
 
 	// create physical bodies
 	b2BodyDef* def = new b2BodyDef();
@@ -83,7 +84,7 @@ void Ufo::tick(sf::Time elapsedTime)
 			{
 				// left mouse button has been clicked
 				m_lastClick = sf::Mouse::getPosition(*m_renderWindow);
-				m_difference = sf::Vector2i(m_lastClick.x - (int)m_spriteBody.getPosition().x, m_lastClick.y - (int)m_spriteBody.getPosition().y);
+				m_difference = sf::Vector2i(m_lastClick.x - (int)m_spriteBody->getPosition().x, m_lastClick.y - (int)m_spriteBody->getPosition().y);
 
 				if(isSelected(m_spriteBody))
 					m_mouseIsPressed = true;
@@ -100,14 +101,14 @@ void Ufo::tick(sf::Time elapsedTime)
 	if(m_mouseIsPressed)
 	{
 		// Mouse control
-		m_spriteBody.setPosition((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y));
+		m_spriteBody->setPosition((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y));
 		m_bodyTest->SetTransform(b2Vec2((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y)), m_bodyTest->GetAngle());
 	}
 	else
 	{
 		// draw testobject
 		//m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);
-		m_spriteBody.setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
+		m_spriteBody->setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
 	}
 
 	// Key control
@@ -152,11 +153,14 @@ void Ufo::tick(sf::Time elapsedTime)
 	}
 
 	m_bodyTest->SetTransform(b2Vec2(m_bodyTest->GetPosition().x - (float)m_direcction / m_sensitivity, m_bodyTest->GetPosition().y - (float)m_acceleration / m_sensitivity), m_bodyTest->GetAngle());
+
+	if(m_spriteBody)
+		m_renderWindow->draw(*m_spriteBody);
 }
 
 void Ufo::resize(float scale)
 {
-	m_spriteBody.setScale(scale, scale);
+	m_spriteBody->setScale(scale, scale);
 }
 
 void addPart()
@@ -179,12 +183,12 @@ sf::Vector2i Ufo::getLastClick()
 }
 
 
-bool Ufo::isSelected(const sf::Sprite object)
+bool Ufo::isSelected(const sf::Sprite* object)
 {
-	if(m_lastClick.x >= object.getPosition().x - object.getTexture()->getSize().x / 4)
-		if(m_lastClick.x <= object.getPosition().x + object.getTexture()->getSize().x / 4)
-			if(m_lastClick.y >= object.getPosition().y - object.getTexture()->getSize().y / 4)
-				if(m_lastClick.y <= object.getPosition().y + object.getTexture()->getSize().y / 4)
+	if(m_lastClick.x >= object->getPosition().x - object->getTexture()->getSize().x / 4)
+		if(m_lastClick.x <= object->getPosition().x + object->getTexture()->getSize().x / 4)
+			if(m_lastClick.y >= object->getPosition().y - object->getTexture()->getSize().y / 4)
+				if(m_lastClick.y <= object->getPosition().y + object->getTexture()->getSize().y / 4)
 					return true;
 	return false;
 }
