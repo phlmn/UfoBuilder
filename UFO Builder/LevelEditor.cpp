@@ -7,11 +7,10 @@
 using namespace std;
 using namespace Awesomium;
 
-LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
+LevelEditor::LevelEditor()
 {
-	m_starter = starter;
-	m_renderWindow = window;
-	m_level = new Level(window);
+	m_renderWindow = Starter::getRenderWindow();
+	m_level = new Level(m_renderWindow);
 	m_lastObjectID = 0;
 	m_selectedObject = NULL;
 	m_action = none;
@@ -20,9 +19,10 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	sf::Texture* texture;
 	texture = new sf::Texture();
 	texture->loadFromFile("images/bg_editor.png");
+	texture->setRepeated(true);
 	m_spriteBg.setTexture(*texture);
 
-	m_uiRenderer = new UiRenderer(starter->getWebCore(), starter->getWebSession(), window, (sf::Vector2i)starter->getScreenSize(), "asset://res/editor.html");
+	m_uiRenderer = new UiRenderer(Starter::getWebCore(), Starter::getWebSession(), m_renderWindow, (sf::Vector2i)Starter::getScreenSize(), "asset://res/editor.html");
 	m_uiRenderer->setJSMethodHandler(this);
 
 	// register js methods
@@ -78,8 +78,8 @@ void LevelEditor::tick(sf::Time elapsedTime)
 		else if(event.type == sf::Event::Resized)
 		{
 			// the windows has been resized
-			m_starter->resize(event.size.width, event.size.height);
-			m_uiRenderer->resize((sf::Vector2i)m_starter->getScreenSize());
+			Starter::resize(event.size.width, event.size.height);
+			m_uiRenderer->resize((sf::Vector2i)Starter::getScreenSize());
 			resize();
 		}
 		else if(event.type == sf::Event::KeyPressed)
@@ -88,7 +88,7 @@ void LevelEditor::tick(sf::Time elapsedTime)
 			if(event.key.code == sf::Keyboard::Escape)
 			{
 				// escape has been pressed -> call Menu
-				m_starter->setGamestate(m_starter->Menu);
+				Starter::setGamestate(Starter::Menu);
 			}
 			else if(event.key.code == sf::Keyboard::S)
 			{
@@ -160,7 +160,7 @@ void LevelEditor::tick(sf::Time elapsedTime)
 
 void LevelEditor::resize()
 {
-	float scale = m_starter->getScreenFactor();
+	float scale = Starter::getScreenFactor();
 
 	m_spriteBg.setScale(3.2f * scale, 3.2f * scale);
 }

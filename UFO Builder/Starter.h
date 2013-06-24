@@ -31,11 +31,11 @@ private:
 	Game* m_game;
 	LevelEditor* m_editor;
 
-	static float screenFactor;
+	static float m_screenFactor;
 
 	sf::Clock m_clock; // measures the elapsed time
 	sf::Window* m_window; // window that serves a target for OpenGL rendering
-	sf::RenderWindow* m_renderWindow; // wrapper for sf::Window, allows easy 2D rendering
+	static sf::RenderWindow* m_renderWindow; // wrapper for sf::Window, allows easy 2D rendering
 
 	// drawable representation of a texture -> allows to easily display a texture on a render target
 	sf::Sprite m_spriteBg;
@@ -44,10 +44,10 @@ private:
 	sf::Font m_fontSegoe;
 	sf::Font m_fontSegoeBold;
 
-	Gamestate m_gamestate;
+	static Gamestate m_gamestate;
 
-	Awesomium::WebCore* m_webCore; // manages the lifetime of all WebViews, resource and network connections
-	Awesomium::WebSession* m_webSession; // storing all user-generated data (cookies, cache)
+	static Awesomium::WebCore* m_webCore; // manages the lifetime of all WebViews, resource and network connections
+	static Awesomium::WebSession* m_webSession; // storing all user-generated data (cookies, cache)
 	UiRenderer* m_uiRenderer;
 
 	virtual void OnMethodCall(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args); // react on js-method-calls
@@ -63,15 +63,17 @@ public:
 	static const float RAD_TO_DEG;
 	static const float PI;
 
-	Awesomium::WebCore* getWebCore(); 
-	Awesomium::WebSession* getWebSession(); 
-	sf::Vector2f getScreenSize(); // manipulating 2 dimensional vectors (x, y)
+	static Awesomium::WebCore* getWebCore(); 
+	static Awesomium::WebSession* getWebSession(); 
+	static sf::Vector2f getScreenSize(); // manipulating 2 dimensional vectors (x, y)
 
 	static float getScreenFactor(); // scale size (factor to Full HD)
 
-	void setGamestate(Gamestate state);
+	static void setGamestate(Gamestate state);
 	void showText(std::string value, int size, float x, float y, bool shadow);
 
-	void resize(int width, int height);
-	void toggleFullscreen();
+	static void resize(int width, int height);
+	static void toggleFullscreen();
+
+	static sf::RenderWindow* getRenderWindow();
 };

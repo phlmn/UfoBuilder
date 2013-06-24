@@ -28,7 +28,6 @@ private:
 		opacity,
 		rotate
 	};
-	Starter* m_starter;
 
 	sf::RenderWindow* m_renderWindow;
 	sf::Sprite m_spriteBg;
@@ -52,7 +51,7 @@ private:
 	Awesomium::JSValue OnMethodCallWithReturnValue(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args);
 
 public:
-	LevelEditor(Starter* starter, sf::RenderWindow* window);
+	LevelEditor();
 	~LevelEditor();
 
 	void tick(sf::Time elapsedTime);

@@ -10,7 +10,12 @@ using namespace Awesomium;
 const float Starter::PI = 3.14159265359f;
 const float Starter::DEG_TO_RAD = 0.0174532925f;
 const float Starter::RAD_TO_DEG = 57.2957795f;
-float Starter::screenFactor = 1;
+
+float Starter::m_screenFactor = 1;
+sf::RenderWindow* Starter::m_renderWindow = NULL;
+Starter::Gamestate Starter::m_gamestate = Menu;
+Awesomium::WebCore* Starter::m_webCore = NULL;
+Awesomium::WebSession* Starter::m_webSession = NULL;
 
 Starter::Starter()
 {
@@ -41,10 +46,10 @@ void Starter::run()
 bool Starter::init()
 {	
 	// create window to render
-	m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 576, 32), "UFO Builder");
-	m_renderWindow->setFramerateLimit(60);
+	Starter::m_renderWindow = new sf::RenderWindow(sf::VideoMode(1024, 576, 32), "UFO Builder");
+	Starter::m_renderWindow->setFramerateLimit(60);
 
-	Starter::screenFactor = m_renderWindow->getSize().x / 1920.0f; // aspect ratio from window
+	Starter::m_screenFactor = m_renderWindow->getSize().x / 1920.0f;
 
 	// load fonts
 	m_fontSegoe.loadFromFile("fonts/segoeui.ttf");
@@ -79,9 +84,6 @@ bool Starter::init()
 
 	// register a handler for custom js-object methods
 	m_uiRenderer->setJSMethodHandler(this);
-	
-	// set the gamestate to menu
-	m_gamestate = Starter::Menu;
 
 	return true;
 }
@@ -92,10 +94,10 @@ void Starter::tick()
 	sf::Time elapsedTime = m_clock.restart();
 	float fps = 1000000.0f / elapsedTime.asMicroseconds();
 
-	m_renderWindow->clear(sf::Color(0x0, 0x0, 0x0)); // clear the entire target with a single color
+	Starter::m_renderWindow->clear(sf::Color(0x0, 0x0, 0x0)); // clear the entire target with a single color
 
 	// update webcore
-	m_webCore->Update();
+	Starter::m_webCore->Update();
 
 	if(m_gamestate == Starter::Menu)
 	{
@@ -106,17 +108,17 @@ void Starter::tick()
 			if (event.type == sf::Event::Closed)
 			{
 				// the close button was clicked
-				m_renderWindow->close();
+				Starter::m_renderWindow->close();
 			}
 			else if(event.type == sf::Event::Resized)
 			{
 				// the windows has been resized
 				resize(event.size.width, event.size.height);
-				m_uiRenderer->resize(event.size.width, event.size.height);				
+				Starter::m_uiRenderer->resize(event.size.width, event.size.height);				
 			}
-			m_uiRenderer->handleEvent(event);
+			Starter::m_uiRenderer->handleEvent(event);
 		}
-		m_renderWindow->draw(m_spriteBg);
+		Starter::m_renderWindow->draw(m_spriteBg);
 		m_uiRenderer->render();
 	}
 	else if(m_gamestate == Starter::Ingame)
@@ -144,7 +146,7 @@ void Starter::tick()
 	}
 
 	// render the whole scene
-	m_renderWindow->display();
+	Starter::m_renderWindow->display();
 }
 
 void Starter::cleanup()
@@ -164,20 +166,20 @@ void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const
 			m_game = new Game(this, m_renderWindow);
 		}
 
-		m_gamestate = Starter::Ingame;
+		Starter::m_gamestate = Starter::Ingame;
 	}
 	else if(method_name == WSLit("startEditor"))
 	{
 		if(m_editor == NULL)
 		{
-			m_editor = new LevelEditor(this, m_renderWindow);
+			m_editor = new LevelEditor();
 		}
 
-		m_gamestate = Starter::Editor;
+		Starter::m_gamestate = Starter::Editor;
 	}
 	else if(method_name == WSLit("exit"))
 	{
-		m_renderWindow->close();
+		Starter::m_renderWindow->close();
 	}
 }
 
@@ -197,32 +199,32 @@ void Starter::showText(std::string value, int size, float x, float y, bool shado
 	{
 		text.setColor(sf::Color(0x0, 0x0, 0x0, 0x55));
 		text.setPosition(x + 1, y + 1);
-		m_renderWindow->draw(text);
+		Starter::m_renderWindow->draw(text);
 	}
 
 	text.setColor(sf::Color(0xff, 0xff, 0xff, 0xff));
 	text.setPosition(x, y);
-	m_renderWindow->draw(text);
+	Starter::m_renderWindow->draw(text);
 }
 
 void Starter::setGamestate(Gamestate state)
 {
-	m_gamestate = state;
+	Starter::m_gamestate = state;
 }
 
 WebCore* Starter::getWebCore()
 {
-	return m_webCore;
+	return Starter::m_webCore;
 }
 
 WebSession* Starter::getWebSession()
 {
-	return m_webSession;
+	return Starter::m_webSession;
 }
 
 float Starter::getScreenFactor()
 {
-	return Starter::screenFactor;
+	return Starter::m_screenFactor;
 }
 
 void Starter::resize(int width, int height)
@@ -249,17 +251,22 @@ void Starter::resize(int width, int height)
 		realHeight = (float)height;
 	}
 
-	Starter::screenFactor = realWidth / 1920.0f;
+	Starter::m_screenFactor = realWidth / 1920.0f;
 	// "2D camera", defines what region is shown on screen (scroll, rotate, zoom without altering the way objects are drawn
 	sf::View view = sf::View(sf::Vector2f(realWidth / 2.0f, realHeight / 2.0f), sf::Vector2f(realWidth, realHeight));
 	// set the target viewport.
 	// the viewprt is the rectangle into which the contents of the view are dislayed (witch factor beetween 0 - 1)
 	view.setViewport(sf::FloatRect((width - realWidth) / width / 2.0f, (height - realHeight) / height / 2.0f, realWidth / width, realHeight / height));
 
-	m_renderWindow->setView(view);
+	Starter::m_renderWindow->setView(view);
 }
 
 sf::Vector2f Starter::getScreenSize()
 {
-	return m_renderWindow->getView().getSize();
+	return Starter::m_renderWindow->getView().getSize();
+}
+
+sf::RenderWindow* Starter::getRenderWindow()
+{
+	return Starter::m_renderWindow;
 }
