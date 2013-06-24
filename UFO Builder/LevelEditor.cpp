@@ -28,6 +28,7 @@ LevelEditor::LevelEditor(Starter* starter, sf::RenderWindow* window)
 	// register js methods
 	m_uiRenderer->registerMethod("newLevel", false);
 	m_uiRenderer->registerMethod("createObject", false);
+	m_uiRenderer->registerMethod("objectSelected", false);
 
 	m_catalogObjects.clear();
 	
@@ -173,6 +174,23 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 		if(args.size() == 2)
 		{
 			createObject(ToString(args.At(0).ToString()), args.At(1).ToInteger());
+		}
+	}
+	else if(method_name == WSLit("objectSelected"))
+	{
+		if(args.size() == 1)
+		{
+			int id = args.At(0).ToInteger();
+			list<LevelObject*>::iterator pos = m_level->getObjects()->begin();
+			while(pos != m_level->getObjects()->end())
+			{
+				if((*pos)->getObjectID() == id)
+				{
+					m_selectedObject = (*pos);
+					break;
+				}
+				pos++;
+			}
 		}
 	}
 }
