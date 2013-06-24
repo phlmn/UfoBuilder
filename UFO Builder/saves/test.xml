@@ -1,4 +1,5 @@
 <level id="" name="test">
-    <object id="hill1_blurred" x="834.375" y="641.25" layer="0" opacity="1" angle="0"/>
-    <object id="hill2_blurred" x="1657.5" y="633.75" layer="0" opacity="1" angle="0"/>
+    <object id="hill3_blurred" x="1515" y="763.125" layer="0" opacity="1" angle="0"/>
+    <object id="hill1_blurred" x="326.25" y="671.25" layer="0" opacity="1" angle="0"/>
+    <object id="tree_medium" x="1516.87" y="333.75" layer="0" opacity="1" angle="0"/>
 </level>

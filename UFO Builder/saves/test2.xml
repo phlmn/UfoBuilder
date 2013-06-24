@@ -1,8 +1,0 @@
-<level id="" name="test">
-    <object id="hill3_blurred" x="975" y="881.25" layer="0" opacity="1" angle="0"/>
-    <object id="hill2_blurred" x="1166.25" y="611.25" layer="0" opacity="1" angle="0"/>
-    <object id="tree_medium" x="986.25" y="423.75" layer="0" opacity="1" angle="0"/>
-    <object id="tree_small" x="1623.75" y="397.5" layer="0" opacity="1" angle="0"/>
-    <object id="cloud_big" x="517.5" y="189.375" layer="0" opacity="1" angle="0"/>
-    <object id="tree_small" x="547.5" y="648.75" layer="0" opacity="1" angle="0"/>
-</level>
