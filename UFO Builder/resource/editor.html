@@ -114,7 +114,7 @@
 			}
 			
 			function addCategory(cat) {
-				if($(".object-browser .categories .cat_" + cat).lengt > 0) return;
+				if($(".object-browser .categories .cat_" + cat).length > 0) return;
 				var newCat = $("<li class='cat_" + cat + "'>" + cat + "</li>");
 				newCat.click(function(e) {
 					filter(cat);
