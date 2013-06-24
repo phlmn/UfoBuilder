@@ -153,10 +153,6 @@ input[type="radio"]:checked + label {
 	z-index: 2;
 }
 
-#editor .menubar:hover {
-	z-index: 21;
-}
-
 #editor .menubar .left {
 	float: left;	
 }
@@ -218,10 +214,6 @@ input[type="radio"]:checked + label {
 #editor .menubar a:hover {
 	background: #3db2e8;
 	color: #fff;
-}
-
-#editor .menubar ul {
-	z-index: 22;
 }
 
 
@@ -361,7 +353,7 @@ input[type="radio"]:checked + label {
 }
 
 #editor > .objects .object-list .placeholder {
-	border-top: 2px dashed 	3db2e8;
+	border-top: 2px dashed #3db2e8;
 }
 
 #editor > .objects li a:hover {
@@ -370,7 +362,7 @@ input[type="radio"]:checked + label {
 
 #editor > .objects li a:active {
 	background: #fff;
-	box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 	opacity: 0.9;
 }
 
@@ -437,10 +429,10 @@ input[type="radio"]:checked + label {
 	margin: 8px;
 	height: 100px;
 	width: 100px;
-	background: -webkit-linear-gradient(#f8f8f8,#f2f2f2);
+	background: -webkit-linear-gradient(#f8f8f8, #f2f2f2);
 	border-radius: 6px;
 	border: 1px solid #eee;
-	box-shadow: 0px 1px 0px rgba(0,0,0,0.1);
+	box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
 	position: relative;
 }
 
@@ -449,10 +441,10 @@ input[type="radio"]:checked + label {
 	margin: 8px;
 	height: 100px;
 	width: 100px;
-	background: -webkit-linear-gradient(#fafafa,#f5f5f5);
+	background: -webkit-linear-gradient(#fafafa, #f5f5f5);
 	border-radius: 6px;
 	border: 1px solid #eee;
-	box-shadow: 0px 1px 0px rgba(0,0,0,0.1);
+	box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
 	position: relative;
 }
 
