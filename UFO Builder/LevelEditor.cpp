@@ -177,6 +177,10 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 	{
 		m_level->save("test");
 	}
+	else if(method_name == WSLit("load"))
+	{
+		m_level->load("test");
+	}
 	else if(method_name == WSLit("layerSort"))
 	{
 		if(args.size() == 3)
@@ -197,7 +201,7 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 			if(object)
 			{
 				int layer = args.At(1).ToInteger();
-				int pos = args.At(2).ToInteger();
+				int index = args.At(2).ToInteger();
 				m_level->removeObject(object);
 				object->setLayer(layer);
 				m_level->addObject(object, args.At(1).ToInteger(), args.At(2).ToInteger());

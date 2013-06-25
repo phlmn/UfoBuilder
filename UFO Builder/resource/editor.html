@@ -20,7 +20,7 @@
 			    $(".object-list ul").sortable({
 			        placeholder: 'placeholder',
 			        connectWith: '.object-list ul',
-			        update: function (event, ui) {
+			        stop: function (event, ui) {
 			            var layer = 0;
 
                         if (ui.item.parent().hasClass('layer_0')) layer = 0;
@@ -35,7 +35,7 @@
                         else if (ui.item.parent().hasClass('layer_9')) layer = 9;
                         else layer = 10;
 
-			            App.layerSort(ui.item.data('id'), layer, ui.item.index);
+			            App.layerSort(ui.item.data('id'), layer, ui.item.index());
 			        }
 			    });
 			});
