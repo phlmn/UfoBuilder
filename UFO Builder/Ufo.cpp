@@ -96,63 +96,27 @@ void Ufo::tick(sf::Time elapsedTime)
 			m_mouseIsPressed = false;
 		}
 	}
-	#pragma endregion
-
-	if(m_mouseIsPressed)
-	{
-		// Mouse control
-		m_spriteBody->setPosition((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y));
-		m_bodyTest->SetTransform(b2Vec2((float)(m_mousePosition.x - m_difference.x), (float)(m_mousePosition.y - m_difference.y)), m_bodyTest->GetAngle());
-	}
-	else
-	{
-		// draw testobject
-		//m_spriteBody.setRotation(m_bodyTest->GetAngle() * Starter::RAD_TO_DEG);
-		m_spriteBody->setPosition(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y);
-	}
+	#pragma endregion	
 
 	// Key control
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		m_acceleration += 2;
+		m_bodyTest->ApplyForce(b2Vec2(0, 2), b2Vec2(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y));
 	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		m_acceleration -= 2;
+		m_bodyTest->ApplyForce(b2Vec2(0, -2), b2Vec2(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y));
 	}
-	else
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if(m_acceleration > 0)
-		{
-			m_acceleration--;
-		}
-		else if(m_acceleration < 0)
-		{
-			m_acceleration++;
-		}
+		m_bodyTest->ApplyForce(b2Vec2(2, 0), b2Vec2(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y));
 	}
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_direcction += 2;
+		m_bodyTest->ApplyForce(b2Vec2(-2, 0), b2Vec2(m_bodyTest->GetPosition().x, m_bodyTest->GetPosition().y));
 	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		m_direcction -= 2;
-	}
-	else
-	{
-		if(m_direcction > 0)
-		{
-			m_direcction--;
-		}
-		else if(m_direcction < 0)
-		{
-			m_direcction++;
-		}
-	}
-
-	m_bodyTest->SetTransform(b2Vec2(m_bodyTest->GetPosition().x - (float)m_direcction / m_sensitivity, m_bodyTest->GetPosition().y - (float)m_acceleration / m_sensitivity), m_bodyTest->GetAngle());
+	
+	m_spriteBody->setPosition(m_bodyTest->GetPosition().x * 64.0f, m_bodyTest->GetPosition().y * 64.0f);
 
 	if(m_spriteBody)
 		m_renderWindow->draw(*m_spriteBody);

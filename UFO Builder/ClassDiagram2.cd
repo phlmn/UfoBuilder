@@ -9,12 +9,11 @@
   </Class>
   <Class Name="Game">
     <Position X="3.5" Y="5" Width="1.5" />
-    <AssociationLine Name="m_renderWindow" Type="sf::RenderWindow" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="m_ufoEditor" Type="UfoEditor" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.5" Y="6.032" />
-        <Point X="3.125" Y="6.032" />
-        <Point X="3.125" Y="1.687" />
-        <Point X="2" Y="1.687" />
+        <Point X="4" Y="7.065" />
+        <Point X="4" Y="8.898" />
+        <Point X="6.75" Y="8.898" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="m_level" Type="Level" FixedFromPoint="true" FixedToPoint="true">
@@ -27,11 +26,12 @@
         <Point X="10.25" Y="1.312" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="m_ufoEditor" Type="UfoEditor" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="m_renderWindow" Type="sf::RenderWindow" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="4" Y="7.065" />
-        <Point X="4" Y="8.898" />
-        <Point X="6.75" Y="8.898" />
+        <Point X="3.5" Y="6.032" />
+        <Point X="3.125" Y="6.032" />
+        <Point X="3.125" Y="1.687" />
+        <Point X="2" Y="1.687" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -39,76 +39,51 @@
       <FileName>Game.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_renderWindow" />
-      <Field Name="m_level" />
       <Field Name="m_starter" />
       <Field Name="m_ufoEditor" />
+      <Field Name="m_level" />
+      <Field Name="m_renderWindow" />
     </ShowAsAssociation>
   </Class>
   <Class Name="LevelObject" Collapsed="true">
     <Position X="14.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EABAJFAWBCAAECAAIIACCBAyAAAwQERDAQAEggQAQAA=</HashCode>
+      <HashCode>EABAJFAWBCAAMCAAIMACCBQyAAAwQERDAQAEggQAQAA=</HashCode>
       <FileName>LevelObject.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Level">
     <Position X="10.25" Y="0.5" Width="1.5" />
-    <AssociationLine Name="m_ufo" Type="Ufo" FixedFromPoint="true">
-      <Path>
-        <Point X="11.75" Y="2.062" />
-        <Point X="12.75" Y="2.062" />
-      </Path>
-    </AssociationLine>
     <AssociationLine Name="m_renderWindow" Type="sf::RenderWindow" FixedFromPoint="true">
       <Path>
         <Point X="10.25" Y="0.687" />
         <Point X="2" Y="0.687" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="m_ufo" Type="Ufo" FixedFromPoint="true">
+      <Path>
+        <Point X="11.75" Y="2.062" />
+        <Point X="12.75" Y="2.062" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AADAAgEKAICAAAAgAAAEACAAAAQggAChAAIAAAAAIAA=</HashCode>
+      <HashCode>AADAAAEKAICAIAAEAAAEACAAAAQAAAChAAIAAAAAAAA=</HashCode>
       <FileName>Level.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_ufo" />
       <Field Name="m_renderWindow" />
+      <Field Name="m_ufo" />
     </ShowAsAssociation>
   </Class>
   <Class Name="LevelEditor">
     <Position X="6.75" Y="3" Width="1.5" />
-    <AssociationLine Name="m_level" Type="Level" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.875" Y="3" />
-        <Point X="7.875" Y="2.062" />
-        <Point X="10.25" Y="2.062" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="m_starter" Type="Starter" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.438" Y="3" />
-        <Point X="7.438" Y="2.062" />
-        <Point X="5.458" Y="2.062" Type="JumpStart" />
-        <Point X="5.292" Y="2.062" Type="JumpEnd" />
-        <Point X="5" Y="2.062" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="m_uiRenderer" Type="UiRenderer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="6.75" Y="4" />
-        <Point X="5.458" Y="4" Type="JumpStart" />
-        <Point X="5.292" Y="4" Type="JumpEnd" />
-        <Point X="4.625" Y="4" Type="JumpStart" />
-        <Point X="4.458" Y="4" Type="JumpEnd" />
-        <Point X="4.375" Y="4" />
-        <Point X="4.375" Y="4" />
-        <Point X="4.042" Y="4" Type="JumpStart" />
-        <Point X="3.875" Y="4" Type="JumpEnd" />
-        <Point X="3.208" Y="4" Type="JumpStart" />
-        <Point X="3.042" Y="4" Type="JumpEnd" />
-        <Point X="2" Y="4" />
-      </Path>
-    </AssociationLine>
+    <NestedTypes>
+      <Enum Name="LevelEditor::Action" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>LevelEditor.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <AssociationLine Name="m_renderWindow" Type="sf::RenderWindow" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="7.625" Y="3" />
@@ -116,27 +91,42 @@
         <Point X="2" Y="1" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="m_uiRenderer" Type="UiRenderer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="4" />
+        <Point X="5.458" Y="4" Type="JumpStart" />
+        <Point X="5.292" Y="4" Type="JumpEnd" />
+        <Point X="4.771" Y="4" Type="JumpStart" />
+        <Point X="4.604" Y="4" Type="JumpEnd" />
+        <Point X="4.375" Y="4" />
+        <Point X="4.375" Y="4" />
+        <Point X="4.333" Y="4" Type="JumpStart" />
+        <Point X="4.167" Y="4" Type="JumpEnd" />
+        <Point X="3.208" Y="4" Type="JumpStart" />
+        <Point X="3.042" Y="4" Type="JumpEnd" />
+        <Point X="2" Y="4" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="m_level" Type="Level" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.875" Y="3" />
+        <Point X="7.875" Y="2.062" />
+        <Point X="10.25" Y="2.062" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AABQAAACAAAAAgAAAABAAEAAAAAAAAAAQUAAQBhAEIA=</HashCode>
+      <HashCode>AABQAAACAAAQAgAAAABAAEAAAAAQAAAAQQAAABhAEIA=</HashCode>
       <FileName>LevelEditor.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_level" />
-      <Field Name="m_starter" />
-      <Field Name="m_uiRenderer" />
       <Field Name="m_renderWindow" />
+      <Field Name="m_uiRenderer" />
+      <Field Name="m_level" />
       <Field Name="m_catalogObjects" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Starter" Collapsed="true">
     <Position X="3.5" Y="1.75" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="Starter::Gamestate">
-        <TypeIdentifier>
-          <NewMemberFileName>Starter.h</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <AssociationLine Name="m_editor" Type="LevelEditor" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="5" Y="2.25" />
@@ -154,12 +144,12 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>WABQQgADAAQAEBAAAABAAAAAACEgoRoAg0gAAACgEAA=</HashCode>
+      <HashCode>WABQAgADAAQAEBAAAABACAAACCEgoRoAg0gAAACgEAA=</HashCode>
       <FileName>Starter.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_editor" />
       <Field Name="m_game" />
+      <Field Name="m_editor" />
       <Field Name="m_renderWindow" />
     </ShowAsAssociation>
   </Class>
@@ -185,8 +175,8 @@
       <FileName>Ufo.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="m_renderWindow" />
       <Field Name="m_parts" />
+      <Field Name="m_renderWindow" />
     </ShowAsAssociation>
   </Class>
   <Class Name="UfoCarriage" Collapsed="true">
@@ -268,93 +258,6 @@
   </Class>
   <Class Name="std::list&lt;_Ty, _Ax&gt;" Collapsed="true">
     <Position X="10.25" Y="5.75" Width="1.5" />
-    <NestedTypes>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::const_reference" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::_Mybase" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::reverse_iterator" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::_Nodeptr" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::value_type" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::size_type" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::_Myt" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::pointer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::allocator_type" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::iterator" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::const_iterator" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::_Node" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::const_pointer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::difference_type" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::_Alloc" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::reference" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-      <Typedef Name="std::list&lt;_Ty, _Ax&gt;::const_reverse_iterator" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</NewMemberFileName>
-        </TypeIdentifier>
-      </Typedef>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AEgEEqECAHBEgEhEAKEIAgISFASAKIIAoQEgAwAEQgo=</HashCode>
       <FileName>c:\program files (x86)\microsoft visual studio 10.0\vc\include\list</FileName>

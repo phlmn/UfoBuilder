@@ -56,30 +56,30 @@ void UiRenderer::handleEvent(sf::Event event)
 {
 	if(event.type == sf::Event::MouseButtonPressed)
 	{
-		if(event.mouseButton.button == sf::Mouse::Button::Left)
+		if(event.mouseButton.button == sf::Mouse::Left)
 		{
 			m_webView->InjectMouseDown(MouseButton::kMouseButton_Left);
 		}
-		else if(event.mouseButton.button == sf::Mouse::Button::Middle)
+		else if(event.mouseButton.button == sf::Mouse::Middle)
 		{
 			m_webView->InjectMouseDown(MouseButton::kMouseButton_Middle);
 		}
-		else if(event.mouseButton.button == sf::Mouse::Button::Right)
+		else if(event.mouseButton.button == sf::Mouse::Right)
 		{
 			m_webView->InjectMouseDown(MouseButton::kMouseButton_Right);
 		}
 	}
 	else if(event.type == sf::Event::MouseButtonReleased)
 	{
-		if(event.mouseButton.button == sf::Mouse::Button::Left)
+		if(event.mouseButton.button == sf::Mouse::Left)
 		{
 			m_webView->InjectMouseUp(MouseButton::kMouseButton_Left);
 		}
-		else if(event.mouseButton.button == sf::Mouse::Button::Middle)
+		else if(event.mouseButton.button == sf::Mouse::Middle)
 		{
 			m_webView->InjectMouseUp(MouseButton::kMouseButton_Middle);
 		}
-		else if(event.mouseButton.button == sf::Mouse::Button::Right)
+		else if(event.mouseButton.button == sf::Mouse::Right)
 		{
 			m_webView->InjectMouseUp(MouseButton::kMouseButton_Right);
 		}
