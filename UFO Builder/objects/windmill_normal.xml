@@ -1,0 +1,4 @@
+<object id="windmill_normal" name="Windmill normal" category="Windmills" image="windmill_normal.png">
+	<physics type="none">
+	</physics>
+</object>
