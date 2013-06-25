@@ -128,7 +128,11 @@ void LevelEditor::tick(sf::Time elapsedTime)
 			if(m_action == rotate) m_action = none;
 		}
 		if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+		{
+			if(m_selectedObject)
+				m_selectedObject->drawHighlighting();
 			m_uiRenderer->handleEvent(event);
+		}
 	}
 
 
@@ -224,6 +228,7 @@ void LevelEditor::createObject(string id, int layer)
 
 	LevelObject* levelObject = new LevelObject(*object);
 	m_level->addObject(levelObject);
+	levelObject->setLayer(layer);
 	levelObject->setObjectID(++m_lastObjectID);
 	levelObject->setRenderWindow(m_renderWindow);
 	levelObject->setPosition(sf::Vector2f(sf::Mouse::getPosition(*m_renderWindow).x / Starter::getScreenFactor(), sf::Mouse::getPosition(*m_renderWindow).y / Starter::getScreenFactor()));

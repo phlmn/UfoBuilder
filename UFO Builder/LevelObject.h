@@ -23,15 +23,19 @@ protected:
 	std::string m_name;
 	int m_objectID;
 	sf::RenderWindow* m_renderWindow;
+	sf::Vector2f m_cameraPos;
+	float m_scrollFactor;
+
+	void calculateScrollFactor();
 
 public:
 	LevelObject();
 	LevelObject(tinyxml2::XMLElement* element);
 	LevelObject(CatalogObject gameObject);
-	LevelObject(CatalogObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle);
 	~LevelObject();
 
 	void tick(sf::Time elapsedTime);
+	void drawHighlighting();
 
 	void getDataFromCatalogObject(CatalogObject catObj);
 
@@ -64,4 +68,7 @@ public:
 
 	void setRenderWindow(sf::RenderWindow* window);
 	sf::RenderWindow* getRenderWindow();
+
+	void setCameraPos(sf::Vector2f pos);
+	sf::Vector2f getCameraPos();
 };

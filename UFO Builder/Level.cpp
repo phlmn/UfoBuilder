@@ -10,6 +10,8 @@ Level::Level(sf::RenderWindow* window)
 	m_renderWindow = window;
 	m_objects.clear();
 	m_ufo = NULL;
+	m_cameraPos = sf::Vector2f();
+	m_cameraMoveSpeed = sf::Vector2i();
 
 	m_levelID = "";
 }
@@ -22,9 +24,51 @@ Level::~Level()
 
 void Level::tick(sf::Time elapsedTime)
 {
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		if(m_cameraMoveSpeed.y < 30)
+			m_cameraMoveSpeed.y++;
+	}
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		if(m_cameraMoveSpeed.y > -30)
+			m_cameraMoveSpeed.y--;
+	}
+	else
+	{
+		if(m_cameraMoveSpeed.y > 0)
+			m_cameraMoveSpeed.y--;
+		else if(m_cameraMoveSpeed.y < 0)
+			m_cameraMoveSpeed.y++;
+	}
+
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		if(m_cameraMoveSpeed.x > -30)
+			m_cameraMoveSpeed.x--;
+	}
+	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		if(m_cameraMoveSpeed.x < 30)
+			m_cameraMoveSpeed.x++;
+	}
+	else
+	{
+		if(m_cameraMoveSpeed.x > 0)
+			m_cameraMoveSpeed.x--;
+		else if(m_cameraMoveSpeed.x < 0)
+			m_cameraMoveSpeed.x++;
+	}
+
+	m_cameraPos.y += m_cameraMoveSpeed.y / 10.0f * elapsedTime.asMilliseconds();
+	m_cameraPos.x += m_cameraMoveSpeed.x / 10.0f * elapsedTime.asMilliseconds();
+
 	list<LevelObject*>::iterator pos = m_objects.begin();
 	while(pos != m_objects.end())
 	{
+		(*pos)->setCameraPos(m_cameraPos);
 		(*pos)->tick(elapsedTime);
 		pos++;
 	}

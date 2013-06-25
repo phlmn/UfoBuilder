@@ -19,6 +19,9 @@ private:
 
 	std::string m_levelID;
 
+	sf::Vector2f m_cameraPos;
+	sf::Vector2i m_cameraMoveSpeed;
+
 	Ufo* m_ufo;
 
 public:

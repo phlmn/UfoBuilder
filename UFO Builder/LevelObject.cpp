@@ -18,6 +18,7 @@ LevelObject::LevelObject()
 	m_objectType = "";
 	m_category = "";
 	m_renderWindow = NULL;
+	calculateScrollFactor();
 }
 
 LevelObject::LevelObject(XMLElement* element)
@@ -25,10 +26,12 @@ LevelObject::LevelObject(XMLElement* element)
 	m_layer = atoi(element->Attribute("layer"));
 
 	m_objectID = 0;
+	m_cameraPos = sf::Vector2f();
 	m_objectType = "";
 	m_category = "";
 	m_sprite = NULL;
 	m_renderWindow = NULL;
+	calculateScrollFactor();
 
 	m_position = sf::Vector2f((float)atof(element->Attribute("x")), (float)atof(element->Attribute("y")));
 
@@ -45,6 +48,7 @@ LevelObject::LevelObject(XMLElement* element)
 LevelObject::LevelObject(CatalogObject gameObject)
 {
 	m_position = sf::Vector2f();
+	m_cameraPos = sf::Vector2f();
 	m_scale = 1.0f;
 	m_opacity = 1.0f;
 	m_angle = 0.0f;
@@ -54,6 +58,7 @@ LevelObject::LevelObject(CatalogObject gameObject)
 	m_category = "";
 	m_sprite = NULL;
 	m_renderWindow = NULL;
+	calculateScrollFactor();
 
 	getDataFromCatalogObject(gameObject);
 }
@@ -103,21 +108,6 @@ void LevelObject::getDataFromCatalogObject(CatalogObject catObj)
 	b2Fixture* fixture = body->CreateFixture(&fixDef);
 }
 
-LevelObject::LevelObject(CatalogObject gameObject, int layer, sf::Vector2f position, float scale, float opacity, float angle)
-{
-	m_layer = layer;
-	m_position = position;
-	m_scale = scale;
-	m_opacity = opacity;
-	m_angle = angle;
-
-	sf::Texture texture;
-	texture.loadFromFile(string("objects/images/") + gameObject.getImageFile());
-
-	m_sprite = new sf::Sprite();
-	m_sprite->setTexture(texture);
-}
-
 LevelObject::~LevelObject()
 {
 	if(m_sprite != NULL) delete m_sprite;
@@ -127,7 +117,7 @@ void LevelObject::tick(sf::Time elapsedTime)
 {
 	if(m_renderWindow && m_sprite)
 	{
-		m_sprite->setPosition(m_position.x * Starter::getScreenFactor(), m_position.y * Starter::getScreenFactor());
+		m_sprite->setPosition((m_position.x - m_cameraPos.x * m_scrollFactor) * Starter::getScreenFactor(), (m_position.y + m_cameraPos.y * m_scrollFactor) * Starter::getScreenFactor());
 		m_sprite->setScale(Starter::getScreenFactor() * m_scale, Starter::getScreenFactor() * m_scale);
 		m_sprite->setRotation(Starter::RAD_TO_DEG *  m_angle);
 		m_sprite->setColor(sf::Color(0xff, 0xff, 0xff, sf::Uint8(0xff * m_opacity)));
@@ -135,14 +125,45 @@ void LevelObject::tick(sf::Time elapsedTime)
 	}
 }
 
+void LevelObject::drawHighlighting()
+{
+	if(m_renderWindow && m_sprite)
+	{
+		m_sprite->setPosition((m_position.x - m_cameraPos.x * m_scrollFactor) * Starter::getScreenFactor(), (m_position.y + m_cameraPos.y * m_scrollFactor) * Starter::getScreenFactor());
+		m_sprite->setScale(Starter::getScreenFactor() * m_scale, Starter::getScreenFactor() * m_scale);
+		m_sprite->setRotation(Starter::RAD_TO_DEG *  m_angle);
+		m_sprite->setColor(sf::Color(0x55, 0xff, 0x55, sf::Uint8(0xff * m_opacity)));
+		m_renderWindow->draw(*m_sprite);
+	}
+}
+
 void LevelObject::setLayer(int layer)
 {
 	m_layer = layer;
+	calculateScrollFactor();
 }
 
 int LevelObject::getLayer()
 {
 	return m_layer;
+}
+
+void LevelObject::calculateScrollFactor()
+{
+	switch(m_layer)
+	{
+	case 0: m_scrollFactor = 0; break;
+	case 1: m_scrollFactor = 0.25f; break;
+	case 2: m_scrollFactor = 0.5f; break;
+	case 3: m_scrollFactor = 0.75; break;
+	case 4: m_scrollFactor = 1; break;
+	case 5: m_scrollFactor = 1; break;
+	case 6: m_scrollFactor = 1; break;
+	case 7: m_scrollFactor = 1.25; break;
+	case 8: m_scrollFactor = 1.5; break;
+	case 9: m_scrollFactor = 2; break;
+	case 10: m_scrollFactor = 0; break;
+	}
 }
 
 void LevelObject::setPosition(sf::Vector2f position)
@@ -233,4 +254,14 @@ void LevelObject::setRenderWindow(sf::RenderWindow* window)
 sf::RenderWindow* LevelObject::getRenderWindow()
 {
 	return m_renderWindow;
+}
+
+void LevelObject::setCameraPos(sf::Vector2f pos)
+{
+	m_cameraPos = pos;
+}
+
+sf::Vector2f LevelObject::getCameraPos() 
+{
+	return m_cameraPos;
 }
