@@ -30,10 +30,6 @@ public:
 
 	void tick(sf::Time elapsedTime);
 
-	void start();
-	void pause();
-	void stop();
-
 	void addObject(LevelObject* object);
 	void removeObject(LevelObject* object);
 	std::list<LevelObject*>* getObjects();

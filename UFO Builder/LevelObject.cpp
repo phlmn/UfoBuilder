@@ -125,18 +125,6 @@ void LevelObject::tick(sf::Time elapsedTime)
 	}
 }
 
-void LevelObject::drawHighlighting()
-{
-	if(m_renderWindow && m_sprite)
-	{
-		m_sprite->setPosition((m_position.x - m_cameraPos.x * m_scrollFactor) * Starter::getScreenFactor(), (m_position.y + m_cameraPos.y * m_scrollFactor) * Starter::getScreenFactor());
-		m_sprite->setScale(Starter::getScreenFactor() * m_scale, Starter::getScreenFactor() * m_scale);
-		m_sprite->setRotation(Starter::RAD_TO_DEG *  m_angle);
-		m_sprite->setColor(sf::Color(0x55, 0xff, 0x55, sf::Uint8(0xff * m_opacity)));
-		m_renderWindow->draw(*m_sprite);
-	}
-}
-
 void LevelObject::setLayer(int layer)
 {
 	m_layer = layer;

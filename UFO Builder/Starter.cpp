@@ -123,12 +123,7 @@ void Starter::tick()
 	}
 	else if(m_gamestate == Starter::Ingame)
 	{
-		m_game->getLevel()->start();
-		if(!m_game->getLevel()->getUfo())
-			m_game->getLevel()->setUfo(new Ufo(m_renderWindow));
 		m_game->tick(elapsedTime);
-
-		std::string posstr;
 
 		// show fps
 		showText("FPS: " + StringHelper::toString(fps), 16, 18.0f, 10.0f, true);

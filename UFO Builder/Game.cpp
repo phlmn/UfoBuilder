@@ -8,12 +8,9 @@ Game::Game(Starter* starter, sf::RenderWindow* window)
 	m_level = new Level(window);
 	m_renderWindow = window;
 
-	// load level
-	/*
-	if(m_level->load("bagdadbahn")) {
-	} else {
-	}
-	*/
+	m_level->load("test");
+
+	m_level->setUfo(new Ufo(m_renderWindow));
 
 	// calculate sprite scales
 	resize();

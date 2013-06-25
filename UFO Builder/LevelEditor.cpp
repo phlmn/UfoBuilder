@@ -128,11 +128,7 @@ void LevelEditor::tick(sf::Time elapsedTime)
 			if(m_action == rotate) m_action = none;
 		}
 		if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
-		{
-			if(m_selectedObject)
-				m_selectedObject->drawHighlighting();
 			m_uiRenderer->handleEvent(event);
-		}
 	}
 
 
@@ -159,8 +155,7 @@ void LevelEditor::tick(sf::Time elapsedTime)
 
 	m_renderWindow->draw(m_spriteBg);
 	m_level->tick(elapsedTime);
-	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
-		m_uiRenderer->render();
+	if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) m_uiRenderer->render();
 }
 
 void LevelEditor::resize()
@@ -174,7 +169,8 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 {
 	if(method_name == WSLit("newLevel"))
 	{
-		
+		if(m_level) delete m_level;	
+		m_level = new Level(m_renderWindow);
 	}
 	else if(method_name == WSLit("save"))
 	{

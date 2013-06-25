@@ -76,26 +76,6 @@ void Level::tick(sf::Time elapsedTime)
 	if(m_ufo) m_ufo->tick(elapsedTime);
 }
 
-void Level::start()
-{
-	if(m_levelID == "")
-	{
-		load("test");
-		m_levelID = "test";
-	}
-
-}
-
-void Level::pause()
-{
-
-}
-
-void Level::stop()
-{
-
-}
-
 void Level::addObject(LevelObject* object)
 {
 	m_objects.push_back(object);

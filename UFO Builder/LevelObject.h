@@ -35,7 +35,6 @@ public:
 	~LevelObject();
 
 	void tick(sf::Time elapsedTime);
-	void drawHighlighting();
 
 	void getDataFromCatalogObject(CatalogObject catObj);
 
