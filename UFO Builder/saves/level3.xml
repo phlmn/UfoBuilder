@@ -1,0 +1,9 @@
+<level id="" name="level3">
+    <object id="gradient_gray" x="945" y="515.625" layer="0" scale="4.06" opacity="1" angle="0"/>
+    <object id="hill5_blurred" x="841.875" y="735" layer="0" scale="3.02" opacity="1.5" angle="0"/>
+    <object id="hill4_blurred" x="956.25" y="841.875" layer="0" scale="2.99" opacity="1.45" angle="0"/>
+    <object id="hill1" x="798.75" y="601.875" layer="0" scale="1" opacity="1" angle="0"/>
+    <object id="house1" x="1734.37" y="825" layer="0" scale="0.289999" opacity="1" angle="0"/>
+    <object id="tree_small" x="1449.37" y="759.375" layer="0" scale="1" opacity="1" angle="0"/>
+    <object id="tree_medium" x="525" y="453.75" layer="0" scale="1" opacity="1" angle="0"/>
+</level>

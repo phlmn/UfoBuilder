@@ -89,6 +89,7 @@ bool Level::save(std::string filename)
 		objectNode->SetAttribute("x", (*pos)->getPosition().x);
 		objectNode->SetAttribute("y", (*pos)->getPosition().y);
 		objectNode->SetAttribute("layer", (*pos)->getLayer());
+		objectNode->SetAttribute("scale", (*pos)->getScale());
 		objectNode->SetAttribute("opacity", (*pos)->getOpacity());
 		objectNode->SetAttribute("angle", (*pos)->getAngle());
 
