@@ -31,6 +31,8 @@ public:
 	void tick(sf::Time elapsedTime);
 
 	void addObject(LevelObject* object);
+	void addObject(LevelObject* object, int index);
+	void addObject(LevelObject* object, int layer, int index);
 	void removeObject(LevelObject* object);
 	std::list<LevelObject*>* getObjects();
 

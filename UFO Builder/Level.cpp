@@ -81,6 +81,39 @@ void Level::addObject(LevelObject* object)
 	m_objects.push_back(object);
 }
 
+void Level::addObject(LevelObject* object, int index)
+{
+	m_objects.push_back(object);
+
+	list<LevelObject*>::iterator pos = m_objects.begin();
+	for(int i = 0; i < index; i++)
+	{
+		pos++;
+	}
+	m_objects.insert(pos, object);
+}
+
+void Level::addObject(LevelObject* object, int layer, int index)
+{
+
+	m_objects.push_back(object);
+	list<LevelObject*>::iterator pos = m_objects.begin();
+	while((*pos)->getLayer() < layer)
+	{
+		pos++;
+	}
+
+	for(int i = 0; i < index; i++)
+	{
+		pos++;
+	}
+	if(pos == m_objects.end())
+		m_objects.push_back(object);
+	else
+		m_objects.insert(pos, object);
+
+}
+
 void Level::removeObject(LevelObject* object)
 {
 	m_objects.remove(object);

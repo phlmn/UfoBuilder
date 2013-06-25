@@ -85,6 +85,9 @@ bool Starter::init()
 	// register a handler for custom js-object methods
 	m_uiRenderer->setJSMethodHandler(this);
 
+	// init srite size
+	resizeSprites();
+
 	return true;
 }
 
@@ -114,7 +117,8 @@ void Starter::tick()
 			{
 				// the windows has been resized
 				resize(event.size.width, event.size.height);
-				Starter::m_uiRenderer->resize(event.size.width, event.size.height);				
+				Starter::m_uiRenderer->resize(event.size.width, event.size.height);	
+				resizeSprites();
 			}
 			Starter::m_uiRenderer->handleEvent(event);
 		}
@@ -143,6 +147,12 @@ void Starter::cleanup()
 	delete m_renderWindow;
 	if(m_game) delete m_game;
 	if(m_editor) delete m_editor;
+}
+
+void Starter::resizeSprites()
+{
+	// resize sprites
+	m_spriteBg.setScale(2.0f * Starter::getScreenFactor(), 1.2f * Starter::getScreenFactor());
 }
 
 void Starter::OnMethodCall(WebView* caller, unsigned int remote_object_id, const WebString& method_name, const JSArray& args)

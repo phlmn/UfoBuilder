@@ -30,6 +30,7 @@ LevelEditor::LevelEditor()
 	m_uiRenderer->registerMethod("save", false);
 	m_uiRenderer->registerMethod("createObject", false);
 	m_uiRenderer->registerMethod("objectSelected", false);
+	m_uiRenderer->registerMethod("layerSort", false);
 
 	m_catalogObjects.clear();
 	
@@ -175,6 +176,33 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 	else if(method_name == WSLit("save"))
 	{
 		m_level->save("test");
+	}
+	else if(method_name == WSLit("layerSort"))
+	{
+		if(args.size() == 3)
+		{
+			LevelObject* object = NULL;
+			int id = args.At(0).ToInteger();
+			list<LevelObject*>::iterator pos = m_level->getObjects()->begin();
+			while(pos != m_level->getObjects()->end())
+			{
+				if((*pos)->getObjectID() == id)
+				{
+					object = (*pos);
+					break;
+				}
+				pos++;
+			}
+
+			if(object)
+			{
+				int layer = args.At(1).ToInteger();
+				int pos = args.At(2).ToInteger();
+				m_level->removeObject(object);
+				object->setLayer(layer);
+				m_level->addObject(object, args.At(1).ToInteger(), args.At(2).ToInteger());
+			}
+		}
 	}
 	else if(method_name == WSLit("createObject"))
 	{

@@ -53,6 +53,8 @@ private:
 	virtual void OnMethodCall(Awesomium::WebView* caller, unsigned int remote_object_id, const Awesomium::WebString& method_name, const Awesomium::JSArray& args); // react on js-method-calls
 	virtual Awesomium::JSValue OnMethodCallWithReturnValue(Awesomium::WebView *caller, unsigned int remote_object_id, const Awesomium::WebString &method_name, const Awesomium::JSArray &args);
 
+	void resizeSprites();
+
 public:
 	Starter();
 	~Starter();

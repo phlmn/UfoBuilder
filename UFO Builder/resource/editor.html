@@ -8,19 +8,36 @@
         <script type="text/javascript">		
 		
 			var openDialog = "";
-				
-			$(document).ready(function(e) {
-                $(".v-center").each(function(index, element) {
-                    $(element).css('margin-top', - $(element).outerHeight() / 2);
-					$(element).bind('resize', function(e) {
-                        $(this).css('margin-top', - $(this).outerHeight() / 2);
-                    });
-                });
-				
-				$(".object-list ul").sortable({
-					placeholder: 'placeholder',
-					connectWith: '.object-list ul'
-				});
+
+			$(document).ready(function (e) {
+			    $(".v-center").each(function (index, element) {
+			        $(element).css('margin-top', -$(element).outerHeight() / 2);
+			        $(element).bind('resize', function (e) {
+			            $(this).css('margin-top', -$(this).outerHeight() / 2);
+			        });
+			    });
+
+			    $(".object-list ul").sortable({
+			        placeholder: 'placeholder',
+			        connectWith: '.object-list ul',
+			        update: function (event, ui) {
+			            var layer = 0;
+
+                        if (ui.item.parent().hasClass('layer_0')) layer = 0;
+                        else if (ui.item.parent().hasClass('layer_1')) layer = 1;
+                        else if (ui.item.parent().hasClass('layer_2')) layer = 2;
+                        else if (ui.item.parent().hasClass('layer_3')) layer = 3;
+                        else if (ui.item.parent().hasClass('layer_4')) layer = 4;
+                        else if (ui.item.parent().hasClass('layer_5')) layer = 5;
+                        else if (ui.item.parent().hasClass('layer_6')) layer = 6;
+                        else if (ui.item.parent().hasClass('layer_7')) layer = 7;
+                        else if (ui.item.parent().hasClass('layer_8')) layer = 8;
+                        else if (ui.item.parent().hasClass('layer_9')) layer = 9;
+                        else layer = 10;
+
+			            App.layerSort(ui.item.data('id'), layer, ui.item.index);
+			        }
+			    });
 			});
 			
 			function overlay(show) {
@@ -51,8 +68,10 @@
 			
 			function appendObject(name, id, layer) {
 				var entry = $(".object-list li.object_" + id);
-				if(entry.length != 0) entry.remove();
-				$(".object-list ul.layer_" + layer).append("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+				if (entry.length != 0) entry.remove();
+				var element = $("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
+				element.data('id', id);
+                $(".object-list ul.layer_" + layer).append(element);
 			}
 			
 			function prependObject(name, id, layer) {
@@ -72,7 +91,7 @@
 					$(".object-list ul.layer_" + layer + " li").each(function(index, element) {
 						if(index == sortIndex - 1) {
 							$(element).after("<li class='object_" + id + "'><a href='javascript: App.objectSelected(" + id + ");'>" + name + "</a></li>");
-							created = true;
+                            created = true;
 							return;
 						}
 					});
@@ -168,9 +187,6 @@
                         <li><a href="javascript: showDialog('settings');">Settings</a></li>
                     </ul>
                 </li>
-            </ul>
-            <ul class="right">
-            	<li><a href="#"><img class="icon" src="object-browser.png" /></a></li>
             </ul>
         </div>
         <div class="objects">
