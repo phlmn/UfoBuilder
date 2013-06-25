@@ -130,6 +130,7 @@ void LevelObject::tick(sf::Time elapsedTime)
 		m_sprite->setPosition(m_position.x * Starter::getScreenFactor(), m_position.y * Starter::getScreenFactor());
 		m_sprite->setScale(Starter::getScreenFactor() * m_scale, Starter::getScreenFactor() * m_scale);
 		m_sprite->setRotation(Starter::RAD_TO_DEG *  m_angle);
+		m_sprite->setColor(sf::Color(0xff, 0xff, 0xff, sf::Uint8(0xff * m_opacity)));
 		m_renderWindow->draw(*m_sprite);
 	}
 }
@@ -166,7 +167,6 @@ float LevelObject::getScale()
 
 void LevelObject::setOpacity(float opacity)
 {
-	if(m_sprite) m_sprite->setColor(sf::Color(0xff, 0xff, 0xff, 0xff * opacity));
 	m_opacity = opacity;
 }
 
