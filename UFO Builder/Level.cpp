@@ -37,6 +37,7 @@ void Level::start()
 	if(m_levelID == "")
 	{
 		load("test");
+		m_levelID = "test";
 	}
 
 }
