@@ -19,13 +19,8 @@ private:
 	// drawable representation of a texture -> allows to easily display a texture on a render target
 	sf::Sprite* m_spriteBody;
 
-	sf::Vector2i m_mousePosition;
-	sf::Vector2i m_lastClick;
-	sf::Vector2i m_difference;
+	sf::Vector2f m_cameraPos;
 	bool m_mouseIsPressed;
-
-	int m_direcction;
-	int m_acceleration;
 
 	float m_sensitivity;
 
@@ -41,6 +36,9 @@ public:
 
 	void resize(float scale);
 
-	sf::Vector2i getMousePosition();
-	sf::Vector2i getLastClick();
+	void setCameraPos(sf::Vector2f pos);
+	sf::Vector2f getCameraPos();
+
+	void setPos(sf::Vector2f pos);
+	sf::Vector2f getPos();
 };

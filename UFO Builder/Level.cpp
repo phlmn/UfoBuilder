@@ -62,8 +62,15 @@ void Level::tick(sf::Time elapsedTime)
 			m_cameraMoveSpeed.x++;
 	}
 
-	m_cameraPos.y += m_cameraMoveSpeed.y / 10.0f * elapsedTime.asMilliseconds();
-	m_cameraPos.x += m_cameraMoveSpeed.x / 10.0f * elapsedTime.asMilliseconds();
+	if(m_ufo)
+	{
+		m_cameraPos = m_ufo->getPos();
+	}
+	else
+	{
+		m_cameraPos.y += m_cameraMoveSpeed.y / 10.0f * elapsedTime.asMilliseconds();
+		m_cameraPos.x += m_cameraMoveSpeed.x / 10.0f * elapsedTime.asMilliseconds();
+	}
 
 	list<LevelObject*>::iterator pos = m_objects.begin();
 	while(pos != m_objects.end())
@@ -73,7 +80,11 @@ void Level::tick(sf::Time elapsedTime)
 		pos++;
 	}
 
-	if(m_ufo) m_ufo->tick(elapsedTime);
+	if(m_ufo)
+	{
+		m_ufo->setCameraPos(m_cameraPos);
+		m_ufo->tick(elapsedTime);
+	}
 }
 
 void Level::addObject(LevelObject* object)
