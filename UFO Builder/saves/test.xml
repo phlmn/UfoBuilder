@@ -1,10 +1,14 @@
 <level id="" name="test">
-    <object id="gradient_gray" x="1038.75" y="521.25" layer="0" scale="4.79" opacity="1" angle="0"/>
-    <object id="hill3_blurred" x="993.75" y="795" layer="1" scale="2.95" opacity="0.295" angle="0"/>
-    <object id="hill4_blurred" x="1048.12" y="988.125" layer="2" scale="2.78" opacity="0.48" angle="0"/>
-    <object id="hill5" x="986.25" y="815.625" layer="5" scale="1" opacity="1" angle="0"/>
-    <object id="house2" x="1333.12" y="757.5" layer="5" scale="0.3" opacity="1" angle="0.19"/>
-    <object id="tree_medium" x="1702.5" y="673.125" layer="5" scale="1" opacity="1" angle="0.095"/>
-    <object id="cloud_big" x="1696.87" y="195" layer="9" scale="1" opacity="1" angle="0"/>
-    <object id="cloud_big" x="1753.13" y="296.25" layer="2" scale="0.3" opacity="0.59" angle="0"/>
+    <object id="gradient_gray" x="984.375" y="536.25" layer="0" scale="3.95" opacity="1" angle="0"/>
+    <object id="hill4_blurred" x="945" y="879.375" layer="1" scale="3.81" opacity="1.445" angle="0"/>
+    <object id="hill5_blurred" x="804.375" y="551.25" layer="2" scale="5.25" opacity="1.385" angle="0"/>
+    <object id="hill2" x="699.375" y="770.625" layer="4" scale="1" opacity="1" angle="0"/>
+    <object id="tree_medium" x="1543.12" y="594.375" layer="4" scale="1" opacity="1" angle="0"/>
+    <object id="house2" x="952.5" y="631.875" layer="4" scale="0.38" opacity="1" angle="-0.27"/>
+    <object id="cloud_big" x="965.625" y="215.625" layer="3" scale="0.36" opacity="1.26" angle="0"/>
+    <object id="cloud_big" x="641.25" y="202.5" layer="6" scale="0.54" opacity="1.385" angle="0"/>
+    <object id="cloud_big" x="1614.38" y="174.375" layer="8" scale="0.56" opacity="0.845" angle="0"/>
+    <object id="hill4" x="2932.5" y="881.25" layer="4" scale="1" opacity="1" angle="0"/>
+    <object id="windmill_small" x="2703.75" y="256.875" layer="4" scale="1" opacity="1" angle="0"/>
+    <object id="house3" x="3397.5" y="438.75" layer="4" scale="0.41" opacity="1" angle="0.275"/>
 </level>

@@ -104,20 +104,28 @@ void Level::addObject(LevelObject* object, int index)
 
 void Level::addObject(LevelObject* object, int layer, int index)
 {
-	list<LevelObject*>::iterator pos = m_objects.begin();
-	while((*pos)->getLayer() < layer)
+	if(!m_objects.empty())
 	{
-		pos++;
-		if(pos == m_objects.end())
-			break;
-	}
+		list<LevelObject*>::iterator pos = m_objects.begin();
 
-	for(int i = 0; i < index; i++)
-	{
-		pos++;
-	}
+		while((*pos)->getLayer() < layer)
+		{
+			pos++;
+			if(pos == m_objects.end())
+				break;
+		}
+
+		for(int i = 0; i < index; i++)
+		{
+			pos++;
+		}
 	
-	m_objects.insert(pos, object);
+		m_objects.insert(pos, object);
+	}
+	else
+	{
+		m_objects.push_back(object);
+	}
 
 }
 
@@ -133,7 +141,7 @@ std::list<LevelObject*>* Level::getObjects()
 
 bool Level::save(std::string filename)
 {
-	XMLDocument doc;
+	tinyxml2::XMLDocument doc;
 
 	// create level node
 	XMLElement* levelNode = doc.NewElement("level");
@@ -175,7 +183,7 @@ bool Level::load(std::string levelID)
 {
 	m_levelID = levelID;
 
-	XMLDocument doc;
+	tinyxml2::XMLDocument doc;
 
 	m_objects.clear();
 
@@ -196,11 +204,19 @@ bool Level::load(std::string levelID)
 
 	XMLElement* objectNode = levelNode->FirstChildElement("object");
 
+	int i = 0;
+
 	while(objectNode != NULL)
 	{
+		i++;
 		LevelObject* obj = new LevelObject(objectNode);
 		obj->setRenderWindow(m_renderWindow);
+		obj->setObjectID(i);
 		m_objects.push_back(obj);
+
+		string name = obj->getName();
+		string id = StringHelper::toString(obj->getObjectID());
+		string layer = StringHelper::toString(obj->getLayer());
 
 		objectNode = objectNode->NextSiblingElement("object");
 	}

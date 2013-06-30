@@ -27,6 +27,7 @@ LevelEditor::LevelEditor()
 
 	// register js methods
 	m_uiRenderer->registerMethod("newLevel", false);
+	m_uiRenderer->registerMethod("load", false);
 	m_uiRenderer->registerMethod("save", false);
 	m_uiRenderer->registerMethod("createObject", false);
 	m_uiRenderer->registerMethod("objectSelected", false);
@@ -179,7 +180,32 @@ void LevelEditor::OnMethodCall(WebView* caller, unsigned int remote_object_id, c
 	}
 	else if(method_name == WSLit("load"))
 	{
-		m_level->load("test");
+		if(m_level) {
+			delete m_level;
+			m_uiRenderer->executeJavascript(Awesomium::ToWebString((string() + "clearObjectList()")));
+		}
+		m_level = new Level(m_renderWindow);
+		m_level->load("Test");
+
+		list<LevelObject*>::iterator pos;
+		pos = m_level->getObjects()->begin();
+		
+		int index = 0;
+		int layer = 0;
+
+		while(pos != m_level->getObjects()->end())
+		{
+			if(layer != (*pos)->getLayer()) 
+			{
+				layer = (*pos)->getLayer();
+				index = 0;
+			}
+
+			m_uiRenderer->executeJavascript(ToWebString(string() + "appendObject('" + (*pos)->getName() + "', '" + StringHelper::toString((*pos)->getObjectID()) + "', '" + StringHelper::toString((*pos)->getLayer()) + "');"));
+			
+			index++;
+			pos++;
+		}
 	}
 	else if(method_name == WSLit("layerSort"))
 	{
